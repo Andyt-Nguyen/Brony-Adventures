@@ -4,6 +4,8 @@ public class Person {
     private String username;
     private String password;
     private int location;
+    private int knife;
+    private int points;
     
     public Person() {
         this.username = "";
@@ -21,6 +23,9 @@ public class Person {
         this.location = location;
     }
 
+    public int geKnife(){
+        return this.knife;
+    }
     public int getHp() {
         return this.hp;
     }
@@ -53,6 +58,21 @@ public class Person {
         this.password = password;
     }
 
+    public void setKnife(int knife){
+        this.knife = knife;
+    }
+
+    public void increaseHp(int hp){
+        this.hp += hp;
+    }
+
+    public void decreaseHp(int hp){
+        this.hp -= hp;
+    }
+
+    public int getPoints(){
+        return this.points;
+    }
 
 
 }

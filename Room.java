@@ -103,10 +103,50 @@ public class Room{
         keywords.add(keyword);
     }
 
-    public void findKeyword(String keyword){
+    public void findKeywordKitchen(Player player, String keyword, Kitchen kitchen){
         boolean isFound = false;
         for(int i = 0; i < keywords.size(); i++){
             if(keywords.get(i).equalsIgnoreCase(keyword)){
+                kitchen.performAction(player, keyword);
+                isFound = true;
+            }
+        }
+        if(!isFound){
+            System.err.println("The game does not recognize the word, " + keyword + "!");
+        }
+    }
+
+    public void findKeywordBedroom(Player player, String keyword, Bedroom bedroom){
+        boolean isFound = false;
+        for(int i = 0; i < keywords.size(); i++){
+            if(keywords.get(i).equalsIgnoreCase(keyword)){
+                bedroom.performAction(player, keyword);
+                isFound = true;
+            }
+        }
+        if(!isFound){
+            System.err.println("The game does not recognize the word, " + keyword + "!");
+        }
+    }
+
+    public void findKeywordBathroom(Player player, String keyword, Bathroom bathroom){
+        boolean isFound = false;
+        for(int i = 0; i < keywords.size(); i++){
+            if(keywords.get(i).equalsIgnoreCase(keyword)){
+                bathroom.performAction(player, keyword);
+                isFound = true;
+            }
+        }
+        if(!isFound){
+            System.err.println("The game does not recognize the word, " + keyword + "!");
+        }
+    }
+
+    public void findKeywordHallway(Player player, String keyword, Hallway hallway){
+        boolean isFound = false;
+        for(int i = 0; i < keywords.size(); i++){
+            if(keywords.get(i).equalsIgnoreCase(keyword)){
+                hallway.performAction(player, keyword);
                 isFound = true;
             }
         }
