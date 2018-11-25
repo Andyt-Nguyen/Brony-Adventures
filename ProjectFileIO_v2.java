@@ -6,7 +6,7 @@
   
   public class ProjectFileIO_v2 {
       //Global Constants
-      private static String FILE_NAME = "FileTest-1.txt";
+      private static String FILE_NAME = "BronyLogs.txt";
       
       private static String EOF_MARKER             = "-";
       private static String PLAYER_MARKER          = "=";
@@ -84,7 +84,7 @@
           }
           catch (FileNotFoundException e) {
               System.out.println(FILE_NAME + " not found. Creating new file with sample player data.");
-              writeNewPlayer("testusername", "pw123", 100, 0, 0);
+              writeNewPlayer("testusername", "pw123", 0, 100, 0, 0);
                   
               writeFile();
               //readFile();
@@ -114,20 +114,23 @@
           String password = getLine();
           
           //Get 3rd line
+          String highscore = getLine();
+
+          //Get 4rd line
           String hp = getLine();
           
-          //Get 4th line
+          //Get 5th line
           String food = getLine();
           
-          //Get 5th line
+          //Get 6th line
           String location = getLine();
           
-          writeNewPlayer(name, password, Integer.parseInt(hp), Integer.parseInt(food), Integer.parseInt(location));
+          writeNewPlayer(name, password, Integer.parseInt(highscore),Integer.parseInt(hp), Integer.parseInt(food), Integer.parseInt(location));
       }
       
       //ADJUST AS NECESSARY!
-      private static void writeNewPlayer(String name, String password, int hp, int food, int location){
-          Player playerNew = new Player(name, password, hp, food, location);
+      private static void writeNewPlayer(String name, String password, int highscore, int hp, int food, int location){
+          Player playerNew = new Player(name, password, highscore, hp, food, location);
           playerArrayList.add(playerNew);
       }
       
@@ -156,7 +159,7 @@
       public static void writeFile() throws IOException {
           System.out.println("\nWriting File...");
           
-          fw = new FileWriter(userName);
+          fw = new FileWriter(FILE_NAME);
           pw = new PrintWriter(fw);
           writeHeaderLines();
           writeGlobalSettingsLines();
@@ -197,8 +200,9 @@
           for (int i = 0; i < playerArrayList.size(); i++){
               String playerMarker = PLAYER_MARKER + PLAYER_MARKER + PLAYER_MARKER + PLAYER_MARKER + PLAYER_MARKER;
               pw.println(playerMarker + " Player#" + i + " " + playerMarker);
-              pw.println(playerArrayList.get(i).getUserName());
+              pw.println(playerArrayList.get(i).getUsername());
               pw.println(playerArrayList.get(i).getPassword());
+              pw.println(playerArrayList.get(i).getHighScore());
               pw.println(playerArrayList.get(i).getHp());
               pw.println(playerArrayList.get(i).getFood());
               pw.println(playerArrayList.get(i).getLocation());
@@ -227,7 +231,7 @@
       //Returns a Player object
       public static Player getPlayer(String name, String password){
          for (int i = 0; i < playerArrayList.size(); i++){
-             if (playerArrayList.get(i).getUserName().equals(name)
+             if (playerArrayList.get(i).getUsername().equals(name)
               && playerArrayList.get(i).getPassword().equals(password))
              {
                  return playerArrayList.get(i);
@@ -239,7 +243,7 @@
       //Finds the specific Player object, deletes it, and adds the new Player object
       public static void updatePlayer(Player newPlayer){
           for (int i = 0; i < playerArrayList.size(); i++){
-             if (playerArrayList.get(i).getUserName().equals(newPlayer.getUserName())
+             if (playerArrayList.get(i).getUsername().equals(newPlayer.getUsername())
               && playerArrayList.get(i).getPassword().equals(newPlayer.getPassword()))
              {
                  playerArrayList.remove(i);
@@ -254,8 +258,7 @@
       //Adds the new Player object if there is no duplicate name and password 
       public static boolean addNewPlayer(Player newPlayer){
           for (int i = 0; i < playerArrayList.size(); i++){
-             if (playerArrayList.get(i).getUserName().equals(newPlayer.getUserName())
-              && playerArrayList.get(i).getPassword().equals(newPlayer.getPassword()))
+             if (playerArrayList.get(i).getUsername().equals(newPlayer.getUsername()))
              {
                  return false;  //indicates the player could not be added due to a duplcate player name and password. 
              }

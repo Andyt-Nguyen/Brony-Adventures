@@ -1,26 +1,34 @@
-public class Person {
+public class Player {
     private int hp;
     private int food;
     private String username;
     private String password;
     private int location;
     private int knife;
-    private int points;
+    private int highScore;
     
-    public Person() {
+    public Player() {
         this.username = "";
         this.password = "";
         this.hp = 100;
-        this.food = "";
+        this.food = 0;
         this.location = 0;
     }
 
-    public Person(String username, String password, int hp, int food, int location) {
+    public Player(String username, String password, int highscore, int hp, int food, int location) {
         this.username = username;
         this.password = password;
         this.hp = hp;
         this.food = food;
         this.location = location;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public int geKnife(){
@@ -38,6 +46,10 @@ public class Person {
         return location;
     }
 
+    public int getHighScore(){
+        return this.highScore;
+    }
+
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -50,16 +62,24 @@ public class Person {
         this.food = food;
     }
 
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setPassowrd(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     public void setKnife(int knife){
         this.knife = knife;
+    }
+
+    public void setPoints(int highScore) {
+        this.highScore = highScore;
+    }
+
+    public void addToPoints(int points) {
+        this.highScore += points;
     }
 
     public void increaseHp(int hp){
@@ -69,10 +89,5 @@ public class Person {
     public void decreaseHp(int hp){
         this.hp -= hp;
     }
-
-    public int getPoints(){
-        return this.points;
-    }
-
 
 }
