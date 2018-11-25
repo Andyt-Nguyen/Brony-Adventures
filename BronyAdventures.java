@@ -5,6 +5,20 @@ class BronyAdventures {
     public static Player player = new Player();
     public final static Scanner scanner = new Scanner(System.in);
     public static void main(String args []) throws IOException {
+        
+        readyPlayer();
+        /**
+         * To access the player object just use variable "player"
+         * player.getHighScore(); player.getFood(); etc...
+         */
+    
+    }
+
+
+
+    /******************* Start: Create or get user information *********************/
+    
+    public static void readyPlayer() throws IOException {
         ProjectFileIO_v2.readFile();
         boolean flag = false;
         while(!flag) {
@@ -34,19 +48,9 @@ class BronyAdventures {
                 }
             }
         }
-
-        /**
-         * To access the player object just use variable "player"
-         * player.getHighScore(); player.getFood(); etc...
-         */
-    
     }
 
-
-
-
-
-    public static boolean createUser() throws IOException{
+    public static boolean createUser() throws IOException {
         String username = getString("Create username");
         String password = getString("Create password");
         Player newPlayer = new Player(username,password, 0, 0, 0, 0);
@@ -54,7 +58,7 @@ class BronyAdventures {
         if(isNewPlayer) {
             player = newPlayer;
             ProjectFileIO_v2.writeFile();
-            System.out.println("Welcome " + username + "! To Brony Adventures!");
+            System.out.println("Welcome " + username + " to Brony Adventures!");
             return true;
         } else {
             System.out.println("There is already a user with that username");
@@ -62,7 +66,7 @@ class BronyAdventures {
         }
     }
 
-    public static boolean signinUser() {
+    public static boolean signinUser() throws IOException {
         String username = getString("Enter username");
         String password = getString("Enter password");
         Player isPlayerExist = ProjectFileIO_v2.getPlayer(username,password);
@@ -82,6 +86,8 @@ class BronyAdventures {
         System.out.println("* 2. Login              *");
         System.out.println("*************************");
     }
+
+   /******************* End: Create or get user information *********************/
 
 
     public static String getString(String msg) {
