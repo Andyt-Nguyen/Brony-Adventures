@@ -1,9 +1,10 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 class BronyAdventures {
     public static Player player = new Player();
     public final static Scanner scanner = new Scanner(System.in);
+    public ArrayList<Room> roomList = new ArrayList<Room>();
     public static void main(String args []) throws IOException {
         
         readyPlayer();

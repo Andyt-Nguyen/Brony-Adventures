@@ -10,10 +10,10 @@ public class Menus {
         System.out.println("------------------------------------");
     }
 
-    public static void displayGameOver(){
+    public static void displayGameOver(Player player){
         System.out.println("----------------------------------------------");
         System.out.println("It seems you have died.");
-        System.err.println("You collected a total of " + player.getPoints() + " points this game.");
+        System.err.println("You collected a total of " + player.getHighScore() + " points this game.");
         System.err.println("Your stats have been placed on the highscores.");
         System.out.println("----------------------------------------------");
     }

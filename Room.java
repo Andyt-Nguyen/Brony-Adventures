@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 public class Room{
 
@@ -25,7 +26,7 @@ public class Room{
 
     Room(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2, String defaultMsg3,
          String defaultMsg4, String defaultMsg5){
-        this.roomID = roomId;
+        this.roomID = roomID;
         this.roomName = roomName;
         this.roomDescription = roomDescription;
         this.defaultMsg1 = defaultMsg1;

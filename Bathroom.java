@@ -10,9 +10,8 @@ public class Bathroom extends Room{
         this.shower = 0;
     }
 
-    Bathroom(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2,
-    String defaultMsg3, String defaultMsg4, String defaultMsg5, int toilet, int shower){
-        super(roomID,roomName,roomDescription,defaultMsg1,defaultMsg2,defaultMsg3,defaultMsg4,defaultMsg5);
+    Bathroom(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2, int toilet, int shower){
+        super(roomID, roomName, roomDescription, defaultMsg1, defaultMsg2);
         this.toilet = toilet;
         this.shower = shower;
     }

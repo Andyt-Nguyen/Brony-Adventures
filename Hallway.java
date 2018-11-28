@@ -9,9 +9,8 @@ public class Hallway extends Room{
         this.window = 0;
     }
 
-    Hallway(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2,
-    String defaultMsg3, String defaultMsg4, String defaultMsg5, int lamp, int window){
-        super(roomID, roomName, roomDescription, defaultMsg1, defaultMsg2, defaultMsg3, defaultMsg4, defaultMsg5);
+    Hallway(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2, int lamp, int window){
+        super(roomID, roomName, roomDescription, defaultMsg1, defaultMsg2);
         this.lamp = lamp;
         this.window = window;
     }
@@ -42,7 +41,7 @@ public class Hallway extends Room{
         if(keyword.equalsIgnoreCase("window") && this.window == 1){
             System.out.println("You see a window and decide to make a jump for it, as you're jumping out you get " +
             " tripped up on your foot, you fall two stories onto your head and die.");
-            Menus.displayGameOver();
+            Menus.displayGameOver(player);
             setWindow(0);
             player.setHp(0);
         }else if(keyword.equalsIgnoreCase("window") && this.window== 0){
