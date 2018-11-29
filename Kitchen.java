@@ -14,8 +14,8 @@ public class Kitchen extends Room{
     }
     
     
-    Kitchen(int roomID, String roomName, String roomDescription, int knife, int fridge){
-        super(roomID, roomName, roomDescription);
+    Kitchen(int roomID, String roomName, String roomDescription, int door1, int door2, int knife, int fridge){
+        super(roomID, roomName, roomDescription, door1, door2);
         this.knife = knife;
         this.fridge = fridge;
         if(fridge > 0){
@@ -54,33 +54,47 @@ public class Kitchen extends Room{
             }
         }
         if(!isFound){
-            System.out.println("The game does not recognize the word, " + keyword + "!");
+            System.out.println("\nThe game does not recognize the word, " + keyword + "!");
         }
     }
 
     public void performAction(Player player, String keyword){
         if(keyword.equalsIgnoreCase("knife") && this.knife == 1){
-            System.out.println("You pick up the knife and accidentally dropped it on your toe, but don't worry it's still useable.");
+            System.out.println("\nYou pick up the knife and accidentally dropped it on your toe, but don't worry it's still useable.");
             setKnife(0);
             player.setKnife(1);
             player.decreaseHp(10);
+            this.kitchenKeywords.remove("Knife");
         }else if(keyword.equalsIgnoreCase("knife") && this.knife == 0){
-            System.err.println("Sorry the command " + keyword + " is not useable here.");
+            System.err.println("\nSorry the command " + keyword + " is not useable here.");
         }
         if(keyword.equalsIgnoreCase("fridge") && this.fridge == 1){
-            System.out.println("You decide to look in the fridge, you find a half eaten apple and decide to eat it anyways.");
+            System.out.println("\nYou decide to look in the fridge, you find a half eaten apple and decide to eat it anyways.");
             setFridge(0);
             player.increaseHp(15);
+            this.kitchenKeywords.remove("Fridge");
         }else if(keyword.equalsIgnoreCase("fridge") && this.fridge == 0){
-            System.err.println("Sorry the command " + keyword + " is not useable here.");
+            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+        }
+        if(keyword.equalsIgnoreCase("left") && this.getRoomID() == 4){
+            System.out.println("\nYou re-enter the hallway that was linked to the imaginary room.");
+            player.setLocation(this.getDoor1());
+        }
+        if(keyword.equalsIgnoreCase("up") && this.getRoomID() == 4){
+            System.out.println("\nYou enter another hallway.");
+            player.setLocation(this.getDoor2());
         }
     }
 
     public void displayRoomHelp(){
-        System.out.println("\n------" + this.getRoomName() + "------");
+        System.out.println("\n---------" + this.getRoomName() + "---------");
+        System.out.println("\n" + this.getDescription());
+        System.out.println("Here are a few words you can enter to do things around the room..");
+        System.out.println("");
         for(int i = 1; i < this.kitchenKeywords.size() + 1; i++){
-            System.out.println(i + ". " + this.kitchenKeywords.get(i));
+            System.out.println(i + ". " + this.kitchenKeywords.get(i - 1));
         }
+        System.out.println("\n-------------------------------");
     }
 
 }

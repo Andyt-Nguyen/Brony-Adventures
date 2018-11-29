@@ -16,8 +16,8 @@ public class Bedroom extends Room{
         this.diary = 0;
     }
 
-    Bedroom(int roomID, String roomName, String roomDescription, int dresser, int bed){
-        super(roomID, roomName, roomDescription);
+    Bedroom(int roomID, String roomName, String roomDescription, int door1, int door2, int dresser, int bed){
+        super(roomID, roomName, roomDescription, door1, door2);
         this.dresser = dresser;
         this.bed = bed;
         if(this.dresser > 0){
@@ -61,7 +61,7 @@ public class Bedroom extends Room{
             }
         }
         if(!isFound){
-            System.out.println("The game does not recognize the word, " + keyword + "!");
+            System.out.println("\nThe game does not recognize the word, " + keyword + "!");
         }
     }
 
@@ -70,17 +70,23 @@ public class Bedroom extends Room{
             System.out.println("\nYou open up the dresser and find a diary, you decide to read it");
             setDresser(0);
             readDiary();
+            this.bedroomKeywords.remove("Dresser");
         }else if(keyword.equalsIgnoreCase("dresser") && this.dresser == 0){
-            System.err.println("Sorry the command " + keyword + " is not useable here.");
+            System.err.println("\nSorry the command " + keyword + " is not useable here.");
         }
         if(keyword.equalsIgnoreCase("bed") && this.bed == 1){
-            System.out.println("You search under the bed and find a gun. Turns out you don't know how to use it..");
+            System.out.println("\nYou search under the bed and find a gun. Turns out you don't know how to use it..");
             System.out.println("You accidentally fire the gun into a mirror and a piece of broken glasses grazes your arm.");
             System.out.println("Luckily something worse didn't happen!");
             setBed(0);
             player.decreaseHp(5);
+            this.bedroomKeywords.remove("Bed");
         }else if(keyword.equalsIgnoreCase("bed") && this.bed == 0){
-            System.err.println("Sorry the command " + keyword + " is not useable here.");
+            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+        }
+        if(keyword.equalsIgnoreCase("up") && this.getRoomID() == 1){
+            System.out.println("\nYou move out into a hallway, you look back and the room you were just in is gone...");
+            player.setLocation(this.getDoor1());
         }
     }
 

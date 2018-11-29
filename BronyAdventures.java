@@ -4,7 +4,7 @@ import java.util.*;
 class BronyAdventures {
     public static Player player = new Player();
     public final static Scanner scanner = new Scanner(System.in);
-    public ArrayList<Room> roomList = new ArrayList<Room>();
+    public static ArrayList<Room> roomList = new ArrayList<Room>();
     public static void main(String args []) throws IOException {
         
         String userInput = "";
@@ -14,19 +14,64 @@ class BronyAdventures {
          * player.getHighScore(); player.getFood(); etc...
          */
 
-        Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.",
+        Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.", 2, 0,
           1 , 1);
+        Hallway hallway1 = new Hallway(2, "Hallway", "This is the hallway right outside the guest bedroom.", 3, 4, 1, 1);
+        Bathroom bathroom1 = new Bathroom(3, "Master Bathroom", "This is the bathroom closest to the master bedroom.",
+        2, 5, 1, 1);
+        Kitchen kitchen1 = new Kitchen(4, "Kitchen 1", "This is the kitchen at the back right corner of the house.",
+        2, 6, 1, 1);
+
         guestBedroom.addKeyword("Dresser");
         guestBedroom.addKeyword("Bed");
+        guestBedroom.addKeyword("Up");
+
+        hallway1.addKeyword("Lamp");
+        hallway1.addKeyword("Window");
+        hallway1.addKeyword("Left");
+        hallway1.addKeyword("Right");
+
+        bathroom1.addKeyword("Toilet");
+        bathroom1.addKeyword("Shower");
+        bathroom1.addKeyword("Right");
+        bathroom1.addKeyword("Up");
+
+        kitchen1.addKeyword("Fridge");
+        kitchen1.addKeyword("Knife");
+        kitchen1.addKeyword("Left");
+        kitchen1.addKeyword("Up");
+
+
+
+        roomList.add(guestBedroom);
+        player.setLocation(1);
         player.setHp(100);
+
         while(!userInput.equalsIgnoreCase("ex")){
+            int currentRoom = player.getLocation();
             userInput = IR5.getString("\nEnter a single word associated with what you would like to do (ex to exit).");
             if(userInput.equalsIgnoreCase("help")){
-                guestBedroom.displayRoomHelp();
+                if(currentRoom == 1){
+                    guestBedroom.displayRoomHelp();
+                }else if(currentRoom == 2){
+                    hallway1.displayRoomHelp();
+                }else if(currentRoom == 3){
+                    bathroom1.displayRoomHelp();
+                }else if(currentRoom == 4){
+                    kitchen1.displayRoomHelp();
+                }
             }else if(userInput.equalsIgnoreCase("ex")){
                 System.exit(0);
             }else{
-                guestBedroom.findKeyword(player, userInput);
+                if(currentRoom == 1){
+                    guestBedroom.findKeyword(player, userInput);
+                }else if(currentRoom == 2){
+                    hallway1.findKeyword(player, userInput);
+                }else if(currentRoom == 3){
+                    bathroom1.findKeyword(player, userInput);
+                }else if(currentRoom == 4){
+                    kitchen1.findKeyword(player, userInput);
+                }
             }
           }
 
