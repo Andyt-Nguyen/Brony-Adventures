@@ -16,8 +16,8 @@ public class Bedroom extends Room{
         this.diary = 0;
     }
 
-    Bedroom(int roomID, String roomName, String roomDescription, int door1, int door2, int dresser, int bed){
-        super(roomID, roomName, roomDescription, door1, door2);
+    Bedroom(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int dresser, int bed){
+        super(roomID, roomName, roomDescription, roomUniques, door1, door2);
         this.dresser = dresser;
         this.bed = bed;
         if(this.dresser > 0){

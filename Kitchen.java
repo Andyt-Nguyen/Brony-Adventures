@@ -14,8 +14,8 @@ public class Kitchen extends Room{
     }
     
     
-    Kitchen(int roomID, String roomName, String roomDescription, int door1, int door2, int knife, int fridge){
-        super(roomID, roomName, roomDescription, door1, door2);
+    Kitchen(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int knife, int fridge){
+        super(roomID, roomName, roomDescription, roomUniques, door1, door2);
         this.knife = knife;
         this.fridge = fridge;
         if(fridge > 0){

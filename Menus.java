@@ -2,19 +2,12 @@ public class Menus {
     
     public static void displayHelp() {
         System.out.println("**************************************************");
-        System.out.println("* Command             |    Action                  *");
+        System.out.println("* Command             |    Action                *");
         System.out.println("**************************************************");
-        System.out.println("  move north          |    Move up               *");
-        System.out.println("  move south          |    Move down             *");
-        System.out.println("  move east           |    Move right            *");
-        System.out.println("  move west           |    Move left             *");
-        System.out.println("  scream              |    Player screams        *");
-        System.out.println("  pick up [item]      |    Player picks up wepon *");
-        System.out.println("  view inventory      |    look in inventory     *");
-        System.out.println("  view surroundings   |    look around room      *");
-        System.out.println("  look under [object] |    looks under object    *");
-        System.out.println("  diagnostics         |    view hp               *");
-        System.out.println("  fight [enemy]       |    fight enemy           *");
+        System.out.println("  Search              |    Examines Room         *");
+        System.out.println("  Scream              |    Player Screams        *");
+        System.out.println("  Health              |    Displays HP           *");
+        System.out.println("  Exit                |    Saves and Quits Game  *");
         System.out.println("**************************************************");
     }
 

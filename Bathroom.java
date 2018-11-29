@@ -13,8 +13,8 @@ public class Bathroom extends Room{
         this.shower = 0;
     }
 
-    Bathroom(int roomID, String roomName, String roomDescription, int door1, int door2, int toilet, int shower){
-        super(roomID, roomName, roomDescription, door1, door2);
+    Bathroom(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int toilet, int shower){
+        super(roomID, roomName, roomDescription, roomUniques, door1, door2);
         this.toilet = toilet;
         this.shower = shower;
     }

@@ -12,8 +12,8 @@ public class Hallway extends Room{
         this.window = 0;
     }
 
-    Hallway(int roomID, String roomName, String roomDescription, int door1, int door2, int lamp, int window){
-        super(roomID, roomName, roomDescription, door1, door2);
+    Hallway(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int lamp, int window){
+        super(roomID, roomName, roomDescription, roomUniques, door1, door2);
         this.lamp = lamp;
         this.window = window;
     }

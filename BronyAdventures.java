@@ -14,13 +14,15 @@ class BronyAdventures {
          * player.getHighScore(); player.getFood(); etc...
          */
 
-        Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.", 2, 0,
+        Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.",
+        "\nYou see a door to the north, a dresser and a bed in this room.", 2, 0,
           1 , 1);
-        Hallway hallway1 = new Hallway(2, "Hallway", "This is the hallway right outside the guest bedroom.", 3, 4, 1, 1);
+        Hallway hallway1 = new Hallway(2, "Hallway", "This is the hallway right outside the guest bedroom.",
+        "\nYou see a door to your east and to the west, a lamp, and a window.", 3, 4, 1, 1);
         Bathroom bathroom1 = new Bathroom(3, "Master Bathroom", "This is the bathroom closest to the master bedroom.",
-        2, 5, 1, 1);
+        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 2, 5, 1, 1);
         Kitchen kitchen1 = new Kitchen(4, "Kitchen 1", "This is the kitchen at the back right corner of the house.",
-        2, 6, 1, 1);
+        "\nYou see a door to your west and to the north, you also notice a knife and a running fridge.", 2, 6, 1, 1);
 
         guestBedroom.addKeyword("Dresser");
         guestBedroom.addKeyword("Bed");
@@ -51,15 +53,26 @@ class BronyAdventures {
             int currentRoom = player.getLocation();
             userInput = IR5.getString("\nEnter a single word associated with what you would like to do (ex to exit).");
             if(userInput.equalsIgnoreCase("help")){
+                Menus.displayHelp();
+            }else if(userInput.equalsIgnoreCase("search")){
                 if(currentRoom == 1){
+                    System.out.println(guestBedroom.getRoomUniques());
                     guestBedroom.displayRoomHelp();
                 }else if(currentRoom == 2){
+                    System.out.println(hallway1.getRoomUniques());
                     hallway1.displayRoomHelp();
                 }else if(currentRoom == 3){
+                    System.out.println(bathroom1.getRoomUniques());
                     bathroom1.displayRoomHelp();
                 }else if(currentRoom == 4){
+                    System.out.println(kitchen1.getRoomUniques());
                     kitchen1.displayRoomHelp();
                 }
+            }else if (userInput.equalsIgnoreCase("scream")){
+                System.out.println("You scream in fear!");
+
+            }else if (userInput.equalsIgnoreCase("health")){
+                System.out.println("Hp: " + player.getHp() + "/100");
             }else if(userInput.equalsIgnoreCase("ex")){
                 System.exit(0);
             }else{
