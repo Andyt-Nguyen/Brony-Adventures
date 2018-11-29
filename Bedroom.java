@@ -1,9 +1,12 @@
+import java.util.*;
+
 public class Bedroom extends Room{
 
     private int dresser;
     private int diary;
     private int bed;
     private int gun;
+    private List<String> bedroomKeywords = new ArrayList<String>();
 
     Bedroom(){
         super();
@@ -13,8 +16,8 @@ public class Bedroom extends Room{
         this.diary = 0;
     }
 
-    Bedroom(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2, int dresser, int bed){
-        super(roomID, roomName, roomDescription, defaultMsg1, defaultMsg2);
+    Bedroom(int roomID, String roomName, String roomDescription, int dresser, int bed){
+        super(roomID, roomName, roomDescription);
         this.dresser = dresser;
         this.bed = bed;
         if(this.dresser > 0){
@@ -45,6 +48,23 @@ public class Bedroom extends Room{
         return this.bed;
     }
 
+    public void addKeyword(String keyword){
+        this.bedroomKeywords.add(keyword);
+    }
+
+    public void findKeyword(Player player, String keyword){
+        boolean isFound = false;
+        for(int i = 0; i < this.bedroomKeywords.size();i++){
+            if(this.bedroomKeywords.get(i).equalsIgnoreCase(keyword)){
+                this.performAction(player, keyword);
+                isFound = true;
+            }
+        }
+        if(!isFound){
+            System.out.println("The game does not recognize the word, " + keyword + "!");
+        }
+    }
+
     public void performAction(Player player, String keyword){
         if(keyword.equalsIgnoreCase("dresser") && this.dresser == 1){
             System.out.println("You open up the dresser and find a diary, you decide to read it");
@@ -61,6 +81,13 @@ public class Bedroom extends Room{
             player.decreaseHp(5);
         }else if(keyword.equalsIgnoreCase("bed") && this.bed == 0){
             System.err.println("Sorry the command " + keyword + " is not useable here.");
+        }
+    }
+
+    public void displayRoomHelp(){
+        System.out.println("\n------" + this.getRoomName() + "------");
+        for(int i = 1; i < this.bedroomKeywords.size() + 1; i++){
+            System.out.println(i + ". " + this.bedroomKeywords.get(i - 1));
         }
     }
 

@@ -1,7 +1,10 @@
+import java.util.*;
+
 public class Hallway extends Room{
 
     private int lamp;
     private int window;
+    private List<String> hallwayKeywords = new ArrayList<String>();
 
     Hallway(){
         super();
@@ -9,8 +12,8 @@ public class Hallway extends Room{
         this.window = 0;
     }
 
-    Hallway(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2, int lamp, int window){
-        super(roomID, roomName, roomDescription, defaultMsg1, defaultMsg2);
+    Hallway(int roomID, String roomName, String roomDescription, int lamp, int window){
+        super(roomID, roomName, roomDescription);
         this.lamp = lamp;
         this.window = window;
     }
@@ -31,6 +34,23 @@ public class Hallway extends Room{
         return this.window;
     }
 
+    public void addKeyword(String keyword){
+        this.hallwayKeywords.add(keyword);
+    }
+
+    public void findKeyword(Player player, String keyword){
+        boolean isFound = false;
+        for(int i = 0; i < this.hallwayKeywords.size();i++){
+            if(this.hallwayKeywords.get(i).equalsIgnoreCase(keyword)){
+                this.performAction(player, keyword);
+                isFound = true;
+            }
+        }
+        if(!isFound){
+            System.out.println("The game does not recognize the word, " + keyword + "!");
+        }
+    }
+
     public void performAction(Player player, String keyword){
         if(keyword.equalsIgnoreCase("lamp") && this.lamp == 1){
             System.out.println("It's a pony shaped lamp, you decide you're already deathly freightened of ponies and stay away from it.");
@@ -46,6 +66,13 @@ public class Hallway extends Room{
             player.setHp(0);
         }else if(keyword.equalsIgnoreCase("window") && this.window== 0){
             System.err.println("Sorry the command " + keyword + " is not useable here.");
+        }
+    }
+
+    public void displayRoomHelp(){
+        System.out.println("\n------" + this.getRoomName() + "------");
+        for(int i = 1; i < this.hallwayKeywords.size() + 1; i++){
+            System.out.println(i + ". " + this.hallwayKeywords.get(i));
         }
     }
 }

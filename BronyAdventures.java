@@ -7,11 +7,27 @@ class BronyAdventures {
     public ArrayList<Room> roomList = new ArrayList<Room>();
     public static void main(String args []) throws IOException {
         
+        String userInput = "";
         readyPlayer();
         /**
          * To access the player object just use variable "player"
          * player.getHighScore(); player.getFood(); etc...
          */
+
+        Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.",
+          1 , 1);
+        guestBedroom.addKeyword("Dresser");
+        guestBedroom.addKeyword("Bed");
+        player.setHp(100);
+        while(!userInput.equalsIgnoreCase("ex")){
+            userInput = IR5.getString("Enter a single word associated with what you would like to do (ex to exit).");
+            if(userInput.equalsIgnoreCase("help")){
+                guestBedroom.displayRoomHelp();
+            }else if(userInput.equalsIgnoreCase("ex")){
+                System.exit(0);
+            }
+          }
+
     
     }
 

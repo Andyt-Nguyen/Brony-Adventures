@@ -1,9 +1,11 @@
+import java.util.*;
+
 public class Kitchen extends Room{
 
     private int knife;
     private int fridge;
     private int food;
-
+    private ArrayList<String> kitchenKeywords = new ArrayList<String>();
     Kitchen(){
         super();
         this.knife = 0;
@@ -12,8 +14,8 @@ public class Kitchen extends Room{
     }
     
     
-    Kitchen(int roomID, String roomName, String roomDescription, String defaultMsg1, String defaultMsg2, int knife, int fridge){
-        super(roomID, roomName, roomDescription, defaultMsg1, defaultMsg2);
+    Kitchen(int roomID, String roomName, String roomDescription, int knife, int fridge){
+        super(roomID, roomName, roomDescription);
         this.knife = knife;
         this.fridge = fridge;
         if(fridge > 0){
@@ -39,6 +41,23 @@ public class Kitchen extends Room{
         return this.fridge;
     }
 
+    public void addKeyword(String keyword){
+        this.kitchenKeywords.add(keyword);
+    }
+
+    public void findKeyword(Player player, String keyword){
+        boolean isFound = false;
+        for(int i = 0; i < this.kitchenKeywords.size();i++){
+            if(this.kitchenKeywords.get(i).equalsIgnoreCase(keyword)){
+                this.performAction(player, keyword);
+                isFound = true;
+            }
+        }
+        if(!isFound){
+            System.out.println("The game does not recognize the word, " + keyword + "!");
+        }
+    }
+
     public void performAction(Player player, String keyword){
         if(keyword.equalsIgnoreCase("knife") && this.knife == 1){
             System.out.println("You pick up the knife and accidentally dropped it on your toe, but don't worry it's still useable.");
@@ -54,6 +73,13 @@ public class Kitchen extends Room{
             player.increaseHp(15);
         }else if(keyword.equalsIgnoreCase("fridge") && this.fridge == 0){
             System.err.println("Sorry the command " + keyword + " is not useable here.");
+        }
+    }
+
+    public void displayRoomHelp(){
+        System.out.println("\n------" + this.getRoomName() + "------");
+        for(int i = 1; i < this.kitchenKeywords.size() + 1; i++){
+            System.out.println(i + ". " + this.kitchenKeywords.get(i));
         }
     }
 
