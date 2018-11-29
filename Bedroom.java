@@ -67,7 +67,7 @@ public class Bedroom extends Room{
 
     public void performAction(Player player, String keyword){
         if(keyword.equalsIgnoreCase("dresser") && this.dresser == 1){
-            System.out.println("You open up the dresser and find a diary, you decide to read it");
+            System.out.println("\nYou open up the dresser and find a diary, you decide to read it");
             setDresser(0);
             readDiary();
         }else if(keyword.equalsIgnoreCase("dresser") && this.dresser == 0){
@@ -85,14 +85,24 @@ public class Bedroom extends Room{
     }
 
     public void displayRoomHelp(){
-        System.out.println("\n------" + this.getRoomName() + "------");
+        System.out.println("\n---------" + this.getRoomName() + "---------");
+        System.out.println("\n" + this.getDescription());
+        System.out.println("Here are a few words you can enter to do things around the room..");
+        System.out.println("");
         for(int i = 1; i < this.bedroomKeywords.size() + 1; i++){
             System.out.println(i + ". " + this.bedroomKeywords.get(i - 1));
         }
+        System.out.println("\n-------------------------------");
     }
 
     public void readDiary(){
-
+        System.out.println("\n----------------------------------------------------------------------");
+        System.out.println("- It's night number 3 in this odd house..                            -");
+        System.out.println("- I keep hearing noises outside my room in the middle of the night.. -");
+        System.out.println("- It kind of sounds like a stampede running through the hallway..    -");
+        System.out.println("- I am way too scared to check it out..                              -");
+        System.out.println("- Hopefully it's just my imagination..                               -");
+        System.out.println("----------------------------------------------------------------------");
     }
 
 }

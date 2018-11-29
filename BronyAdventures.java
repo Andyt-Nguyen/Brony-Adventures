@@ -20,11 +20,13 @@ class BronyAdventures {
         guestBedroom.addKeyword("Bed");
         player.setHp(100);
         while(!userInput.equalsIgnoreCase("ex")){
-            userInput = IR5.getString("Enter a single word associated with what you would like to do (ex to exit).");
+            userInput = IR5.getString("\nEnter a single word associated with what you would like to do (ex to exit).");
             if(userInput.equalsIgnoreCase("help")){
                 guestBedroom.displayRoomHelp();
             }else if(userInput.equalsIgnoreCase("ex")){
                 System.exit(0);
+            }else{
+                guestBedroom.findKeyword(player, userInput);
             }
           }
 
