@@ -1,9 +1,9 @@
 public class Menus {
     
     public static void displayHelp() {
-        System.out.println("*********************************************");
-        System.out.println("* Command           |    Action               *");
-        System.out.println("*********************************************");
+        System.out.println("**************************************************");
+        System.out.println("* Command           |    Action                  *");
+        System.out.println("**************************************************");
         System.out.println("  move north          |    Move up               *");
         System.out.println("  move south          |    Move down             *");
         System.out.println("  move east           |    Move right            *");
