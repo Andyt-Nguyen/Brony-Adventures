@@ -19,9 +19,9 @@ public class Kitchen extends Room{
     }
     
     
-    Kitchen(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int knife, int fridge,
-    int sink, int chair){
-        super(roomID, roomName, roomDescription, roomUniques, door1, door2);
+    Kitchen(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int door3, int door4,
+    int knife, int fridge, int sink, int chair){
+        super(roomID, roomName, roomDescription, roomUniques, door1, door2, door3, door4);
         this.knife = knife;
         this.fridge = fridge;
         this.sink = sink;
@@ -105,13 +105,25 @@ public class Kitchen extends Room{
         }else if(keyword.equalsIgnoreCase("fridge") && this.fridge == 0 && this.getRoomID() == 4){
             System.err.println("\nSorry the command " + keyword + " is not useable here.");
         }
-        if(keyword.equalsIgnoreCase("left") && this.getRoomID() == 4){
-            System.out.println("\nYou re-enter the hallway that was linked to the imaginary room.");
+        if(keyword.equalsIgnoreCase("north") && this.getDoor1() != 0){
             player.setLocation(this.getDoor1());
+        }else if(keyword.equalsIgnoreCase("north") && this.getDoor1() == 0){
+            System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.equalsIgnoreCase("up") && this.getRoomID() == 4){
-            System.out.println("\nYou enter another hallway.");
+        if(keyword.equalsIgnoreCase("south") && this.getDoor2() != 0){
             player.setLocation(this.getDoor2());
+        }else if(keyword.equalsIgnoreCase("south") && this.getDoor2() == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.equalsIgnoreCase("east") && this.getDoor3() != 0){
+            player.setLocation(this.getDoor3());
+        }else if(keyword.equalsIgnoreCase("east") && this.getDoor3() == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.equalsIgnoreCase("west") && this.getDoor4() != 0){
+            player.setLocation(this.getDoor4());
+        }else if(keyword.equalsIgnoreCase("west") && this.getDoor4() == 0){
+            System.err.println("\nYou cannot go this direction.");
         }
     }
 

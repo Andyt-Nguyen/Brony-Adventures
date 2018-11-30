@@ -9,6 +9,8 @@ public class Room{
     private String roomUniques;
     private int door1;
     private int door2;
+    private int door3;
+    private int door4;
     private ArrayList<String> keywords = new ArrayList<String>();
 
     Room(){
@@ -18,15 +20,19 @@ public class Room{
         roomUniques = "";
         door1 = 0;
         door2 = 0;
+        door3 = 0;
+        door4 = 0;
     }
 
-    Room(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2){
+    Room(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int door3, int door4){
         this.roomID = roomID;
         this.roomName = roomName;
         this.roomDescription = roomDescription;
         this.roomUniques = roomUniques;
         this.door1 = door1;
         this.door2 = door2;
+        this.door3 = door3;
+        this.door4 = door4;
     }
 
     public void setRoomID(int roomID){
@@ -53,6 +59,14 @@ public class Room{
         this.door2 = door2;
     }
 
+    public void setDoor3(int door3){
+        this.door3 = door3;
+    }
+    
+    public void setDoor4(int door4){
+        this.door4 = door4;
+    }
+
     public int getRoomID(){
         return this.roomID;
     }
@@ -76,4 +90,13 @@ public class Room{
     public int getDoor2(){
         return this.door2;
     }
+
+    public int getDoor3(){
+        return this.door3;
+    }
+
+    public int getDoor4(){
+        return this.door4;
+    }
+
 }

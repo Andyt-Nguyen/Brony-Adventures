@@ -15,32 +15,50 @@ class BronyAdventures {
          */
 
         Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.",
-        "\nYou see a door to the north, a dresser and a bed in this room.", 2, 0, 1 , 1, 0, 0);
+        "\nYou see a door to the north, a dresser and a bed in this room.", 2, 0, 0, 0, 1 , 1, 0, 0);
         Hallway hallway1 = new Hallway(2, "Hallway", "This is the hallway right outside the guest bedroom.",
-        "\nYou see a door to your east and to the west, a lamp, and a window.", 3, 4, 1, 1, 0, 0, 0);
+        "\nYou see a door to your east and to the west, a lamp, and a window.", 0, 0, 4, 3, 1, 1, 0, 0, 0);
         Bathroom bathroom1 = new Bathroom(3, "Master Bathroom", "This is the bathroom closest to the master bedroom.",
-        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 2, 5, 1, 1, 0, 0, 0);
+        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 5, 0, 2, 0, 1, 1, 0, 0, 0);
         Kitchen kitchen1 = new Kitchen(4, "Kitchen 1", "This is the kitchen at the back right corner of the house.",
-        "\nYou see a door to your west and to the north, you also notice a knife and a running fridge.", 2, 6, 1, 1, 0, 0);
+        "\nYou see a door to your west and to the north, you also notice a knife and a running fridge.", 6, 0, 0, 2, 1, 1, 0, 0);
+        Hallway hallway2 = new Hallway(5, "Hallway", "This hallway is to the west of a bedroom.", 
+        "\nYou see doors to the south, east, and west. You also see a statue, another window, and a closet.", 8, 3, 7, 0, 0, 1, 1, 0, 1);
+        Hallway hallway3 = new Hallway(6, "Hallway", "This hallway is to the east of a bedroom.", 
+        "\nYou see doors to the south, west, and north. You also see a window, an attic panel, and a statue.", 9, 4, 0, 7, 0, 1, 0, 1, 1);
 
         guestBedroom.addKeyword("Dresser");
         guestBedroom.addKeyword("Bed");
-        guestBedroom.addKeyword("Up");
+        guestBedroom.addKeyword("North");
 
         hallway1.addKeyword("Lamp");
         hallway1.addKeyword("Window");
-        hallway1.addKeyword("Left");
-        hallway1.addKeyword("Right");
+        hallway1.addKeyword("West");
+        hallway1.addKeyword("East");
 
         bathroom1.addKeyword("Toilet");
         bathroom1.addKeyword("Shower");
-        bathroom1.addKeyword("Right");
-        bathroom1.addKeyword("Up");
+        bathroom1.addKeyword("East");
+        bathroom1.addKeyword("North");
 
         kitchen1.addKeyword("Fridge");
         kitchen1.addKeyword("Knife");
-        kitchen1.addKeyword("Left");
-        kitchen1.addKeyword("Up");
+        kitchen1.addKeyword("West");
+        kitchen1.addKeyword("North");
+
+        hallway2.addKeyword("Window");
+        hallway2.addKeyword("Statue");
+        hallway2.addKeyword("Closet");
+        hallway2.addKeyword("North");
+        hallway2.addKeyword("East");
+        hallway2.addKeyword("South");
+
+        hallway3.addKeyword("Window");
+        hallway3.addKeyword("Attic Panel");
+        hallway3.addKeyword("Statue");
+        hallway3.addKeyword("North");
+        hallway3.addKeyword("West");
+        hallway3.addKeyword("South");
 
 
 
@@ -66,6 +84,12 @@ class BronyAdventures {
                 }else if(currentRoom == 4){
                     System.out.println(kitchen1.getRoomUniques());
                     kitchen1.displayRoomHelp();
+                }else if(currentRoom == 5){
+                    System.out.println(hallway2.getRoomUniques());
+                    hallway2.displayRoomHelp();
+                }else if(currentRoom == 6){
+                    System.out.println(hallway3.getRoomUniques());
+                    hallway3.displayRoomHelp();
                 }
             }else if (userInput.equalsIgnoreCase("scream")){
                 System.out.println("You scream in fear!");
@@ -84,6 +108,10 @@ class BronyAdventures {
                     bathroom1.findKeyword(player, userInput);
                 }else if(currentRoom == 4){
                     kitchen1.findKeyword(player, userInput);
+                }else if(currentRoom == 5){
+                    hallway2.findKeyword(player, userInput);
+                }else if(currentRoom == 6){
+                    hallway3.findKeyword(player, userInput);
                 }
             }
           }
