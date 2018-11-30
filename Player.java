@@ -84,6 +84,9 @@ public class Player {
 
     public void increaseHp(int hp){
         this.hp += hp;
+        if(this.hp > 100){
+            this.hp = 100;
+        }
     }
 
     public void decreaseHp(int hp){

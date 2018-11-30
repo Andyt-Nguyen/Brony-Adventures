@@ -15,14 +15,13 @@ class BronyAdventures {
          */
 
         Bedroom guestBedroom = new Bedroom(1, "Guest Bedroom", "This is the guest bedroom at the back of the house.",
-        "\nYou see a door to the north, a dresser and a bed in this room.", 2, 0,
-          1 , 1);
+        "\nYou see a door to the north, a dresser and a bed in this room.", 2, 0, 1 , 1, 0, 0);
         Hallway hallway1 = new Hallway(2, "Hallway", "This is the hallway right outside the guest bedroom.",
-        "\nYou see a door to your east and to the west, a lamp, and a window.", 3, 4, 1, 1);
+        "\nYou see a door to your east and to the west, a lamp, and a window.", 3, 4, 1, 1, 0, 0, 0);
         Bathroom bathroom1 = new Bathroom(3, "Master Bathroom", "This is the bathroom closest to the master bedroom.",
-        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 2, 5, 1, 1);
+        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 2, 5, 1, 1, 0, 0, 0);
         Kitchen kitchen1 = new Kitchen(4, "Kitchen 1", "This is the kitchen at the back right corner of the house.",
-        "\nYou see a door to your west and to the north, you also notice a knife and a running fridge.", 2, 6, 1, 1);
+        "\nYou see a door to your west and to the north, you also notice a knife and a running fridge.", 2, 6, 1, 1, 0, 0);
 
         guestBedroom.addKeyword("Dresser");
         guestBedroom.addKeyword("Bed");
@@ -45,13 +44,13 @@ class BronyAdventures {
 
 
 
-        roomList.add(guestBedroom);
-        player.setLocation(1);
-        player.setHp(100);
+        //roomList.add(guestBedroom);
+        //player.setLocation(1);
+       // player.setHp(100);
 
-        while(!userInput.equalsIgnoreCase("ex")){
+        while(player.getHp() > 0){
             int currentRoom = player.getLocation();
-            userInput = IR5.getString("\nEnter a single word associated with what you would like to do (ex to exit).");
+            userInput = IR5.getString("\nEnter a single word associated with what you would like to do (ex to exit).").trim();
             if(userInput.equalsIgnoreCase("help")){
                 Menus.displayHelp();
             }else if(userInput.equalsIgnoreCase("search")){
@@ -74,6 +73,7 @@ class BronyAdventures {
             }else if (userInput.equalsIgnoreCase("health")){
                 System.out.println("Hp: " + player.getHp() + "/100");
             }else if(userInput.equalsIgnoreCase("ex")){
+                ProjectFileIO_v2.writeFile();
                 System.exit(0);
             }else{
                 if(currentRoom == 1){
@@ -130,7 +130,7 @@ class BronyAdventures {
     public static boolean createUser() throws IOException {
         String username = getString("Create username");
         String password = getString("Create password");
-        Player newPlayer = new Player(username,password, 0, 0, 0, 0);
+        Player newPlayer = new Player(username,password, 0, 100, 0, 1);
         boolean isNewPlayer = ProjectFileIO_v2.addNewPlayer(newPlayer);
         if(isNewPlayer) {
             player = newPlayer;

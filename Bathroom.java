@@ -4,6 +4,9 @@ public class Bathroom extends Room{
 
     private int toilet;
     private int shower;
+    private int mirror;
+    private int cabinets;
+    private int plunger;
     private ArrayList<String> bathroomKeywords = new ArrayList<String>();
 
 
@@ -11,12 +14,19 @@ public class Bathroom extends Room{
         super();
         this.toilet = 0;
         this.shower = 0;
+        this.mirror = 0;
+        this.cabinets = 0;
+        this.plunger = 0;
     }
 
-    Bathroom(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int toilet, int shower){
+    Bathroom(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int toilet, int shower,
+    int mirror, int cabinets, int plunger){
         super(roomID, roomName, roomDescription, roomUniques, door1, door2);
         this.toilet = toilet;
         this.shower = shower;
+        this.mirror = mirror;
+        this.cabinets = cabinets;
+        this.plunger = plunger;
     }
 
     public void setToilet(int toilet){
@@ -27,12 +37,36 @@ public class Bathroom extends Room{
         this.shower = shower;
     }
 
+    public void setMirror(int mirror){
+        this.mirror = mirror;
+    }
+
+    public void setCabinets(int cabinets){
+        this.cabinets = cabinets;
+    }
+
+    public void setPlunger(int plunger){
+        this.plunger = plunger;
+    }
+
     public int getToilet(){
         return this.toilet;
     }
 
     public int getShower(){
         return this.shower;
+    }
+
+    public int getMirror(){
+        return this.mirror;
+    }
+
+    public int getCabinets(){
+        return this.cabinets;
+    }
+
+    public int getPlunger(){
+        return this.plunger;
     }
 
     public void addKeyword(String keyword){
@@ -53,21 +87,24 @@ public class Bathroom extends Room{
     }
 
     public void performAction(Player player, String keyword){
-        if(keyword.equalsIgnoreCase("toilet") && this.toilet == 1){
+        if(keyword.equalsIgnoreCase("toilet") && this.toilet == 1 && this.getRoomID() == 3){
             System.out.println("\nYou decide to drop a nuke in the toilet, it becomes unuseable but you feel slightly refreshed.");
+            System.out.println("Your health has recovered slightly.");
             setToilet(0);
             player.increaseHp(20);
             this.bathroomKeywords.remove("Toilet");
-        }else if(keyword.equalsIgnoreCase("toilet") && this.toilet == 0){
+            player.addToPoints(2);
+        }else if(keyword.equalsIgnoreCase("toilet") && this.toilet == 0 && this.getRoomID() == 3){
             System.err.println("\nSorry the command " + keyword + " is not useable here.");
         }
-        if(keyword.equalsIgnoreCase("shower") && this.shower == 1){
+        if(keyword.equalsIgnoreCase("shower") && this.shower == 1 && this.getRoomID() == 3){
             System.out.println("\nYou take a nice hot shower, as you finish a demonic pony comes and rams you into the wall" +
             " causing you to lose half of your health.");
             setShower(0);
-            player.decreaseHp(50);
+            player.decreaseHp(player.getHp()/2);
             this.bathroomKeywords.remove("Shower");
-        }else if(keyword.equalsIgnoreCase("shower") && this.shower == 0){
+            player.addToPoints(2);
+        }else if(keyword.equalsIgnoreCase("shower") && this.shower == 0 && this.getRoomID() == 3){
             System.err.println("\nSorry the command " + keyword + " is not useable here.");
         }
         if(keyword.equalsIgnoreCase("right") && this.getRoomID() == 3){
@@ -86,7 +123,7 @@ public class Bathroom extends Room{
         System.out.println("Here are a few words you can enter to do things around the room..");
         System.out.println("");
         for(int i = 1; i < this.bathroomKeywords.size() + 1; i++){
-            System.out.println(i + ". " + this.bathroomKeywords.get(i - 1));
+            System.out.println("- " + this.bathroomKeywords.get(i - 1));
         }
         System.out.println("\n-------------------------------");
     }
