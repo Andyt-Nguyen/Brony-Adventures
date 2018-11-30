@@ -114,6 +114,18 @@ class BronyAdventures {
                     hallway3.findKeyword(player, userInput);
                 }
             }
+            int newLocation = player.getLocation();
+            if(newLocation == 2 && newLocation != currentRoom){
+                System.err.println("\nYou entered the hallway on the south side of the building.");
+            }else if(newLocation == 3 && newLocation != currentRoom){
+                System.err.println("\nYou entered the master bathroom.");
+            }else if(newLocation == 4 && newLocation != currentRoom){
+                System.err.println("\nYou entered the kitchen on the south-east side of the building.");
+            }else if(newLocation == 5 && newLocation != currentRoom){
+                System.err.println("\nYou entered the hallway on the west side of the building.");
+            }else if(newLocation == 6 && newLocation != currentRoom){
+                System.err.println("\nYou entered the hallway on the east side of the building.");
+            }
           }
 
     
