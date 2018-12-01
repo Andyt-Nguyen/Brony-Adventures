@@ -83,27 +83,35 @@ public class Kitchen extends Room{
     }
 
     public void performAction(Player player, String keyword){
+        boolean userChoice;
         if(keyword.equalsIgnoreCase("knife") && this.knife == 1 && this.getRoomID() == 4){
-            System.out.println("\nYou pick up the knife and accidentally dropped it on your toe and lose 10 hp, but don't worry it's still useable.");
-            setKnife(0);
-            player.setKnife(1);
-            player.decreaseHp(10);
-            player.addToPoints(2);
-            this.kitchenKeywords.remove("Knife");
-        }else if(keyword.equalsIgnoreCase("knife") && this.knife == 0 && this.getRoomID() == 4){
-            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+            System.out.println("\nYou see a knife on the counter..");
+            userChoice = IR5.getYorN("\nWould you like to pick up the knife?(Y/N)");
+            if(userChoice){
+                System.out.println("\nYou pick up the knife and accidentally dropped it on your toe and lose 10 hp, but don't worry it's still useable.");
+                setKnife(0);
+                player.setKnife(1);
+                player.decreaseHp(10);
+                player.addToPoints(2);
+                this.kitchenKeywords.remove("Knife");
+            }else{
+                System.out.println("\nYou decide to leave the knife there for now..");
+            }
         }
         if(keyword.equalsIgnoreCase("fridge") && this.fridge == 1 && this.getRoomID() == 4){
-            System.out.println("\nYou decide to look in the fridge, you find a half eaten apple and decide to eat it anyways.");
-            System.out.println("You gained some health back..");
-            setFridge(0);
-            if(player.getHp() < 100){
-                player.increaseHp(15);
+            userChoice = IR5.getYorN("\nYou see a fridge, would you like to open it and check what's inside?(Y/N)");
+            if(userChoice){
+                System.out.println("\nYou find a half eaten apple and decide to eat it anyways.");
+                System.out.println("You gained some health back..");
+                setFridge(0);
+                if(player.getHp() < 100){
+                   player.increaseHp(15);
+                }
+                this.kitchenKeywords.remove("Fridge");
+                player.addToPoints(2);
+            }else{
+                System.out.println("\nYou decide to leave the fridge alone for now..");
             }
-            this.kitchenKeywords.remove("Fridge");
-            player.addToPoints(2);
-        }else if(keyword.equalsIgnoreCase("fridge") && this.fridge == 0 && this.getRoomID() == 4){
-            System.err.println("\nSorry the command " + keyword + " is not useable here.");
         }
         if(keyword.equalsIgnoreCase("north") || keyword.equalsIgnoreCase("south") || keyword.equalsIgnoreCase("east") || 
         keyword.equalsIgnoreCase("west")){

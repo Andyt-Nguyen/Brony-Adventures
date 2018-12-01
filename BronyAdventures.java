@@ -153,6 +153,7 @@ class BronyAdventures {
                     }
                     
                 }
+                Menus.displayStartGame(player);
             } else if(userOption == 2) {
                 boolean doesUserExist = false;
                 while(!doesUserExist) {
@@ -175,7 +176,7 @@ class BronyAdventures {
         if(isNewPlayer) {
             player = newPlayer;
             ProjectFileIO_v2.writeFile();
-            System.out.println("Welcome " + username + " to Brony Adventures!");
+            //System.out.println("Welcome " + username + " to Brony Adventures!");
             return true;
         } else {
             System.out.println("There is already a user with that username");

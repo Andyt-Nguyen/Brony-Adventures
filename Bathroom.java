@@ -87,25 +87,32 @@ public class Bathroom extends Room{
     }
 
     public void performAction(Player player, String keyword){
+        boolean userChoice;
         if(keyword.equalsIgnoreCase("toilet") && this.toilet == 1 && this.getRoomID() == 3){
-            System.out.println("\nYou decide to drop a nuke in the toilet, it becomes unuseable but you feel slightly refreshed.");
-            System.out.println("Your health has recovered slightly.");
-            setToilet(0);
-            player.increaseHp(20);
-            this.bathroomKeywords.remove("Toilet");
-            player.addToPoints(2);
-        }else if(keyword.equalsIgnoreCase("toilet") && this.toilet == 0 && this.getRoomID() == 3){
-            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+            userChoice = IR5.getYorN("\nThere's a nice clean toilet in here, would you like to use it?(Y/N");
+            if(userChoice){
+                System.out.println("\nYou decide to drop a nuke in the toilet, it becomes unuseable but you feel slightly refreshed.");
+                System.out.println("Your health has recovered slightly.");
+                setToilet(0);
+                player.increaseHp(10);
+                this.bathroomKeywords.remove("Toilet");
+                player.addToPoints(2);
+            }else{
+                System.out.println("\nYou choose to hold it..");
+            }
         }
         if(keyword.equalsIgnoreCase("shower") && this.shower == 1 && this.getRoomID() == 3){
-            System.out.println("\nYou take a nice hot shower, as you finish a demonic pony comes and rams you into the wall" +
-            " causing you to lose half of your health.");
-            setShower(0);
-            player.decreaseHp(player.getHp()/2);
-            this.bathroomKeywords.remove("Shower");
-            player.addToPoints(2);
-        }else if(keyword.equalsIgnoreCase("shower") && this.shower == 0 && this.getRoomID() == 3){
-            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+            userChoice = IR5.getYorN("\nThere seems to be a working shower in here, would you like to take one?(Y/N)");
+            if(userChoice){
+                System.out.println("\nYou take a nice hot shower, as you finish a demonic pony comes and rams you into the wall" +
+                " causing you to lose half of your health.");
+                setShower(0);
+                player.decreaseHp(player.getHp()/2);
+                this.bathroomKeywords.remove("Shower");
+                player.addToPoints(2);
+            }else{
+                System.out.println("\nYou decide you like being a dirty human being.");
+            }
         }
         if(keyword.equalsIgnoreCase("north") || keyword.equalsIgnoreCase("south") || keyword.equalsIgnoreCase("east") || 
         keyword.equalsIgnoreCase("west")){

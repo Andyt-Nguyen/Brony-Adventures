@@ -88,16 +88,16 @@ public class Hallway extends Room{
     public void performAction(Player player, String keyword){
         boolean userChoice;
         if(keyword.equalsIgnoreCase("lamp") && this.lamp == 1 && this.getRoomID() == 2){
-            System.out.println("It's a pony shaped lamp, you decide you're already deathly freightened of ponies and stay away from it.");
+            System.out.println("\nIt's a pony shaped lamp, you decide you're already deathly freightened of ponies and stay away from it.");
             setLamp(0);
             player.addToPoints(2);
             this.hallwayKeywords.remove("Lamp");
         }
         if(keyword.equalsIgnoreCase("window") && this.window == 1 && this.getRoomID() == 2){
-            System.out.println("You see a window..");
-            userChoice = IR5.getYorN("Would you like to try and escape from this window?");
+            System.out.println("\nYou see a window..");
+            userChoice = IR5.getYorN("\nWould you like to try and escape from this window?");
             if(userChoice){
-                System.out.println("You see a window and decide to make a jump for it, as you're jumping out you get " +
+                System.out.println("\nYou decide to make a jump for it, as you're jumping out you get " +
                 " tripped up on your foot, you fall two stories onto your head and die.");
                 player.addToPoints(2);
                 Menus.displayGameOver(player);
@@ -105,7 +105,7 @@ public class Hallway extends Room{
                 player.setHp(0);
                 this.hallwayKeywords.remove("Window");
             }else{
-                System.out.println("You decide not to attempt to escape.");
+                System.out.println("\nYou decide not to attempt to escape.");
             }
         }
         if(keyword.equalsIgnoreCase("window") && this.window == 1 && this.getRoomID() == 5){
@@ -120,7 +120,7 @@ public class Hallway extends Room{
                 setWindow(0);
                 this.hallwayKeywords.remove("Window");
             }else{
-                System.out.println("You decide to not try and escape from the window. You take a step back from it.");
+                System.out.println("\nYou decide to not try and escape from the window. You take a step back from it.");
             }
         }
         if(keyword.equalsIgnoreCase("statue") && this.statue == 1 && this.getRoomID() == 5){

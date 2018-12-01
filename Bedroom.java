@@ -89,24 +89,36 @@ public class Bedroom extends Room{
     }
 
     public void performAction(Player player, String keyword){
+        boolean userChoice;
         if(keyword.equalsIgnoreCase("dresser") && this.dresser == 1 && this.getRoomID() == 1){
-            System.out.println("\nYou open up the dresser and find a diary, you decide to read it");
-            setDresser(0);
-            readDiary();
-            this.bedroomKeywords.remove("Dresser");
-        }else if(keyword.equalsIgnoreCase("dresser") && this.dresser == 0 && this.getRoomID() == 1){
-            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+            userChoice = IR5.getYorN("\nYou see a dresser would you like to open it?(Y/N)");
+            if(userChoice){
+                System.out.println("\nYou open up the dresser and find a diary, you find a diary in it.");
+                userChoice = IR5.getYorN("Would you like to read the diary?(Y/N)");
+                if(userChoice){
+                    setDresser(0);
+                    readDiary();
+                    player.addToPoints(2);
+                    this.bedroomKeywords.remove("Dresser");
+                }else{
+                    System.out.println("\nYou decide to not read the diary, you put it back in the dresser.");
+                }
+            }else{
+                System.out.println("\nYou take a step back away from the dresser.");
+            }
         }
         if(keyword.equalsIgnoreCase("bed") && this.bed == 1 && this.getRoomID() == 1){
-            System.out.println("\nYou search under the bed and find a gun. Turns out you don't know how to use it..");
-            System.out.println("You accidentally fire the gun into a mirror and a piece of broken glasses grazes your arm.");
-            System.out.println("You lose 5 hp.");
-            System.out.println("Luckily something worse didn't happen!");
-            setBed(0);
-            player.decreaseHp(5);
-            this.bedroomKeywords.remove("Bed");
-        }else if(keyword.equalsIgnoreCase("bed") && this.bed == 0 && this.getRoomID() == 1){
-            System.err.println("\nSorry the command " + keyword + " is not useable here.");
+            userChoice = IR5.getYorN("\nWould you like to search under the bed you woke up on?(Y/N)");
+            if(userChoice){
+                System.out.println("\nYou search under the bed and find a gun. Turns out you don't know how to use it..");
+                System.out.println("You accidentally fire the gun, it didn't hit you but you decide to put it back where it was.");
+                System.out.println("Luckily something worse didn't happen!");
+                setBed(0);
+                player.addToPoints(2);
+                this.bedroomKeywords.remove("Bed");
+            }else{
+                System.out.println("\nYou choose to not look under it.");
+            }
         }
         if(keyword.equalsIgnoreCase("north") || keyword.equalsIgnoreCase("south") || keyword.equalsIgnoreCase("east") || 
         keyword.equalsIgnoreCase("west")){
