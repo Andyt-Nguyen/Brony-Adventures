@@ -18,9 +18,9 @@ public class Hallway extends Room{
         this.statue = 0;
     }
 
-    Hallway(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int door3, int door4,
+    Hallway(int roomID, String roomName, String roomDescription, String roomUniques, int northDoor, int southDoor, int eastDoor, int westDoor,
     int lamp, int window, int closet, int atticPanel, int statue){
-        super(roomID, roomName, roomDescription, roomUniques, door1, door2, door3, door4);
+        super(roomID, roomName, roomDescription, roomUniques, northDoor, southDoor, eastDoor, westDoor);
         this.lamp = lamp;
         this.window = window;
         this.closet = closet;
@@ -105,25 +105,9 @@ public class Hallway extends Room{
         }else if(keyword.equalsIgnoreCase("window") && this.window == 0 && this.getRoomID() == 2){
             System.err.println("Sorry the command " + keyword + " is not useable here.");
         }
-        if(keyword.equalsIgnoreCase("north") && this.getDoor1() != 0){
-            player.setLocation(this.getDoor1());
-        }else if(keyword.equalsIgnoreCase("north") && this.getDoor1() == 0){
-            System.err.println("\nYou cannot go this direction.");
-        }
-        if(keyword.equalsIgnoreCase("south") && this.getDoor2() != 0){
-            player.setLocation(this.getDoor2());
-        }else if(keyword.equalsIgnoreCase("south") && this.getDoor2() == 0){
-            System.err.println("\nYou cannot go this direction.");
-        }
-        if(keyword.equalsIgnoreCase("east") && this.getDoor3() != 0){
-            player.setLocation(this.getDoor3());
-        }else if(keyword.equalsIgnoreCase("east") && this.getDoor3() == 0){
-            System.err.println("\nYou cannot go this direction.");
-        }
-        if(keyword.equalsIgnoreCase("west") && this.getDoor4() != 0){
-            player.setLocation(this.getDoor4());
-        }else if(keyword.equalsIgnoreCase("west") && this.getDoor4() == 0){
-            System.err.println("\nYou cannot go this direction.");
+        if(keyword.equalsIgnoreCase("north") || keyword.equalsIgnoreCase("south") || keyword.equalsIgnoreCase("east") || 
+        keyword.equalsIgnoreCase("west")){
+            moveRoom(player, keyword);
         }
     }
     

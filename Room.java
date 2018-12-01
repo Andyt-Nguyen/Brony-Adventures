@@ -7,10 +7,10 @@ public class Room{
     private String roomName;
     private String roomDescription;
     private String roomUniques;
-    private int door1;
-    private int door2;
-    private int door3;
-    private int door4;
+    private int northDoor;
+    private int southDoor;
+    private int eastDoor;
+    private int westDoor;
     private ArrayList<String> keywords = new ArrayList<String>();
 
     Room(){
@@ -18,21 +18,21 @@ public class Room{
         roomName = "";
         roomDescription = "";
         roomUniques = "";
-        door1 = 0;
-        door2 = 0;
-        door3 = 0;
-        door4 = 0;
+        northDoor = 0;
+        southDoor = 0;
+        eastDoor = 0;
+        westDoor = 0;
     }
 
-    Room(int roomID, String roomName, String roomDescription, String roomUniques, int door1, int door2, int door3, int door4){
+    Room(int roomID, String roomName, String roomDescription, String roomUniques, int northDoor, int southDoor, int eastDoor, int westDoor){
         this.roomID = roomID;
         this.roomName = roomName;
         this.roomDescription = roomDescription;
         this.roomUniques = roomUniques;
-        this.door1 = door1;
-        this.door2 = door2;
-        this.door3 = door3;
-        this.door4 = door4;
+        this.northDoor = northDoor;
+        this.southDoor = southDoor;
+        this.eastDoor = eastDoor;
+        this.westDoor = westDoor;
     }
 
     public void setRoomID(int roomID){
@@ -51,20 +51,20 @@ public class Room{
         this.roomUniques = roomUniques;
     }
 
-    public void setDoor1(int door1){
-        this.door1 = door1;
+    public void setNorthDoor(int northDoor){
+        this.northDoor = northDoor;
     }
 
-    public void setDoor2(int door2){
-        this.door2 = door2;
+    public void setSouthDoor(int southDoor){
+        this.southDoor = southDoor;
     }
 
-    public void setDoor3(int door3){
-        this.door3 = door3;
+    public void setEastDoor(int eastDoor){
+        this.eastDoor = eastDoor;
     }
     
-    public void setDoor4(int door4){
-        this.door4 = door4;
+    public void setWestDoor(int westDoor){
+        this.westDoor = westDoor;
     }
 
     public int getRoomID(){
@@ -83,20 +83,45 @@ public class Room{
         return this.roomUniques;
     }
 
-    public int getDoor1(){
-        return this.door1;
+    public int getNorthDoor(){
+        return this.northDoor;
     }
 
-    public int getDoor2(){
-        return this.door2;
+    public int getSouthDoor(){
+        return this.southDoor;
     }
 
-    public int getDoor3(){
-        return this.door3;
+    public int getEastDoor(){
+        return this.eastDoor;
     }
 
-    public int getDoor4(){
-        return this.door4;
+    public int getWestDoor(){
+        return this.westDoor;
+    }
+
+    public void moveRoom(Player player, String keyword){
+
+        if(keyword.equalsIgnoreCase("north") && this.northDoor != 0){
+            player.setLocation(this.northDoor);
+        }else if(keyword.equalsIgnoreCase("north") && this.northDoor == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.equalsIgnoreCase("south") && this.southDoor != 0){
+            player.setLocation(this.southDoor);
+        }else if(keyword.equalsIgnoreCase("south") && this.southDoor == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.equalsIgnoreCase("east") && this.eastDoor != 0){
+            player.setLocation(this.eastDoor);
+        }else if(keyword.equalsIgnoreCase("east") && this.eastDoor == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.equalsIgnoreCase("west") && this.westDoor != 0){
+            player.setLocation(this.westDoor);
+        }else if(keyword.equalsIgnoreCase("west") && this.westDoor == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+
     }
 
 }
