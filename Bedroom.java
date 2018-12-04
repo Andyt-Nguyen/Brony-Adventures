@@ -100,7 +100,7 @@ public class Bedroom extends Room{
         String userAction;
         boolean center = false;
         if(keyword.startsWith("walk to d") && this.dresser == 1 && this.getRoomID() == 1){
-            userAction = IR5.getString("\nYou walk up to the dresser.").toLowerCase().trim();
+            userAction = IR5.getString("\nYou walk up to the dresser.Choose an action.(Help for list of commands)").toLowerCase().trim();
             if(userAction.startsWith("cent")){
                 center = true;
             }else if(userAction.equals("help")){
@@ -213,10 +213,12 @@ public class Bedroom extends Room{
     }
 
     public void displayDresserActions(){
-        System.out.println("Here are some commands you can use on the dresser!");
+        System.out.println("\nHere are some commands you can use on the dresser!");
+        System.out.println("**********************************************************");
         for(int i = 0; i < dresserActions.length; i++){
             System.out.println("- " + dresserActions[i]);
         }
+        System.out.println("**********************************************************");
     }
 
 }
