@@ -75,7 +75,7 @@ public class Hallway extends Room{
     public void findKeyword(Player player, String keyword){
         boolean isFound = false;
         for(int i = 0; i < this.hallwayKeywords.size();i++){
-            if(this.hallwayKeywords.get(i).equalsIgnoreCase(keyword)){
+            if(this.hallwayKeywords.get(i).toLowerCase().startsWith(keyword)){
                 this.performAction(player, keyword);
                 isFound = true;
             }
@@ -87,13 +87,12 @@ public class Hallway extends Room{
 
     public void performAction(Player player, String keyword){
         boolean userChoice;
-        if(keyword.equalsIgnoreCase("lamp") && this.lamp == 1 && this.getRoomID() == 2){
+        if(keyword.startsWith("walk to la") && this.lamp == 1 && this.getRoomID() == 2){
             System.out.println("\nIt's a pony shaped lamp, you decide you're already deathly freightened of ponies and stay away from it.");
             setLamp(0);
             player.addToPoints(2);
-            this.hallwayKeywords.remove("Lamp");
         }
-        if(keyword.equalsIgnoreCase("window") && this.window == 1 && this.getRoomID() == 2){
+        if(keyword.startsWith("walk to wi") && this.window == 1 && this.getRoomID() == 2){
             System.out.println("\nYou see a window..");
             userChoice = IR5.getYorN("\nWould you like to try and escape from this window?");
             if(userChoice){
@@ -103,12 +102,11 @@ public class Hallway extends Room{
                 Menus.displayGameOver(player);
                 setWindow(0);
                 player.setHp(0);
-                this.hallwayKeywords.remove("Window");
             }else{
                 System.out.println("\nYou decide not to attempt to escape.");
             }
         }
-        if(keyword.equalsIgnoreCase("window") && this.window == 1 && this.getRoomID() == 5){
+        if(keyword.startsWith("walk to wi") && this.window == 1 && this.getRoomID() == 5){
             System.out.println("\nYou see window..");
             userChoice = IR5.getYorN("\nWould you like to try to escape through the window?(Y/N)");
             if(userChoice){
@@ -118,12 +116,11 @@ public class Hallway extends Room{
                 player.decreaseHp(5);
                 player.addToPoints(2);
                 setWindow(0);
-                this.hallwayKeywords.remove("Window");
             }else{
                 System.out.println("\nYou decide to not try and escape from the window. You take a step back from it.");
             }
         }
-        if(keyword.equalsIgnoreCase("statue") && this.statue == 1 && this.getRoomID() == 5){
+        if(keyword.startsWith("walk to st") && this.statue == 1 && this.getRoomID() == 5){
             System.out.println("You notice a statue in the corner of the room..");
             userChoice = IR5.getYorN("It's kind of hard to see from here would you like to get closer?(Y/N)");
             if(userChoice){
@@ -136,13 +133,11 @@ public class Hallway extends Room{
                 player.increaseHp(10);
                 player.addToPoints(2);
                 setStatue(0);
-                this.hallwayKeywords.remove("Statue");
             }else{
                 System.out.println("You decide not to get closer to the statue, it remains in the dark unknown..");
             }
         }
-        if(keyword.equalsIgnoreCase("north") || keyword.equalsIgnoreCase("south") || keyword.equalsIgnoreCase("east") || 
-        keyword.equalsIgnoreCase("west")){
+        if(keyword.startsWith("move")){
             moveRoom(player, keyword);
         }
     }

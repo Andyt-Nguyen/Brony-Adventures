@@ -162,7 +162,7 @@
           fw = new FileWriter(FILE_NAME);
           pw = new PrintWriter(fw);
           writeHeaderLines();
-          writeGlobalSettingsLines();
+          //writeGlobalSettingsLines();
           writePlayerLines();
           writeEOFline();
           

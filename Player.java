@@ -6,6 +6,7 @@ public class Player {
     private int location;
     private int knife;
     private int highScore;
+    private int key;
     
     public Player() {
         this.username = "";
@@ -50,6 +51,10 @@ public class Player {
         return this.highScore;
     }
 
+    public int getKey(){
+        return this.key;
+    }
+
     public void setHp(int hp) {
         this.hp = hp;
     }
@@ -76,6 +81,10 @@ public class Player {
 
     public void setPoints(int highScore) {
         this.highScore = highScore;
+    }
+
+    public void setKey(int key){
+        this.key = key;
     }
 
     public void addToPoints(int points) {

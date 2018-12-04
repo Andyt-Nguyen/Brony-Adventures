@@ -72,7 +72,7 @@ public class Kitchen extends Room{
     public void findKeyword(Player player, String keyword){
         boolean isFound = false;
         for(int i = 0; i < this.kitchenKeywords.size();i++){
-            if(this.kitchenKeywords.get(i).equalsIgnoreCase(keyword)){
+            if(this.kitchenKeywords.get(i).toLowerCase().startsWith(keyword)){
                 this.performAction(player, keyword);
                 isFound = true;
             }
@@ -84,7 +84,7 @@ public class Kitchen extends Room{
 
     public void performAction(Player player, String keyword){
         boolean userChoice;
-        if(keyword.equalsIgnoreCase("knife") && this.knife == 1 && this.getRoomID() == 4){
+        if(keyword.startsWith("walk to kn") && this.knife == 1 && this.getRoomID() == 4){
             System.out.println("\nYou see a knife on the counter..");
             userChoice = IR5.getYorN("\nWould you like to pick up the knife?(Y/N)");
             if(userChoice){
@@ -93,12 +93,11 @@ public class Kitchen extends Room{
                 player.setKnife(1);
                 player.decreaseHp(10);
                 player.addToPoints(2);
-                this.kitchenKeywords.remove("Knife");
             }else{
                 System.out.println("\nYou decide to leave the knife there for now..");
             }
         }
-        if(keyword.equalsIgnoreCase("fridge") && this.fridge == 1 && this.getRoomID() == 4){
+        if(keyword.startsWith("walk to fr") && this.fridge == 1 && this.getRoomID() == 4){
             userChoice = IR5.getYorN("\nYou see a fridge, would you like to open it and check what's inside?(Y/N)");
             if(userChoice){
                 System.out.println("\nYou find a half eaten apple and decide to eat it anyways.");
@@ -107,14 +106,12 @@ public class Kitchen extends Room{
                 if(player.getHp() < 100){
                    player.increaseHp(15);
                 }
-                this.kitchenKeywords.remove("Fridge");
                 player.addToPoints(2);
             }else{
                 System.out.println("\nYou decide to leave the fridge alone for now..");
             }
         }
-        if(keyword.equalsIgnoreCase("north") || keyword.equalsIgnoreCase("south") || keyword.equalsIgnoreCase("east") || 
-        keyword.equalsIgnoreCase("west")){
+        if(keyword.startsWith("move")){
             moveRoom(player, keyword);
         }
     }

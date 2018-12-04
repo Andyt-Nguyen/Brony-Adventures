@@ -101,26 +101,36 @@ public class Room{
 
     public void moveRoom(Player player, String keyword){
 
-        if(keyword.equalsIgnoreCase("north") && this.northDoor != 0){
-            player.setLocation(this.northDoor);
-        }else if(keyword.equalsIgnoreCase("north") && this.northDoor == 0){
+        if(keyword.startsWith("move n") && this.northDoor != 0){
+            if(this.getRoomID() == 10){
+                if(player.getKey() == 1){
+                    Menus.displayGameWon(player);
+                }else if(player.getKey() == 0){
+                    System.err.println("Sorry this door is locked, you need to find the key.");  
+                }
+            }else{
+                player.setLocation(this.northDoor);
+            }
+            
+        }else if(keyword.startsWith("move n") && this.northDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.equalsIgnoreCase("south") && this.southDoor != 0){
+        if(keyword.startsWith("move s") && this.southDoor != 0){
             player.setLocation(this.southDoor);
-        }else if(keyword.equalsIgnoreCase("south") && this.southDoor == 0){
+        }else if(keyword.startsWith("move s") && this.southDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.equalsIgnoreCase("east") && this.eastDoor != 0){
+        if(keyword.startsWith("move e") && this.eastDoor != 0){
             player.setLocation(this.eastDoor);
-        }else if(keyword.equalsIgnoreCase("east") && this.eastDoor == 0){
+        }else if(keyword.startsWith("move e") && this.eastDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.equalsIgnoreCase("west") && this.westDoor != 0){
+        if(keyword.startsWith("move w") && this.westDoor != 0){
             player.setLocation(this.westDoor);
-        }else if(keyword.equalsIgnoreCase("west") && this.westDoor == 0){
+        }else if(keyword.startsWith("move w") && this.westDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
+        
 
     }
 
