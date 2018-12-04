@@ -193,9 +193,9 @@ class BronyAdventures {
                     bathroom2.findKeyword(player, userInput);
                 }else if(currentRoom == 10){
                     hallway4.findKeyword(player, userInput);
-                }else{
-                    System.out.println("Sorry the command " + userInput + " is not recognized.");
                 }
+            }else{
+                System.out.println("\nSorry the command " + userInput + " is not recognized.");
             }
 
             //Sends a message to the user if they have entered a new room.
