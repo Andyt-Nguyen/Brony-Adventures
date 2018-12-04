@@ -106,6 +106,9 @@ public class Bedroom extends Room{
             }else if(userAction.equals("help")){
                 displayDresserActions();
                 userAction = IR5.getString("\nChoose Action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
             }
             while(!center){
                 for(int i = 0; i < dresserActions.length; i++){

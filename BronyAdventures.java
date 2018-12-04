@@ -172,7 +172,7 @@ class BronyAdventures {
             }else if(userInput.startsWith("ex")){ //Saves and closes the game.
                 ProjectFileIO_v2.writeFile();
                 System.exit(0);
-            }else if(userInput.startsWith("walk t")){ //Based on whichever room the user is in, will complete an action.
+            }else if(userInput.startsWith("walk t") || userInput.startsWith("move ")){ //Based on whichever room the user is in, will complete an action.
                 if(currentRoom == 1){
                     guestBedroom.findKeyword(player, userInput);
                 }else if(currentRoom == 2){
