@@ -8,7 +8,12 @@ public class Bedroom extends Room{
     private int gun;
     private int key;
     private int mirror;
+    private boolean isOpen;
+    private boolean isMade;
     private List<String> bedroomKeywords = new ArrayList<String>();
+    private static String dresserActions[] = {"open","close","kick","sit on","smell"};
+    private static String bedActions[] = {"lay on", "look under", "make sheets", "smell"};
+    private static String mirrorActions[] = {"kick", "punch", "look in"};
 
     Bedroom(){
         super();
@@ -27,6 +32,8 @@ public class Bedroom extends Room{
         this.bed = bed;
         this.key = key;
         this.mirror = mirror;
+        this.isOpen = false;
+        this.isMade = false;
         if(this.dresser > 0){
             this.diary = 1;
         }else{
@@ -90,20 +97,78 @@ public class Bedroom extends Room{
 
     public void performAction(Player player, String keyword){
         boolean userChoice;
+        String userAction;
+        boolean center = false;
         if(keyword.startsWith("walk to d") && this.dresser == 1 && this.getRoomID() == 1){
-            userChoice = IR5.getYorN("\nYou see a dresser would you like to open it?(Y/N)");
-            if(userChoice){
-                System.out.println("\nYou open up the dresser and find a diary, you find a diary in it.");
-                userChoice = IR5.getYorN("Would you like to read the diary?(Y/N)");
-                if(userChoice){
-                    readDiary();
-                    player.addToPoints(2);
-                }else{
-                    System.out.println("\nYou decide to not read the diary, you put it back in the dresser.");
-                }
-            }else{
-                System.out.println("\nYou take a step back away from the dresser.");
+            userAction = IR5.getString("\nYou walk up to the dresser.").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }else if(userAction.equals("help")){
+                displayDresserActions();
+                userAction = IR5.getString("\nChoose Action.").toLowerCase().trim();
             }
+            while(!center){
+                for(int i = 0; i < dresserActions.length; i++){
+                    boolean found = false;
+                    if(userAction.equals(dresserActions[i])){
+                        if(dresserActions[i].equals("open") && !this.isOpen){
+                            this.isOpen = true;
+                            userChoice = IR5.getYorN("\nYou open the dresser and find a diary, would you like to read it.?");
+                            if(userChoice){
+                                readDiary();
+                                found = true;
+                            }else{
+                                System.out.println("\nYou choose to not read the diary.");
+                                found = true;
+                            }
+                        }else if(dresserActions[i].equals("open") && this.isOpen){
+                            System.out.println("\nThis dresser is already open.");
+                            found = true;
+                        }else if(dresserActions[i].equals("close")){
+                            if(this.isOpen){
+                                System.out.println("\nYou close the dresser.");
+                                this.isOpen = false;
+                                found = true;
+                            }else{
+                                System.out.println("\nThis dresser is already closed.");
+                                found = true;
+                            }
+                        }else if(dresserActions[i].equals("kick")){
+                            System.out.println("\nYou decide to kick the wooden dresser..");
+                            System.out.println("That didn't feel too good, you take some damage.");
+                            player.decreaseHp(5);
+                            found = true;
+                        }else if(dresserActions[i].equals("sit on")){
+                            System.out.println("\nYou sit on the dresser.");
+                            System.out.println("This seems like a good way of doing nothing.");
+                            found = true;
+                        }else if(dresserActions[i].equals("smell")){
+                            System.out.println("\nThis dresser smells like wood!");
+                            found = true;
+                        }
+                    }else if(found = false){
+                        System.out.println("\nYou cannot use this action here!");
+                    }
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }
+            System.out.println("You return to the center of the room.");
+            //userChoice = IR5.getYorN("\nYou see a dresser would you like to open it?(Y/N)");
+            //if(userChoice){
+            //    System.out.println("\nYou open up the dresser and find a diary, you find a diary in it.");
+            //    userChoice = IR5.getYorN("Would you like to read the diary?(Y/N)");
+            //    if(userChoice){
+            //        readDiary();
+            //        player.addToPoints(2);
+            //    }else{
+            //        System.out.println("\nYou decide to not read the diary, you put it back in the dresser.");
+            //    }
+            //}else{
+            //    System.out.println("\nYou take a step back away from the dresser.");
+            //}
         }
         if(keyword.startsWith("walk to d") && this.dresser == 1 && this.getRoomID() == 7){
             System.err.println("You take the key off the dresser!");
@@ -145,6 +210,13 @@ public class Bedroom extends Room{
         System.out.println("- I am way too scared to check it out..                              -");
         System.out.println("- Hopefully it's just my imagination..                               -");
         System.out.println("----------------------------------------------------------------------");
+    }
+
+    public void displayDresserActions(){
+        System.out.println("Here are some commands you can use on the dresser!");
+        for(int i = 0; i < dresserActions.length; i++){
+            System.out.println("- " + dresserActions[i]);
+        }
     }
 
 }
