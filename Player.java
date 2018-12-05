@@ -102,4 +102,23 @@ public class Player {
         this.hp -= hp;
     }
 
+    public void addFood(int food){
+        this.food += food;
+    }
+
+    public void decreaseFood(int food){
+        this.food -= food;
+    }
+
+    public void eatFood(Player player){
+        if(this.food < 1){
+            System.err.println("\nSorry you don't have any food to eat.");
+        }else if (this.food >= 1){
+            System.out.println("\nYou eat a piece of food.");
+            System.out.println("You slightly recovered some health");
+            player.increaseHp(20);
+            player.decreaseFood(1);
+        }
+    }
+
 }

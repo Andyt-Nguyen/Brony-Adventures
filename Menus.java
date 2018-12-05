@@ -15,8 +15,8 @@ public class Menus {
 
     public static void displayGameWon(Player player){
         System.out.println("****************************************************************");
-        System.out.println("*  Congratulations, " + player.getUsername() + ". You have escaped!                    *" );
-        System.out.println("*  Your score of " + player.getHighScore() + " points will be recorded to the highscores.  *");
+        System.out.println("*  Congratulations, " + player.getUsername() + ". You have escaped!                   *" );
+        System.out.println("*  Your score of " + player.getHighScore() + " points will be recorded to the highscores. *");
         System.out.println("*  I hope you enjoyed playing our game!                        *");
         System.out.println("****************************************************************");
     }
@@ -28,11 +28,12 @@ public class Menus {
         System.out.println("* Walk to -object-    |    Moves to object             *");
         System.out.println("* Move -direction-    |    Changes rooms in direction. *");
         System.out.println("* Center              |    Return to center of room.   *");
-        System.out.println("  Search              |    Examines Room               *");
-        System.out.println("  Scream              |    Player Screams              *");
-        System.out.println("  Health              |    Displays HP                 *");
-        System.out.println("  Exit                |    Saves and Quits Game        *");
-        System.out.println("**************************************************");
+        System.out.println("* Search              |    Examines Room               *");
+        System.out.println("* Scream              |    Player Screams              *");
+        System.out.println("* Eat Food            |    Eats food if available.     *");
+        System.out.println("* Health              |    Displays HP                 *");
+        System.out.println("* Exit                |    Saves and Quits Game        *");
+        System.out.println("********************************************************");
     }
 
     public static void displayGameOver(Player player){

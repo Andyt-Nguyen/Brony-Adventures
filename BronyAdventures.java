@@ -195,6 +195,8 @@ class BronyAdventures {
                 }else if(currentRoom == 10){
                     hallway4.findKeyword(player, userInput);
                 }
+            }else if(userInput.startsWith("eat fo")){
+                player.eatFood(player);
             }else{
                 System.out.println("\nSorry the command " + userInput + " is not recognized.");
             }
