@@ -85,7 +85,7 @@ class BronyAdventures {
                 3, 7, 0, 0, 1, 1, 0, 1);
         Hallway hallway3 = new Hallway(6, "Eastern Hallway", "This hallway is to the east of a bedroom.",
                 "\nYou see doors to the south, west, and north. You also see a window, an attic panel, and a statue.",
-                9, 4, 0, 7, 0, 1, 0, 1, 1);
+                9, 4, 0, 7, 0, 1, 0, 1, 0);
         Bedroom masterBedroom = new Bedroom(7, "Master Bedroom",
                 "This is the master bedroom that hovers over the courtyard.",
                 "\nYou see doors to the east and west, a mirror, a bed, and a dresser in here.", 0, 0, 6, 5, 1, 1, 1,
@@ -134,7 +134,6 @@ class BronyAdventures {
         // Adds keywords to intialize an action in hallway3.
         hallway3.addKeyword("Walk to Window");
         hallway3.addKeyword("Walk to Attic Panel");
-        hallway3.addKeyword("Walk to Statue");
         hallway3.addKeyword("Move North");
         hallway3.addKeyword("Move West");
         hallway3.addKeyword("Move South");
