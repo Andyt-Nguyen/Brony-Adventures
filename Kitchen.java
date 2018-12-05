@@ -8,8 +8,16 @@ public class Kitchen extends Room implements Serializable {
     private int food;
     private int sink;
     private int chair;
-    
+    private boolean doorOpen;
+    private boolean sinkOn;
+    private boolean chairFlipped;
     private ArrayList<String> kitchenKeywords = new ArrayList<String>();
+    private static String[] knifeActions = {"examine" , "pick up"};
+    private static String[] fridgeActions = {"examine" , "open door", "close door", "take food", "kick"};
+    private static String[] sinkActions = {"examine" , "turn on", "turn off", "wash dishes", "wash hands"};
+    private static String[] chairActions = {"examine" , "sit on", "stand on", "flip", "set up"};
+
+
     Kitchen(){
         super();
         this.knife = 0;
@@ -27,8 +35,11 @@ public class Kitchen extends Room implements Serializable {
         this.fridge = fridge;
         this.sink = sink;
         this.chair = chair;
+        this.doorOpen = false;
+        this.sinkOn = false;
+        this.chairFlipped = false;
         if(fridge > 0){
-            this.food = 1;
+            this.food = 5;
         }else{
             this.food = 0;
         }
@@ -66,6 +77,10 @@ public class Kitchen extends Room implements Serializable {
         return this.chair;
     }
 
+    public void decreaseFood(int food){
+        this.food -= food;
+    }
+
     public void addKeyword(String keyword){
         this.kitchenKeywords.add(keyword);
     }
@@ -85,33 +100,118 @@ public class Kitchen extends Room implements Serializable {
 
     public void performAction(Player player, String keyword){
         boolean userChoice;
-        if(keyword.startsWith("walk to kn") && this.knife == 1 && this.getRoomID() == 4){
-            System.out.println("\nYou see a knife on the counter..");
-            userChoice = IR5.getYorN("\nWould you like to pick up the knife?(Y/N)");
-            if(userChoice){
-                System.out.println("\nYou pick up the knife and accidentally dropped it on your toe and lose 10 hp, but don't worry it's still useable.");
-                setKnife(0);
-                player.setKnife(1);
-                player.decreaseHp(10);
-                player.addToPoints(2);
-            }else{
-                System.out.println("\nYou decide to leave the knife there for now..");
+        boolean center = false;
+        String userAction;
+        if(keyword.startsWith("walk to k") && this.knife == 1){
+            userAction = IR5.getString("\nYou walk up to the knife. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
             }
-        }
-        if(keyword.startsWith("walk to fr") && this.fridge == 1 && this.getRoomID() == 4){
-            userChoice = IR5.getYorN("\nYou see a fridge, would you like to open it and check what's inside?(Y/N)");
-            if(userChoice){
-                System.out.println("\nYou find a half eaten apple and decide to eat it anyways.");
-                System.out.println("You gained some health back..");
-                setFridge(0);
-                if(player.getHp() < 100){
-                   player.increaseHp(15);
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayKnifeActions();
+                    found = true;
                 }
-                player.addToPoints(2);
-            }else{
-                System.out.println("\nYou decide to leave the fridge alone for now..");
+                for(int i = 0; i < knifeActions.length; i++){
+                    if(userAction.equals(knifeActions[i])){
+                        if(knifeActions[i].equals("examine")){
+                            System.out.println("\nIt's a super sharp knife, it could probably be used as a weapon.");
+                            found = true;
+                        }else if(knifeActions[i].equals("pick up")){
+                            System.out.println("\nYou pick up the sharp knife and decide you want to carry it with you.");
+                            this.knife = 0;
+                            center = true;
+                            player.setKnife(1);
+                            found = true;
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                if(this.knife == 1){
+                    userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                }
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
             }
-        }
+
+            System.out.println("\nYou return to the center of the room.");
+        } 
+        if(keyword.startsWith("walk to fr") && this.fridge == 1){
+            userAction = IR5.getString("\nYou walk up to the knife. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayFridgeActions();
+                    found = true;
+                }
+                //"examine" , "open door", "close door", "take food", "kick"};
+                for(int i = 0; i < fridgeActions.length; i++){
+                    if(userAction.equals(fridgeActions[i])){
+                        if(fridgeActions[i].equals("examine")){
+                            System.out.println("\nIt's a very basic, white fridge.");
+                            found = true;
+                        }else if(fridgeActions[i].equals("open door")){
+                            if(doorOpen){
+                                System.out.println("\nThe fridge door is already open!");
+                                found = true;
+                            }else if(!doorOpen){
+                                System.out.println("\nYou open the fridge door..");
+                                System.out.println("It looks like there is a bit of edible food in here!");
+                                found = true;
+                            }   
+                        }else if(fridgeActions[i].equals("close door")){
+                            if(doorOpen){
+                                System.out.println("\nYou shut the fridge door.");
+                                found = true;
+                            }else if(!doorOpen){
+                                System.out.println("\nThe fridge door is already shut..");
+                                found = true;
+                            }
+                        }else if(fridgeActions[i].equals("take food")){
+                            if(doorOpen && this.food > 0){
+                                System.out.println("\nYou take the food, which happens to be tater tots..");
+                                System.out.println("And you stash them in your pockets for later");
+                                player.addFood(5);
+                                found = true;
+                            }else if(!doorOpen){
+                                System.out.println("\nThe fridge door has to be open for you to take the food..");
+                                found = true;
+                            }else if(doorOpen && this.food == 0){
+                                System.out.println("\nYou already took the food that was in here!");
+                                found = true;
+                            }
+                        }else if(fridgeActions[i].equals("kick")){
+                            if(this.food == 0){
+                                System.out.println("\nYou violently kick the fridge wishing there was more food to take..");
+                                System.out.println("You hurt your foot and lost some health in the process..");
+                                player.decreaseHp(10);
+                                found = true;
+                            }else{
+                                System.out.println("\nYou give the fridge a nice lil' kick!");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }
+
+            System.out.println("\nYou return to the center of the room.");
+        } 
         if(keyword.startsWith("move")){
             moveRoom(player, keyword);
         }
@@ -126,6 +226,46 @@ public class Kitchen extends Room implements Serializable {
             System.out.println("- " + this.kitchenKeywords.get(i - 1));
         }
         System.out.println("\n-------------------------------");
+    }
+
+    public void displayKnifeActions(){
+        System.out.println("\nHere are some commands you can use on the knife!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < knifeActions.length; i++){
+            System.out.println("- " + knifeActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayFridgeActions(){
+        System.out.println("\nHere are some commands you can use on the fridge!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < fridgeActions.length; i++){
+            System.out.println("- " + fridgeActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displaySinkActions(){
+        System.out.println("\nHere are some commands you can use on the sink!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < sinkActions.length; i++){
+            System.out.println("- " + sinkActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayChairActions(){
+        System.out.println("\nHere are some commands you can use on the chair!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < chairActions.length; i++){
+            System.out.println("- " + chairActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
     }
 
 }

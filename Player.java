@@ -34,7 +34,7 @@ public class Player implements Serializable {
         return password;
     }
 
-    public int geKnife(){
+    public int getKnife(){
         return this.knife;
     }
     public int getHp() {

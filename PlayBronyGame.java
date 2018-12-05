@@ -248,4 +248,5 @@ public class PlayBronyGame implements Serializable {
     public String getPlayerPassword() {
         return player.getPassword();
     }
+
 }
