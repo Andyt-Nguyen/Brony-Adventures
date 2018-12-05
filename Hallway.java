@@ -362,7 +362,6 @@ public class Hallway extends Room implements Serializable {
                     displayClosetActions();
                     found = true;
                 }
-                //{"examine" , "open", "close", "listen", "knock", "look inside"
                 for(int i = 0; i < closetActions.length; i++){
                     if(userAction.equals(closetActions[i])){
                         if(closetActions[i].equals("examine")){
@@ -376,6 +375,7 @@ public class Hallway extends Room implements Serializable {
                                     center = true;
                                     break;
                                 }
+                                closetOpen = true;
                                 closetFightComplete = true;
                                 found = true;
                             }else if(closetFightComplete && closetOpen){
@@ -384,11 +384,13 @@ public class Hallway extends Room implements Serializable {
                                 found = true;
                             }else if(!closetOpen && closetFightComplete){
                                 System.out.println("\nYou re-open the closet door and see the demon ponies dead carcass!");
+                                closetOpen = true;
                                 found = true;
                             }
                         }else if(closetActions[i].equals("close")){
                             if(closetOpen){
                                 System.out.println("\nYou shut the closet door, leaving the carcass of the dead pony in there!");
+                                closetOpen = false;
                                 found = true;
                             }else if(!closetOpen){
                                 System.out.println("\nThe closet door is already closed!");
