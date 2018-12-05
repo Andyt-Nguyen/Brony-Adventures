@@ -15,6 +15,7 @@ public class Hallway extends Room implements Serializable {
     private boolean closetOpen;
     private boolean closetFightComplete;
     private boolean panelFightComplete;
+    private boolean finalFightComplete;
     private List<String> hallwayKeywords = new ArrayList<String>();
     private static String[] lampActions = {"examine" , "punch", "turn on", "turn off"};
     private static String[] windowActions = {"examine" , "open", "close", "jump out", "look out"};
@@ -46,6 +47,7 @@ public class Hallway extends Room implements Serializable {
         this.isScouted = false;
         this.closetFightComplete = false;
         this.panelFightComplete = false;
+        this.finalFightComplete = false;
     }
 
     public void setLamp(int lamp){
@@ -178,40 +180,41 @@ public class Hallway extends Room implements Serializable {
                             System.out.println("\nIt's a window on the north side of the room. It looks like it could be opened or closed.");
                             found = true;
                         }else if(windowActions[i].equals("open")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nThis window is already open..");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou open the window!");
-                                windowOpen = true;
+                                this.windowOpen = true;
                                 found = true;
                             }
                         }else if(windowActions[i].equals("close")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou close the window.");
-                                windowOpen = false;
+                                this.windowOpen = false;
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nThis window is already closed.");
                                 found = true;
                             }
                         }else if(windowActions[i].equals("jump out")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou decide to jump out the window..");
                                 System.out.println("As you are jumping out, your foot gets tripped up on the window ceil.");
                                 System.out.println("You fall two stories landing on your head causing instant death...");
                                 Menus.displayGameOver(player);
+                                center = true;
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou can't jump out of a closed window!");
                                 found = true;
                             }
                         }else if(windowActions[i].equals("look out")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou look outside the window and search all around.");
                                 System.out.println("You see nothing in the distance.");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou can't see much through this closed window.");
                                 found = true;
                             }
@@ -246,20 +249,20 @@ public class Hallway extends Room implements Serializable {
                             System.out.println("\nIt's a window on the west side of the room. It looks like it could be opened or closed.");
                             found = true;
                         }else if(windowActions[i].equals("open")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nThis window is already open..");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou open the window!");
-                                windowOpen = true;
+                                this.windowOpen = true;
                                 found = true;
                             }
                         }else if(windowActions[i].equals("close")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou shut the window.");
-                                windowOpen = false;
+                                this.windowOpen = false;
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nThis window is already closed!");
                                 found = true;
                             }
@@ -271,20 +274,20 @@ public class Hallway extends Room implements Serializable {
                                 System.out.println("You see a stable that is loaded with what seems to be demonic ponies..");
                                 System.out.println("\nMaybe jumping out isn't the best idea..");
                                 found = true;
-                            }else if(windowOpen && isScouted){
+                            }else if(this.windowOpen && this.isScouted){
                                 System.out.println("\nWhy would you want to jump out this window knowing what's out there..");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou can't jump out of a closed window!");
                                 found = true;
                             }
                         }else if(windowActions[i].equals("look out")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou look outside the window and search all around.");
                                 System.out.println("You see a stable filled with demonic ponies..");
-                                isScouted = true;
+                                this.isScouted = true;
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou can't see much through this closed window.");
                                 found = true;
                             }
@@ -370,64 +373,64 @@ public class Hallway extends Room implements Serializable {
                             System.out.println("\nIt's a closet.. probably used for storage.");
                             found = true;
                         }else if(closetActions[i].equals("open")){
-                            if(!closetFightComplete && !closetOpen){
+                            if(!this.closetFightComplete && !this.closetOpen){
                                 this.closetFight(player);
                                 if(player.getHp() <= 0){
                                     Menus.displayGameOver(player);
                                     center = true;
                                     break;
                                 }
-                                closetOpen = true;
-                                closetFightComplete = true;
+                                this.closetOpen = true;
+                                this.closetFightComplete = true;
                                 found = true;
-                            }else if(closetFightComplete && closetOpen){
+                            }else if(this.closetFightComplete && this.closetOpen){
                                 System.out.println("\nThe closet door is already open.");
                                 System.out.println("You should probably shut so you don't have to smell that dead carcass later!");
                                 found = true;
-                            }else if(!closetOpen && closetFightComplete){
+                            }else if(!this.closetOpen && this.closetFightComplete){
                                 System.out.println("\nYou re-open the closet door and see the demon ponies dead carcass!");
-                                closetOpen = true;
+                                this.closetOpen = true;
                                 found = true;
                             }
                         }else if(closetActions[i].equals("close")){
-                            if(closetOpen){
+                            if(this.closetOpen){
                                 System.out.println("\nYou shut the closet door, leaving the carcass of the dead pony in there!");
-                                closetOpen = false;
+                                this.closetOpen = false;
                                 found = true;
-                            }else if(!closetOpen){
+                            }else if(!this.closetOpen){
                                 System.out.println("\nThe closet door is already closed!");
                                 found = true;
                             }
                         }else if(closetActions[i].equals("listen")){
-                            if(!closetFightComplete && !closetOpen){
+                            if(!this.closetFightComplete && !this.closetOpen){
                                 System.out.println("\nYou put your ear next to the door, is sounds like something on the other side is breathing.");
                                 found = true;
-                            }else if(closetFightComplete && !closetOpen){
+                            }else if(this.closetFightComplete && !this.closetOpen){
                                 System.out.println("\nYou put your ear next to the door and hear nothing..");
                                 System.out.println("That carcass in there is silently rotting away.");
                                 found = true;
-                            }else if (closetOpen){
+                            }else if (this.closetOpen){
                                 System.out.println("\nThe closet door is open.. why listen if you can look inside!?");
                                 found = true;
                             }
                         }else if(closetActions[i].equals("knock")){
-                            if(!closetFightComplete && !closetOpen){
+                            if(!this.closetFightComplete && !this.closetOpen){
                                 System.out.println("\nYou knock on the door..");
                                 System.out.println("Right after you hear something ram into the door!");
                                 found = true;
-                            }else if(closetFightComplete && !closetOpen){
+                            }else if(this.closetFightComplete && !this.closetOpen){
                                 System.out.println("\nYou knock on the door..");
                                 System.out.println("But you hear nothing..");
                                 found = true;
-                            }else if (closetOpen){
+                            }else if (this.closetOpen){
                                 System.out.println("\nThe closet door is open.. you cannot knock on it..");
                                 found = true;
                             }
                         }else if(closetActions[i].equals("look inside")){
-                            if(closetOpen){
+                            if(this.closetOpen){
                                 System.out.println("\nYou look inside the closet but all you see is the dead carcass of the demonic pony you slayed..");
                                 found = true;
-                            }else if (!closetOpen){
+                            }else if (!this.closetOpen){
                                 System.out.println("\nThe door is closed, there is no way for you too look inside unless it's open.");
                                 found = true;
                             }
@@ -462,38 +465,38 @@ public class Hallway extends Room implements Serializable {
                             System.out.println("\nIt's a window on the east side of the room. It looks like it could be opened or closed.");
                             found = true;
                         }else if(windowActions[i].equals("open")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nThis window is already open..");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou open the window!");
-                                windowOpen = true;
+                                this.windowOpen = true;
                                 found = true;
                             }
                         }else if(windowActions[i].equals("close")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou shut the window.");
-                                windowOpen = false;
+                                this.windowOpen = false;
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nThis window is already closed!");
                                 found = true;
                             }
                         }else if(windowActions[i].equals("jump out")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nI don't think jumping out is a good idea..");
                                 System.out.println("Maybe you should just look out of it.");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou can't jump out of a closed window!");
                                 found = true;
                             }
                         }else if(windowActions[i].equals("look out")){
-                            if(windowOpen){
+                            if(this.windowOpen){
                                 System.out.println("\nYou look outside the window and search all around.");
                                 System.out.println("You look straight down and see a stable of demonic ponies.");
                                 found = true;
-                            }else if(!windowOpen){
+                            }else if(!this.windowOpen){
                                 System.out.println("\nYou can't see much through this closed window.");
                                 found = true;
                             }
@@ -528,38 +531,38 @@ public class Hallway extends Room implements Serializable {
                             System.out.println("\nIt's an attic panel.. who knows what's inside..");
                             found = true;
                         }else if(panelActions[i].equals("open")){
-                            if(!panelFightComplete && !panelOpen){
+                            if(!this.panelFightComplete && !this.panelOpen){
                                 this.panelFight(player);
                                 if(player.getHp() <= 0){
                                     Menus.displayGameOver(player);
                                     center = true;
                                     break;
                                 }
-                                panelOpen = true;
-                                panelFightComplete = true;
+                                this.panelOpen = true;
+                                this.panelFightComplete = true;
                                 found = true;
-                            }else if(panelFightComplete && panelOpen){
+                            }else if(this.panelFightComplete && this.panelOpen){
                                 System.out.println("\nThe attic panel is already open.");
                                 found = true;
-                            }else if(!panelOpen && panelFightComplete){
+                            }else if(!this.panelOpen && this.panelFightComplete){
                                 System.out.println("\nYou re-open the attic panel to find a bunch of junk..");
-                                panelOpen = true;
+                                this.panelOpen = true;
                                 found = true;
                             }
                         }else if(panelActions[i].equals("close")){
-                            if(panelOpen){
+                            if(this.panelOpen){
                                 System.out.println("\nYou shut the attic panel.");
-                                panelOpen = false;
+                                this.panelOpen = false;
                                 found = true;
-                            }else if(!panelOpen){
+                            }else if(!this.panelOpen){
                                 System.out.println("\nThe attic pannel is already shut!");
                                 found = true;
                             }   
                         }else if(panelActions[i].equals("look inside")){
-                            if(panelOpen){
+                            if(this.panelOpen){
                                 System.out.println("\nYou look inside the attic but all you see is junk..");
                                 found = true;
-                            }else if (!panelOpen){
+                            }else if (!this.panelOpen){
                                 System.out.println("\nThe panel is shut, there is no way for you too look inside unless it's open.");
                                 found = true;
                             }
@@ -577,6 +580,52 @@ public class Hallway extends Room implements Serializable {
 
             System.out.println("\nYou return to the center of the room.");
         } 
+        if(keyword.startsWith("walk to st") && this.statue == 1 && this.getRoomID() == 10){
+            if(!this.finalFightComplete){
+                this.finalFight(player);
+                if(player.getHp() <= 0){
+                    Menus.displayGameOver(player);
+                }else if(player.getHp() > 0){
+                    this.finalFightComplete = true;
+                }
+            }else if(this.finalFightComplete){
+                userAction = IR5.getString("\nYou walk up to the statue. Choose an action.(Help for list of commands)").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                while(!center){
+                    boolean found = false;
+                    if(userAction.startsWith("hel")){
+                        displayStatueActions();
+                        found = true;
+                    }
+                    for(int i = 0; i < statueActions.length; i++){
+                        if(userAction.equals(statueActions[i])){
+                            if(statueActions[i].equals("examine")){
+                                
+                            }else if(statueActions[i].equals("punch")){
+                                
+                            }else if(statueActions[i].equals("kick")){
+                                
+                            }else if(statueActions[i].equals("imitate")){
+                                
+                            }else if(statueActions[i].equals("smell")){
+                                
+                            }
+                        }
+                    }
+                    if(!found){
+                        System.err.println("\nSorry this command cannot be used here!");
+                    }
+                    userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                    if(userAction.startsWith("cent")){
+                        center = true;
+                    }
+                }  
+
+                System.out.println("\nYou return to the center of the room.");
+            } 
+        }
         if(keyword.startsWith("move")){
             moveRoom(player, keyword);
         }
@@ -789,6 +838,81 @@ public class Hallway extends Room implements Serializable {
             System.out.println("\nVery nice job, you have killed the pony.");
             System.out.println("You leave the dead carcass where you killed it, you better get out of this place before it begins to smell!");
             player.addToPoints(10);
+        }
+    }
+
+    public void finalFight(Player player){
+        int ponyHealth = 50;
+        String userChoice;
+        int ponyDamage;
+        int userDamage;
+        System.out.println("You approach the statue.. All of the sudden it comes to life and and attacks!");
+        System.out.println("It's a demonic pony but this one has 3 horns and is slightly bigger!");
+        while(ponyHealth > 0 && player.getHp() > 0){
+            System.out.println("\n**********Choose Attack*********");
+            System.out.println("* - Punch                      *");
+            System.out.println("* - Kick                       *");
+            if(player.getKnife() == 1){
+                System.out.println("* -  Stab(knife)                 *");
+            }
+            System.out.println("********************************");
+            userChoice = IR5.getString("\n").toLowerCase().trim();
+            if(userChoice.startsWith("pu")){
+                userDamage = IR5.getRandomNumber(3, 5);
+                ponyHealth -= userDamage;
+                if(ponyHealth < 0){
+                    ponyHealth = 0;
+                }
+                System.out.println("\nYou decide to use your hands to punch it, you deal " + userDamage + " damage to the pony.");
+                System.out.println("The pony has " + ponyHealth + " hp remaining.");
+                if(ponyHealth > 0){
+                    ponyDamage = IR5.getRandomNumber(10, 12);
+                    player.decreaseHp(ponyDamage);
+                    System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
+                    System.out.println("You take " + ponyDamage + " damage.");
+                    System.out.println("\nYou have " + player.getHp() + " hp remaining.");
+                }
+            }else if(userChoice.startsWith("ki")){
+                userDamage = IR5.getRandomNumber(3, 5);
+                ponyHealth -= userDamage;
+                if(ponyHealth < 0){
+                    ponyHealth = 0;
+                }
+                System.out.println("\nYou decide to use your feet to kick it, you deal " + userDamage + " damage to the pony.");
+                System.out.println("The pony has " + ponyHealth + " hp remaining.");
+                if(ponyHealth > 0){
+                    ponyDamage = IR5.getRandomNumber(10, 12);
+                    player.decreaseHp(ponyDamage);
+                    System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
+                    System.out.println("You take " + ponyDamage + " damage.");
+                    System.out.println("\nYou have " + player.getHp() + " hp remaining.");
+                }
+            }else if(userChoice.startsWith("st") && player.getKnife() == 1){
+                userDamage = IR5.getRandomNumber(12, 15);
+                ponyHealth -= userDamage;
+                if(ponyHealth < 0){
+                    ponyHealth = 0;
+                }
+                System.out.println("\nYou decide to stab it with the knife you picked up!, you deal " + userDamage + " damage to the pony.");
+                System.out.println("The pony has " + ponyHealth + " hp remaining.");
+                if(ponyHealth > 0){
+                    ponyDamage = IR5.getRandomNumber(10, 12);
+                    player.decreaseHp(ponyDamage);
+                    System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
+                    System.out.println("You take " + ponyDamage + " damage.");
+                    System.out.println("\nYou have " + player.getHp() + " hp remaining.");
+                }
+            }else if(userChoice.startsWith("st") && player.getKnife() == 0){
+                System.out.println("\nNice try, you don't have a nice you dirty experienced player.");
+            }else{
+                System.out.println("\nSorry the command " + userChoice + " doesn't work here.");
+            }
+
+        }
+        if(ponyHealth <= 0){
+            System.out.println("\nVery nice job, you have killed the pony.");
+            System.out.println("You leave the dead carcass where you killed it, you better get out of this place before worse things happen!");
+            player.addToPoints(25);
         }
     }
 }

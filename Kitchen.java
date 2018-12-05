@@ -151,39 +151,40 @@ public class Kitchen extends Room implements Serializable {
                     displayFridgeActions();
                     found = true;
                 }
-                //"examine" , "open door", "close door", "take food", "kick"};
                 for(int i = 0; i < fridgeActions.length; i++){
                     if(userAction.equals(fridgeActions[i])){
                         if(fridgeActions[i].equals("examine")){
                             System.out.println("\nIt's a very basic, white fridge.");
                             found = true;
                         }else if(fridgeActions[i].equals("open door")){
-                            if(doorOpen){
+                            if(this.doorOpen){
                                 System.out.println("\nThe fridge door is already open!");
                                 found = true;
-                            }else if(!doorOpen){
+                            }else if(!this.doorOpen){
                                 System.out.println("\nYou open the fridge door..");
                                 System.out.println("It looks like there is a bit of edible food in here!");
+                                this.doorOpen = true;
                                 found = true;
                             }   
                         }else if(fridgeActions[i].equals("close door")){
-                            if(doorOpen){
+                            if(this.doorOpen){
                                 System.out.println("\nYou shut the fridge door.");
+                                this.doorOpen = false;
                                 found = true;
-                            }else if(!doorOpen){
+                            }else if(!this.doorOpen){
                                 System.out.println("\nThe fridge door is already shut..");
                                 found = true;
                             }
                         }else if(fridgeActions[i].equals("take food")){
-                            if(doorOpen && this.food > 0){
+                            if(this.doorOpen && this.food > 0){
                                 System.out.println("\nYou take the food, which happens to be tater tots..");
                                 System.out.println("And you stash them in your pockets for later");
                                 player.addFood(5);
                                 found = true;
-                            }else if(!doorOpen){
+                            }else if(!this.doorOpen){
                                 System.out.println("\nThe fridge door has to be open for you to take the food..");
                                 found = true;
-                            }else if(doorOpen && this.food == 0){
+                            }else if(this.doorOpen && this.food == 0){
                                 System.out.println("\nYou already took the food that was in here!");
                                 found = true;
                             }

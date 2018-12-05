@@ -125,28 +125,28 @@ public class Bathroom extends Room implements Serializable {
                             System.out.println("\nIt's a very nice shower! What else would you expect in the master bathroom.");
                             found = true;
                         }else if(showerActions[i].equals("open curtain")){
-                            if(curtainsClosed){
+                            if(this.curtainsClosed){
                                 System.out.println("\nYou open up the shower curtains.");
-                                curtainsClosed = false;
+                                this.curtainsClosed = false;
                                 found = true;
-                            }else if(!curtainsClosed){
+                            }else if(!this.curtainsClosed){
                                 System.out.println("\nThe curtains are already open!");
                                 found = true;
                             }
                         }else if(showerActions[i].equals("close curtain")){
-                            if(curtainsClosed){
+                            if(this.curtainsClosed){
                                 System.out.println("\nThe curtains are already closed..");
                                 found = true;
-                            }else if(!curtainsClosed){
+                            }else if(!this.curtainsClosed){
                                 System.out.println("\nThe close the shower curtains!");
-                                curtainsClosed = true;
+                                this.curtainsClosed = true;
                                 found = true;
                             }
                         }else if(showerActions[i].equals("take shower")){
-                            if(curtainsClosed){
+                            if(this.curtainsClosed){
                                 System.out.println("\nYou need to open the curtains before you get in the shower!");
                                 found = true;
-                            }else if(!curtainsClosed){
+                            }else if(!this.curtainsClosed){
                                 System.out.println("\nYou have decided that it is a good time to take a shower.");
                                 System.out.println("You take off your clothes and turn on the hot water, it feels really nice.");
                                 System.out.println("After you feel squeaky clean, you hop out and put your clothes back on.");
@@ -183,22 +183,22 @@ public class Bathroom extends Room implements Serializable {
                             System.out.println("\nIt's a toilet made out of gold! Too bad you can't take it and sell it..");
                             found = true;
                         }else if(toiletActions[i].equals("lift seat")){
-                            if(seatUp){
+                            if(this.seatUp){
                                 System.out.println("\nThe toilet seat is already up.");
                                 found = true;
-                            }else if (!seatUp){
+                            }else if (!this.seatUp){
                                 System.out.println("\nYou struggle to lift the toilet seat that is made out of solid gold.");
-                                seatUp = true;
+                                this.seatUp = true;
                                 found = true;
                             }
                         }else if(toiletActions[i].equals("close seat")){
-                            if(seatUp){
+                            if(this.seatUp){
                                 System.out.println("\nYou start to put the golden toilet seat down..");
                                 System.out.println("The heavyness allows it to slip out of your hands and it slams down.");
                                 System.out.println("You hear the sound of it echo through the house.");
-                                seatUp = false;
+                                this.seatUp = false;
                                 found = true;
-                            }else if (!seatUp){
+                            }else if (!this.seatUp){
                                 System.out.println("\nThis toilet seat is already closed.");
                                 found = true;
                             }
@@ -206,22 +206,22 @@ public class Bathroom extends Room implements Serializable {
                             System.out.println("\nYou flush the toilet for funsies.");
                             found = true;
                         }else if(toiletActions[i].equals("take a piss")){
-                            if(seatUp){
+                            if(this.seatUp){
                                 System.out.println("\nYou somehow make yourself go pee.");
                                 System.out.println("Wow it's like magic..");
                                 found = true;
-                            }else if(!seatUp){
+                            }else if(!this.seatUp){
                                 System.out.println("\nMaybe you should lift the toilet seat up before you go.");
                                 System.out.println("You wouldn't want to pee on all this gold!");
                                 found = true;
                             }
                         }else if(toiletActions[i].equals("take a dump")){
-                            if(seatUp){
+                            if(this.seatUp){
                                 System.out.println("\nYou drop a nuke in the toilet.");
                                 System.out.println("Thanks to you the whole house smells like death.");
                                 System.out.println("Maybe you should go shower and clean yourself.");
                                 found = true;
-                            }else if(!seatUp){
+                            }else if(!this.seatUp){
                                 System.out.println("\nThe seat is down..");
                                 System.out.println("Would you really want to do that on a gold toilet?");
                                 found = true;
@@ -245,7 +245,6 @@ public class Bathroom extends Room implements Serializable {
             if(userAction.startsWith("cent")){
                 center = true;
             }
-            //"examine", "turn on", "turn off", "wash hands"
             while(!center){
                 boolean found = false;
                 if(userAction.startsWith("hel")){
@@ -258,34 +257,34 @@ public class Bathroom extends Room implements Serializable {
                             System.out.println("\nThis sink seems to be made out of solid gold!");
                             found = true;
                         }else if(sinkActions[i].equals("turn on")){
-                            if(isRunning){
+                            if(this.isRunning){
                                 System.out.println("\nThe sink is already running!");
                                 System.out.println("Don't worry about turning it off or anything.");
                                 System.out.println("I mean who wants to save water anyways.");
                                 found = true;
-                            }else if(!isRunning){
+                            }else if(!this.isRunning){
                                 System.out.println("\nYou turn on the golden sink.");
-                                isRunning = true;
+                                this.isRunning = true;
                                 found = true;
                             }
                         }else if(sinkActions[i].equals("turn off")){
                             if(isRunning){
                                 System.out.println("\nYou turn off the golden sink!");
-                                isRunning = false;
+                                this.isRunning = false;
                                 found = true;
-                            }else if(!isRunning){
+                            }else if(!this.isRunning){
                                 System.out.println("\nThe sink is already turned off");
                                 found = true;
                             }
                         }else if(sinkActions[i].equals("wash hands")){
-                            if(isRunning){
+                            if(this.isRunning){
                                 System.out.println("\nYou take a moment to bask in the idea of what you're about to do.");
                                 System.out.println("You take a deep look at the golden sink imagining how washing your hands is going to feel.");
                                 System.out.println("You slowly place your hands under the golden faucet..");
                                 System.out.println("You feel like money.. next thing you know 10 minutes has gone by..");
                                 System.out.println("Don't forget to turn off the sink!");
                                 found = true;
-                            }else if(!isRunning){
+                            }else if(!this.isRunning){
                                 System.out.println("\nMaybe you should try turning it on before you use it!.");
                                 found = true;
                             }
