@@ -7,7 +7,16 @@ public class Hallway extends Room{
     private int closet;
     private int atticPanel;
     private int statue;
+    private boolean lampOn;
+    private boolean windowOpen;
+    private boolean panelOpen;
+    private boolean closetOpen;
     private List<String> hallwayKeywords = new ArrayList<String>();
+    private static String[] lampActions = {"examine" , "punch", "turn on", "turn off"};
+    private static String[] windowActions = {"examine" , "open", "close", "jump out", "look out"};
+    private static String[] closetActions = {"examine" , "open", "close", "listen", "knock", "look inside"};
+    private static String[] panelActions = {"examine" , "open", "close", "look inside"};
+    private static String[] statueActions = {"examine" , "punch", "kick", "imitate", "smell"};
 
     Hallway(){
         super();
@@ -26,6 +35,10 @@ public class Hallway extends Room{
         this.closet = closet;
         this.atticPanel = atticPanel;
         this.statue = statue;
+        this.lampOn = false;
+        this.windowOpen = false;
+        this.panelOpen = false;
+        this.closetOpen = false;
     }
 
     public void setLamp(int lamp){
@@ -87,25 +100,128 @@ public class Hallway extends Room{
 
     public void performAction(Player player, String keyword){
         boolean userChoice;
-        if(keyword.startsWith("walk to la") && this.lamp == 1 && this.getRoomID() == 2){
-            System.out.println("\nIt's a pony shaped lamp, you decide you're already deathly freightened of ponies and stay away from it.");
-            setLamp(0);
-            player.addToPoints(2);
-        }
-        if(keyword.startsWith("walk to wi") && this.window == 1 && this.getRoomID() == 2){
-            System.out.println("\nYou see a window..");
-            userChoice = IR5.getYorN("\nWould you like to try and escape from this window?");
-            if(userChoice){
-                System.out.println("\nYou decide to make a jump for it, as you're jumping out you get " +
-                " tripped up on your foot, you fall two stories onto your head and die.");
-                player.addToPoints(2);
-                Menus.displayGameOver(player);
-                setWindow(0);
-                player.setHp(0);
-            }else{
-                System.out.println("\nYou decide not to attempt to escape.");
+        boolean center = false;
+        String userAction;
+        if(keyword.startsWith("walk to l") && this.lamp == 1){
+            userAction = IR5.getString("\nYou walk up to the lamp. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
             }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayLampActions();
+                    found = true;
+                }
+                for(int i = 0; i < lampActions.length; i++){
+                    if(userAction.equals(lampActions[i])){
+                        if(lampActions[i].equals("examine")){
+                            System.out.println("\nIt's a pony shaped lamp!");
+                            found = true;
+                        }else if(lampActions[i].equals("punch")){
+                            System.out.println("\nYou're scared to brake something that seems somewhat valuable.");
+                            System.out.println("You wouldn't want any bad karma coming your way!");
+                            found = true;
+                        }else if(lampActions[i].equals("turn on")){
+                            if(this.lampOn){
+                                System.out.println("\nThis lamp is already turned on!");
+                                found = true;
+                            }else if(!this.lampOn){
+                                System.out.println("\nYou turn on the lamp!");
+                                found = true;
+                                this.lampOn = true;
+                            }
+                        }else if(lampActions[i].equals("turn off")){
+                            if(this.lampOn){
+                                System.out.println("\nYou turn the lamp off!");
+                                this.lampOn = false;
+                                found = true;
+                            }else if(!this.lampOn){
+                                System.out.println("\nThis lamp is already off!");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
         }
+        if(keyword.startsWith("walk to w") && this.window == 1 && this.getRoomID() == 2){
+            userAction = IR5.getString("\nYou walk up to the window. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayWindowActions();
+                    found = true;
+                }
+                for(int i = 0; i < windowActions.length; i++){
+                    if(userAction.equals(windowActions[i])){
+                        if(windowActions[i].equals("examine")){
+                            System.out.println("\nIt's a window on the north side of the room. It looks like it could be opened or closed.");
+                            found = true;
+                        }else if(windowActions[i].equals("open")){
+                            if(windowOpen){
+                                System.out.println("\nThis window is already open..");
+                                found = true;
+                            }else if(!windowOpen){
+                                System.out.println("\nYou open the window!");
+                                windowOpen = true;
+                                found = true;
+                            }
+                        }else if(windowActions[i].equals("close")){
+                            if(windowOpen){
+                                System.out.println("\nYou shut the window.");
+                                windowOpen = false;
+                                found = true;
+                            }else if(!windowOpen){
+                                System.out.println("\nYou close the window!");
+                                found = true;
+                            }
+                        }else if(windowActions[i].equals("jump out")){
+                            if(windowOpen){
+                                System.out.println("\nYou decide to jump out the window..");
+                                System.out.println("As you are jumping out, your foot gets tripped up on the window ceil.");
+                                System.out.println("You fall two stories landing on your head causing instant death...");
+                                Menus.displayGameOver(player);
+                                found = true;
+                            }else if(!windowOpen){
+                                System.out.println("\nYou can't jump out of a closed window!");
+                                found = true;
+                            }
+                        }else if(windowActions[i].equals("look out")){
+                            if(windowOpen){
+                                System.out.println("\nYou look outside the window and search all around.");
+                                System.out.println("You see nothing in the distance.");
+                                found = true;
+                            }else if(!windowOpen){
+                                System.out.println("\nYou can't see much through this closed window.");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }  
+
+            System.out.println("\nYou return to the center of the room.");
+        } 
         if(keyword.startsWith("walk to wi") && this.window == 1 && this.getRoomID() == 5){
             System.out.println("\nYou see window..");
             userChoice = IR5.getYorN("\nWould you like to try to escape through the window?(Y/N)");
@@ -152,5 +268,55 @@ public class Hallway extends Room{
             System.out.println("- " + this.hallwayKeywords.get(i - 1));
         }
         System.out.println("\n-------------------------------");
+    }
+
+    public void displayLampActions(){
+        System.out.println("\nHere are some commands you can use on the lamp!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < lampActions.length; i++){
+            System.out.println("- " + lampActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayWindowActions(){
+        System.out.println("\nHere are some commands you can use on the window!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < windowActions.length; i++){
+            System.out.println("- " + windowActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayPanelActions(){
+        System.out.println("\nHere are some commands you can use on the attic panel!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < panelActions.length; i++){
+            System.out.println("- " + panelActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayClosetActions(){
+        System.out.println("\nHere are some commands you can use on the closet!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < closetActions.length; i++){
+            System.out.println("- " + closetActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayStatueActions(){
+        System.out.println("\nHere are some commands you can use on the statue!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < statueActions.length; i++){
+            System.out.println("- " + statueActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
     }
 }

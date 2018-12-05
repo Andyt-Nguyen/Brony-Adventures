@@ -11,9 +11,9 @@ public class Bedroom extends Room{
     private boolean isOpen;
     private boolean isMade;
     private List<String> bedroomKeywords = new ArrayList<String>();
-    private static String dresserActions[] = {"open","close","kick","sit on","smell"};
-    private static String bedActions[] = {"lay on", "look under", "make sheets", "smell"};
-    private static String mirrorActions[] = {"kick", "punch", "look in"};
+    private static String dresserActions[] = {"examine", "open","close","kick","sit on","smell"};
+    private static String bedActions[] = {"examine", "lay on", "look under", "make sheets", "smell"};
+    private static String mirrorActions[] = {"examine", "kick", "punch", "look in"};
 
     Bedroom(){
         super();
@@ -103,16 +103,13 @@ public class Bedroom extends Room{
             userAction = IR5.getString("\nYou walk up to the dresser.Choose an action.(Help for list of commands)").toLowerCase().trim();
             if(userAction.startsWith("cent")){
                 center = true;
-            }else if(userAction.equals("help")){
-                displayDresserActions();
-                userAction = IR5.getString("\nChoose Action.").toLowerCase().trim();
-                if(userAction.startsWith("cent")){
-                    center = true;
-                }
             }
             while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayDresserActions();
+                }
                 for(int i = 0; i < dresserActions.length; i++){
-                    boolean found = false;
                     if(userAction.equals(dresserActions[i])){
                         if(dresserActions[i].equals("open") && !this.isOpen){
                             this.isOpen = true;
@@ -148,30 +145,21 @@ public class Bedroom extends Room{
                         }else if(dresserActions[i].equals("smell")){
                             System.out.println("\nThis dresser smells like wood!");
                             found = true;
+                        }else if(dresserActions[i].equals("examine")){
+                            System.out.println("\nIt's a wooden dresser, there isn't much to it..");
+                            found = true;
                         }
-                    }else if(found = false){
-                        System.out.println("\nYou cannot use this action here!");
                     }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
                 if(userAction.startsWith("cent")){
                     center = true;
                 }
             }
-            System.out.println("You return to the center of the room.");
-            //userChoice = IR5.getYorN("\nYou see a dresser would you like to open it?(Y/N)");
-            //if(userChoice){
-            //    System.out.println("\nYou open up the dresser and find a diary, you find a diary in it.");
-            //    userChoice = IR5.getYorN("Would you like to read the diary?(Y/N)");
-            //    if(userChoice){
-            //        readDiary();
-            //        player.addToPoints(2);
-            //    }else{
-            //        System.out.println("\nYou decide to not read the diary, you put it back in the dresser.");
-            //    }
-            //}else{
-            //    System.out.println("\nYou take a step back away from the dresser.");
-            //}
+            System.out.println("\nYou return to the center of the room.");
         }
         if(keyword.startsWith("walk to d") && this.dresser == 1 && this.getRoomID() == 7){
             System.err.println("You take the key off the dresser!");
@@ -179,15 +167,68 @@ public class Bedroom extends Room{
             player.addToPoints(2);
         }
         if(keyword.startsWith("walk to b") && this.bed == 1 && this.getRoomID() == 1){
-            userChoice = IR5.getYorN("\nWould you like to search under the bed you woke up on?(Y/N)");
-            if(userChoice){
-                System.out.println("\nYou search under the bed and find a gun. Turns out you don't know how to use it..");
-                System.out.println("You accidentally fire the gun, it didn't hit you but you decide to put it back where it was.");
-                System.out.println("Luckily something worse didn't happen!");
-                player.addToPoints(2);
-            }else{
-                System.out.println("\nYou choose to not look under it.");
+            userAction = IR5.getString("\nYou walk up to the bed.Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
             }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayBedActions();
+                    found = true;
+                }
+                for(int i = 0; i < bedActions.length; i++){
+                    if(userAction.equals(bedActions[i])){
+                        if(bedActions[i].equals("lay on")){
+                            if(!this.isMade){
+                                System.out.println("\nYou lay on the bed.");
+                                System.out.println("It's not very comfy, whoever owns this house doesn't seem to take care of their guests!");
+                                System.out.println("You stand back up.");
+                                found = true;
+                            }else if(this.isMade){
+                                System.out.println("\nWhy would you want to lay on this nicely made bed?");
+                                found = true;
+                            }
+                        }else if(bedActions[i].equals("look under")){
+                            System.out.println("\nYou stoop down to your knees and look under the bed..");
+                            System.out.println("You find nothing of interest.");
+                            found = true;
+                        }else if(bedActions[i].equals("make sheets")){
+                            if(!this.isMade){
+                                System.out.println("\nYou neatly make the sheets.");
+                                this.isMade = true;
+                                found = true;
+                            }else{
+                                System.out.println("\nThis bed is already made.");
+                                found = true;
+                            }
+                        }else if(bedActions[i].equals("smell")){
+                            System.out.println("\nYou smell the bed..");
+                            System.out.println("It smells like whoever slept in this had some bad gas..");
+                            System.out.println("Oh wait, it was you!");
+                            found = true;
+                        }else if(bedActions[i].equals("examine")){
+                            if(this.isMade){
+                                System.out.println("\nIt's a nicely made twin size bed!");
+                                found = true;
+                            }else if(!this.isMade){
+                                System.out.println("\nIt's a twin size bed that is unmade..");
+                                System.out.println("It looks like whoever slept here doesn't know how to make their bed!");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
         }
         if(keyword.startsWith("move")){
             moveRoom(player, keyword);
@@ -221,6 +262,27 @@ public class Bedroom extends Room{
         for(int i = 0; i < dresserActions.length; i++){
             System.out.println("- " + dresserActions[i]);
         }
+        System.out.println("- Center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayBedActions(){
+        System.out.println("\nHere are some commands you can use on the bed!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < bedActions.length; i++){
+            System.out.println("- " + bedActions[i]);
+        }
+        System.out.println("- center");
+        System.out.println("**********************************************************");
+    }
+
+    public void displayMirrorActions(){
+        System.out.println("\nHere are some commands you can use on the mirror!");
+        System.out.println("**********************************************************");
+        for(int i = 0; i < mirrorActions.length; i++){
+            System.out.println("- " + mirrorActions[i]);
+        }
+        System.out.println("- center");
         System.out.println("**********************************************************");
     }
 

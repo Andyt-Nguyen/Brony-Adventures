@@ -23,7 +23,7 @@ class BronyAdventures {
         Hallway hallway1 = new Hallway(2, "Southern Hallway", "This is the hallway right outside the guest bedroom.",
         "\nYou see doors to the  east and to the west, a lamp, and a window.", 0, 0, 4, 3, 1, 1, 0, 0, 0);
         Bathroom masterBathroom = new Bathroom(3, "Master Bathroom", "This is the bathroom closest to the master bedroom.",
-        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 5, 0, 2, 0, 1, 1, 0, 0, 0);
+        "\nYou see a door to the east and to the north, you also notice a working shower and toiet.", 5, 0, 2, 0, 1, 1, 0, 0, 0, 1);
         Kitchen kitchen1 = new Kitchen(4, "South-East Kitchen", "This is the kitchen at the back right corner of the house.",
         "\nYou see doors to the west and to the north, you also notice a knife and a running fridge.", 6, 0, 0, 2, 1, 1, 0, 0);
         Hallway hallway2 = new Hallway(5, "Western Hallway", "This hallway is to the west of a bedroom.", 
@@ -36,7 +36,7 @@ class BronyAdventures {
         "\nYou see doors to the east and the south, you see a fridge, a useable sink, and a chair.", 0, 5, 10, 0, 0, 1, 1, 1);
         Bathroom bathroom2 = new Bathroom(9, "Bathroom", "This bathroom is on the north-east side of the house.",
         "\nYou see doors to the south and to the west, you see a toilet, no shower, a plunger, and some cabinets with a mirror above.",
-        0, 6, 0, 10, 1, 0, 1, 1, 1);
+        0, 6, 0, 10, 1, 0, 1, 1, 1, 1);
         Hallway hallway4 = new Hallway(10, "Northern Hallway", "This hallway is the most northern hallway.",
         "\nyou see doors to the north, east, and west, and a statue.", 11, 0, 9, 8, 0, 0, 0, 0, 1);
 
@@ -54,6 +54,7 @@ class BronyAdventures {
         //Adds keywords to intialize an action in masterBathroom.
         masterBathroom.addKeyword("Walk to Toilet");
         masterBathroom.addKeyword("Walk to Shower");
+        masterBathroom.addKeyword("Walk to Sink");
         masterBathroom.addKeyword("Move East");
         masterBathroom.addKeyword("Move North");
 
@@ -207,7 +208,9 @@ class BronyAdventures {
                     System.err.println("\nYou enter a hallway on the south side of the building, you see a window leading");
                     System.err.println("to the center courtyard, a lamp in the corner of the room, and doors to the east,");
                     System.err.println("and the west.");
+                    System.err.println("\nYou here the door behind you lock..");
                     hallway1Visited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 3 && newLocation != currentRoom){
                 if(masterBathroomVisited == 1){
@@ -217,6 +220,7 @@ class BronyAdventures {
                     System.err.println("a sink that looks like it was being re-done, and that's about it");
                     System.err.println("in here..");
                     masterBathroomVisited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 4 && newLocation != currentRoom){
                 if(kitchen1Visited == 1){
@@ -226,6 +230,7 @@ class BronyAdventures {
                     System.err.println("You see a working fridge and a knife on the counter..");
                     System.err.println("Nothing else seems of interest in here..");
                     kitchen1Visited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 5 && newLocation != currentRoom){
                 if(hallway2Visited == 1){
@@ -235,6 +240,7 @@ class BronyAdventures {
                     System.err.println("You see another window, an unidentifiable statue in the corner of the room,");
                     System.err.println("and there is a closet as well.");
                     hallway2Visited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 6 && newLocation != currentRoom){
                 if(hallway3Visited == 1){
@@ -244,6 +250,7 @@ class BronyAdventures {
                     System.err.println("There is another window, a statue in the corner of the room,");
                     System.err.println("and what seems to be a panel that leads to the attic.");
                     hallway3Visited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 7 && newLocation != currentRoom){
                 if(masterBedroomVisited == 1){
@@ -252,6 +259,7 @@ class BronyAdventures {
                     System.err.println("\nYou enter the master bedroom, which seems to be in the center of the building.");
                     System.err.println("You see doors to the east and west, a mirror, a bed, and a dresser.");
                     masterBedroomVisited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 8 && newLocation != currentRoom){
                 if(kitchen2Visited == 1){
@@ -261,6 +269,7 @@ class BronyAdventures {
                     System.err.println("You see doors to the east and the south, a fridge, a sink that might work,");
                     System.err.println("And a chair just out on its own..");
                     kitchen2Visited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 9 && newLocation != currentRoom){
                 if(bathroomVisited == 1){
@@ -270,6 +279,7 @@ class BronyAdventures {
                     System.err.println("You see doors to the south and the west, a toilet with a plunger, a sink,");
                     System.err.println("And a mirror above it.");
                     bathroomVisited++;
+                    player.addToPoints(5);
                 }
             }else if(newLocation == 10 && newLocation != currentRoom){
                 if(hallway4Visited == 1){
@@ -279,6 +289,7 @@ class BronyAdventures {
                     System.err.println("It has 3 doors, one to the north, one to the east, and one to the west.");
                     System.err.println("Other than that all you see is a statue.");
                     hallway4Visited++;
+                    player.addToPoints(5);
                 }
             }
           }
