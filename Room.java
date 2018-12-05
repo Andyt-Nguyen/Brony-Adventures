@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Room{
+public class Room implements Serializable {
 
     private int roomID;
     private String roomName;

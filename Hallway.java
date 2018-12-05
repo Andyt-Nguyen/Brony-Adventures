@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Hallway extends Room{
+public class Hallway extends Room implements Serializable {
 
     private int lamp;
     private int window;

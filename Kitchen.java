@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.*;
 
-public class Kitchen extends Room{
+public class Kitchen extends Room implements Serializable {
 
     private int knife;
     private int fridge;

@@ -1,6 +1,6 @@
 import java.util.*;
-
-public class Bathroom extends Room{
+import java.io.Serializable;
+public class Bathroom extends Room implements Serializable {
 
     private int toilet;
     private int shower;

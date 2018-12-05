@@ -1,4 +1,6 @@
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private int hp;
     private int food;
     private String username;

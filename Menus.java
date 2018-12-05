@@ -1,4 +1,6 @@
-public class Menus {
+import java.io.Serializable;
+
+public class Menus implements Serializable {
 
     public static void displayStartGame(Player player){
         System.out.println("************************************************************");
