@@ -8,6 +8,8 @@ public class FileIo {
         readFile();
     }
 
+
+    @SuppressWarnings("unchecked")
     public static void readFile() throws FileNotFoundException, IOException, ClassNotFoundException {
         try {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("Game.txt"));
