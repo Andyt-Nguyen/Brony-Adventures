@@ -140,8 +140,8 @@ public class Kitchen extends Room implements Serializable {
 
             System.out.println("\nYou return to the center of the room.");
         } 
-        if(keyword.startsWith("walk to fr") && this.fridge == 1){
-            userAction = IR5.getString("\nYou walk up to the knife. Choose an action.(Help for list of commands)").toLowerCase().trim();
+        if(keyword.startsWith("walk to fr") && this.fridge == 1 && this.getRoomID() == 4){
+            userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
             if(userAction.startsWith("cent")){
                 center = true;
             }
@@ -211,6 +211,210 @@ public class Kitchen extends Room implements Serializable {
                 }
             }
 
+            System.out.println("\nYou return to the center of the room.");
+        } 
+        if(keyword.startsWith("walk to fr") && this.fridge == 1 && this.getRoomID() == 8){
+            userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayFridgeActions();
+                    found = true;
+                }
+                for(int i = 0; i < fridgeActions.length; i++){
+                    if(userAction.equals(fridgeActions[i])){
+                        if(fridgeActions[i].equals("examine")){
+                            System.out.println("\nIt's very nice fridge.");
+                            System.out.println("It has a gold trim around the outside.");
+                            found = true;
+                        }else if(fridgeActions[i].equals("open door")){
+                            if(this.doorOpen){
+                                System.out.println("\nThe fridge door is already open!");
+                                found = true;
+                            }else if(!this.doorOpen){
+                                System.out.println("\nYou open the fridge door..");
+                                System.out.println("It looks like there is a bit of edible food in here!");
+                                this.doorOpen = true;
+                                found = true;
+                            }   
+                        }else if(fridgeActions[i].equals("close door")){
+                            if(this.doorOpen){
+                                System.out.println("\nYou shut the fridge door.");
+                                this.doorOpen = false;
+                                found = true;
+                            }else if(!this.doorOpen){
+                                System.out.println("\nThe fridge door is already shut..");
+                                found = true;
+                            }
+                        }else if(fridgeActions[i].equals("take food")){
+                            if(this.doorOpen && this.food > 0){
+                                System.out.println("\nYou take the food, which happens to be tater tots..");
+                                System.out.println("And you stash them in your pockets for later");
+                                player.addFood(5);
+                                found = true;
+                            }else if(!this.doorOpen){
+                                System.out.println("\nThe fridge door has to be open for you to take the food..");
+                                found = true;
+                            }else if(this.doorOpen && this.food == 0){
+                                System.out.println("\nYou already took the food that was in here!");
+                                found = true;
+                            }
+                        }else if(fridgeActions[i].equals("kick")){
+                            if(this.food == 0){
+                                System.out.println("\nYou violently kick the fridge wishing there was more food to take..");
+                                System.out.println("You hurt your foot and lost some health in the process..");
+                                player.decreaseHp(10);
+                                found = true;
+                            }else{
+                                System.out.println("\nYou give the fridge a nice lil' kick!");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }
+
+            System.out.println("\nYou return to the center of the room.");
+        } 
+        if(keyword.startsWith("walk to si") && this.sink == 1){
+            userAction = IR5.getString("\nYou walk up to the sink. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displaySinkActions();
+                    found = true;
+                }
+                for(int i = 0; i < sinkActions.length; i++){
+                    if(userAction.equals(sinkActions[i])){
+                        if(sinkActions[i].equals("examine")){
+                            System.out.println("\nIt's a sink plated in gold with pony-head shaped faucets and handles.");
+                            found = true;
+                        }else if(sinkActions[i].equals("turn on")){
+                            if(this.sinkOn){
+                                System.out.println("\nThe sink is already on!");
+                                found = true;
+                            }else if(!this.sinkOn){
+                                System.out.println("\nYou turn the sink on!");
+                                found = true;
+                            }
+                        }else if(sinkActions[i].equals("turn off")){
+                            if(this.sinkOn){
+                                System.out.println("\nYou turn the sink off!");
+                                found = true;
+                            }else if(!this.sinkOn){
+                                System.out.println("\nThis sink is already off.");
+                                found = true;
+                            }
+                        }else if(sinkActions[i].equals("wash dishes")){
+                            if(this.sinkOn){
+                                System.out.println("\nYou decide to wash some imaginary dishes that the coder didn't have time to implement into this game.");
+                                found = true;
+                            }else if(!this.sinkOn){
+                                System.out.println("\nThe sink needs to be on in order to wash dishes.");
+                                found = true;
+                            }
+                        }else if(sinkActions[i].equals("wash hands")){
+                            if(this.sinkOn){
+                                System.out.println("\nYou wash your filthy hands..");
+                                System.out.println("You're still filthy.");
+                                found = true;
+                            }else if(!this.sinkOn){
+                                System.out.println("\nThe sink needs to be on for you to wash your hands.");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }
+            System.out.println("\nYou return to the center of the room.");
+        } 
+        if(keyword.startsWith("walk to ch") && this.chair == 1){
+            userAction = IR5.getString("\nYou walk up to the chair. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayChairActions();
+                    found = true;
+                }
+                for(int i = 0; i < chairActions.length; i++){
+                    if(userAction.equals(chairActions[i])){
+                        if(chairActions[i].equals("examine")){
+                            System.out.println("\nIt's a oddly placed chair in the center of the room..");
+                            found = true;
+                        }else if(chairActions[i].equals("sit on")){
+                            if(this.chairFlipped){
+                                System.out.println("\nMaybe you should set up this chair before you try sitting on it.");
+                                found = true;
+                            }else if(!this.chairFlipped){
+                                System.out.println("\nYou sit on the chair and rest.. you recover a very small amount of health");
+                                player.increaseHp(2);
+                                found = true;
+                            }
+                        }else if(chairActions[i].equals("stand on")){
+                            if(this.chairFlipped){
+                                System.out.println("\nMaybe you should set up this chair before you try standing on it.");
+                                found = true;
+                            }else if(!this.chairFlipped){
+                                System.out.println("\nYou stand on the chair.");
+                                System.out.println("You look down and realize that you're a big baby and are scared of heights.");
+                                System.out.println("You quickly get down.");
+                                found = true;
+                            }
+                        }else if(chairActions[i].equals("flip")){
+                            if(this.chairFlipped){
+                                System.out.println("\nThis chair is already flipped..");
+                                found = true;
+                            }else if(!this.chairFlipped){
+                                System.out.println("\nYou feel like you need some excitement in your life.");
+                                System.out.println("You flip the chair and it goes flying..");
+                                this.chairFlipped = true;
+                                found = true;
+                            }
+                        }else if(chairActions[i].equals("set up")){
+                            if(this.chairFlipped){
+                                System.out.println("\nYou grab the chair and neatly set it back up where it originally was.");
+                                this.chairFlipped = false;
+                                found = true;
+                            }else if(!this.chairFlipped){
+                                System.out.println("\nThis chair is already set up neatly..");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }
             System.out.println("\nYou return to the center of the room.");
         } 
         if(keyword.startsWith("move")){

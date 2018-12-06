@@ -11,6 +11,7 @@ public class Bedroom extends Room implements Serializable {
     private int mirror;
     private boolean isOpen;
     private boolean isMade;
+    private boolean isBroken;
     private List<String> bedroomKeywords = new ArrayList<String>();
     private static String dresserActions[] = {"examine", "open","close","kick","sit on","smell"};
     private static String bedActions[] = {"examine", "lay on", "look under", "make sheets", "smell"};
@@ -35,6 +36,7 @@ public class Bedroom extends Room implements Serializable {
         this.mirror = mirror;
         this.isOpen = false;
         this.isMade = false;
+        this.isBroken = false;
         if(this.dresser > 0){
             this.diary = 1;
         }else{
@@ -284,6 +286,131 @@ public class Bedroom extends Room implements Serializable {
                             }else if(!this.isMade){
                                 System.out.println("\nIt's a twin size bed that is unmade..");
                                 System.out.println("It looks like whoever slept here doesn't know how to make their bed!");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
+        }
+        if(keyword.startsWith("walk to b") && this.bed == 1 && this.getRoomID() == 7){
+            userAction = IR5.getString("\nYou walk up to the bed.Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayBedActions();
+                    found = true;
+                }
+                for(int i = 0; i < bedActions.length; i++){
+                    if(userAction.equals(bedActions[i])){
+                        if(bedActions[i].equals("examine")){
+                            System.out.println("\nWow, this bed is nice.");
+                            System.out.println("It's seems to be a king side bed");
+                            System.out.println("It has a luxurious backboard surrounded by white silky drapes.");
+                            System.out.println("Waking up in this thing must make you feel like a king!");
+                            found = true;
+                        }else if(bedActions[i].equals("look under")){
+                            System.out.println("\nYou look under the bed..");
+                            System.out.println("You just see a bunch of what it seems like, pony shaped dolls.");
+                            System.out.println("Whoever's house this is must be an interesting person..");
+                            found = true;
+                        }else if(bedActions[i].equals("make sheets")){
+                            System.out.println("\nYou can't make the sheets to this bed because they're already made.");
+                            found = true;
+                        }else if(bedActions[i].equals("smell")){
+                            System.out.println("\nYou smell the bed..");
+                            System.out.println("Whoever cleaned these sheets must have used downey!");
+                            found = true;
+                        }else if(bedActions[i].equals("lay on")){
+                            System.out.println("\nYou lay on the king sized bed.");
+                            System.out.println("You get up shortly because you realize that you need to get out of here!");
+                            found = true;
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
+        }
+        if(keyword.startsWith("walk to mi") && this.mirror == 1 && this.getRoomID() == 7){
+            userAction = IR5.getString("\nYou walk up to the mirror. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayMirrorActions();
+                    found = true;
+                }
+                for(int i = 0; i < mirrorActions.length; i++){
+                    if(userAction.equals(mirrorActions[i])){
+                        if(mirrorActions[i].equals("examine")){
+                            if(!this.isBroken){
+                                System.out.println("\nIt's a gold-trimmed full body mirror.");
+                                System.out.println("It probably makes the average person look 10x better.");
+                                found = true;
+                            }else if(this.isBroken){
+                                System.out.println("It's a broken mirror..");
+                                found = true;
+                            }
+                        }else if(mirrorActions[i].equals("kick")){
+                            if(this.isBroken){
+                                System.out.println("\nThe mirror is already broken stop trying to harm it any further..");
+                                found = true;
+                            }else{
+                                userChoice = IR5.getYorN("\nAre you sure you want to kick the mirror? It'll break this can't be undone.");
+                                if(userChoice){
+                                    System.out.println("\nYou kick the mirror and it breaks! You watch the glass shatter and all that is left is the golden frame.");
+                                    found = true;
+                                    this.isBroken = true;
+                                }else{
+                                    System.out.println("\nYou decide to not kick the mirror.");
+                                    found = true;
+                                }
+                            }
+                        }else if(mirrorActions[i].equals("punch")){
+                            if(this.isBroken){
+                                System.out.println("\nThe mirror is already broken stop trying to harm it any further..");
+                            }else{
+                                userChoice = IR5.getYorN("\nAre you sure you want to punch the mirror? It'll break this can't be undone.");
+                                if(userChoice){
+                                    System.out.println("\nYou punch the mirror and it breaks! You watch the glass shatter and all that is left is the golden frame.");
+                                    System.out.println("The glass cuts your hand and wounds you, you lose a small amount of blood.");
+                                    player.decreaseHp(20);
+                                    found = true;
+                                    this.isBroken = true;
+                                }else{
+                                    System.out.println("\nYou decide to not punch the mirror.");
+                                    found = true;
+                                }
+                            }
+                        }else if(mirrorActions[i].equals("look in")){
+                            if(this.isBroken){
+                                System.out.println("\nToo bad you broke this mirror, now you can't admire yourself anymore.");
+                                found = true;
+                            }else if(!this.isBroken){
+                                System.out.println("\nYou take a few moments to admire yourself in the gold-trimmed mirror.");
+                                System.out.println("You wish you had a phone to take a picture because this may be the only time you look this luxurious.");
                                 found = true;
                             }
                         }

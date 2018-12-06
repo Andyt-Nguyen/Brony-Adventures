@@ -148,10 +148,8 @@ public class PlayBronyGame implements Serializable {
                 if (hallway1Visited == 1) {
                     System.err.println("\nYou entered the hallway on the south side of the building.");
                 } else if (hallway1Visited == 0) {
-                    System.err.println(
-                            "\nYou enter a hallway on the south side of the building, you see a window leading");
-                    System.err.println(
-                            "to the center courtyard, a lamp in the corner of the room, and doors to the east,");
+                    System.err.println("\nYou enter a hallway on the south side of the building, you see a window leading");
+                    System.err.println("to the center courtyard, a lamp in the corner of the room, and doors to the east,");
                     System.err.println("and the west.");
                     System.err.println("\nYou here the door behind you lock..");
                     hallway1Visited++;
@@ -161,9 +159,8 @@ public class PlayBronyGame implements Serializable {
                 if (masterBathroomVisited == 1) {
                     System.err.println("\nYou entered the master bathroom.");
                 } else if (masterBathroomVisited == 0) {
-                    System.err.println("\nYou enter the master bathroom, you see a useable shower and toilet,");
-                    System.err.println("a sink that looks like it was being re-done, and that's about it");
-                    System.err.println("in here..");
+                    System.err.println("\nYou enter the master bathroom, you see luxurious shower, toilet,");
+                    System.err.println("and sink. That's about it in here..");
                     masterBathroomVisited++;
                     player.addToPoints(5);
                 }
@@ -201,8 +198,7 @@ public class PlayBronyGame implements Serializable {
                 if (masterBedroomVisited == 1) {
                     System.err.println("\nYou re-entered the master bedroom.");
                 } else if (masterBedroomVisited == 0) {
-                    System.err.println(
-                            "\nYou enter the master bedroom, which seems to be in the center of the building.");
+                    System.err.println("\nYou enter the master bedroom, which seems to be in the center of the building.");
                     System.err.println("You see doors to the east and west, a mirror, a bed, and a dresser.");
                     masterBedroomVisited++;
                     player.addToPoints(5);

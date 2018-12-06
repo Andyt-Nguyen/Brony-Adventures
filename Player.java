@@ -102,6 +102,9 @@ public class Player implements Serializable {
 
     public void decreaseHp(int hp){
         this.hp -= hp;
+        if(this.hp < 0){
+            this.hp = 0;
+        }
     }
 
     public void addFood(int food){
