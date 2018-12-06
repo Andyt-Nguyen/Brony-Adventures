@@ -109,25 +109,27 @@ public class Bedroom extends Room implements Serializable {
                 boolean found = false;
                 if(userAction.startsWith("hel")){
                     displayDresserActions();
+                    found = true;
                 }
                 for(int i = 0; i < dresserActions.length; i++){
                     if(userAction.equals(dresserActions[i])){
                         if(dresserActions[i].equals("open") && !this.isOpen){
                             this.isOpen = true;
-                            userChoice = IR5.getYorN("\nYou open the dresser and find a diary, would you like to read it.?");
+                            userChoice = IR5.getYorN("\nYou open the drawers to the dresser and find a diary, would you like to read it.?");
                             if(userChoice){
                                 readDiary();
+                                System.out.println("\nYou place the diary back in the dresser..");
                                 found = true;
                             }else{
                                 System.out.println("\nYou choose to not read the diary.");
                                 found = true;
                             }
                         }else if(dresserActions[i].equals("open") && this.isOpen){
-                            System.out.println("\nThis dresser is already open.");
+                            System.out.println("\nThe drawers are already open.");
                             found = true;
                         }else if(dresserActions[i].equals("close")){
                             if(this.isOpen){
-                                System.out.println("\nYou close the dresser.");
+                                System.out.println("\nYou close the drawers to the dresser.");
                                 this.isOpen = false;
                                 found = true;
                             }else{
@@ -163,9 +165,76 @@ public class Bedroom extends Room implements Serializable {
             System.out.println("\nYou return to the center of the room.");
         }
         if(keyword.startsWith("walk to d") && this.dresser == 1 && this.getRoomID() == 7){
-            System.err.println("You take the key off the dresser!");
-            player.setKey(1);
-            player.addToPoints(2);
+            userAction = IR5.getString("\nYou walk up to the dresser.Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayDresserActions();
+                    found = true;
+                }
+                for(int i = 0; i < dresserActions.length; i++){
+                    if(userAction.equals(dresserActions[i])){
+                        if(dresserActions[i].equals("open")){
+                            if(this.isOpen){
+                                System.out.println("\nThe drawer to the dresser is already open.");
+                                found = true;
+                            }else if(!this.isOpen && this.key == 1){
+                                System.out.println("\nYou open the drawers to the dresser and find a key!");
+                                System.out.println("You stash the key in your pocket.");
+                                setKey(0);
+                                player.setKey(1);
+                                this.isOpen = true;
+                                found = true;
+                            }
+                        }else if(dresserActions[i].equals("close")){
+                            if(this.isOpen){
+                                System.out.println("\nYou shut the drawers to the dresser.");
+                                this.isOpen = false;
+                                found = true;
+                            }else if(!this.isOpen){
+                                System.out.println("\nThe drawers to the dresser are already shut.");
+                                found = true;
+                            }
+                        }else if(dresserActions[i].equals("kick")){
+                            System.out.println("\nYou kick the golden dresser..");
+                            System.out.println("You get warped to a random room in the house.");
+                            int randomRoom = IR5.getRandomNumber(2, 9);
+                            player.setLocation(randomRoom);
+                            center = true;
+                            found = true;
+                            break;
+                        }else if(dresserActions[i].equals("sit on")){
+                            System.out.println("\nThis dresser is too tall to sit on.");
+                        }else if(dresserActions[i].equals("smell")){
+                            System.out.println("\nYou smell the dresser..");
+                            System.out.println("You can smell the pure-ness of the gold!");
+                            found = true;
+                        }else if(dresserActions[i].equals("examine")){
+                            System.out.println("\nIt's a dresser made of pure gold, wow!");
+                            found = true;
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                if(userAction.startsWith("ki")){
+                    System.out.println("");
+                }else{
+                    userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                }
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+            }
+            if(userAction.startsWith("ki")){
+                System.out.println("WOAH");
+            }else{
+                System.out.println("\nYou return to the center of the room.");
+            }
         }
         if(keyword.startsWith("walk to b") && this.bed == 1 && this.getRoomID() == 1){
             userAction = IR5.getString("\nYou walk up to the bed.Choose an action.(Help for list of commands)").toLowerCase().trim();
@@ -287,6 +356,6 @@ public class Bedroom extends Room implements Serializable {
         System.out.println("**********************************************************");
     }
 
-    
+
 
 }

@@ -101,17 +101,8 @@ public class Room implements Serializable {
 
     public void moveRoom(Player player, String keyword){
 
-        if(keyword.startsWith("move n") && this.northDoor != 0){
-            if(this.getRoomID() == 10){
-                if(player.getKey() == 1){
-                    Menus.displayGameWon(player);
-                }else if(player.getKey() == 0){
-                    System.err.println("Sorry this door is locked, you need to find the key.");  
-                }
-            }else{
+        if(keyword.startsWith("move n") && this.northDoor != 0 && this.roomID != 10){
                 player.setLocation(this.northDoor);
-            }
-            
         }else if(keyword.startsWith("move n") && this.northDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }

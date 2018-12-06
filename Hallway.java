@@ -90,6 +90,10 @@ public class Hallway extends Room implements Serializable {
         return this.window;
     }
 
+    public Boolean getFinalFight(){
+        return this.finalFightComplete;
+    }
+
     public void addKeyword(String keyword){
         this.hallwayKeywords.add(keyword);
     }
@@ -602,15 +606,18 @@ public class Hallway extends Room implements Serializable {
                     for(int i = 0; i < statueActions.length; i++){
                         if(userAction.equals(statueActions[i])){
                             if(statueActions[i].equals("examine")){
-                                
+                                System.out.println("\nThis was the statue that came to life and attacked you..");
+                                System.out.println("Luckily you killed it.");
+                                found = true;
                             }else if(statueActions[i].equals("punch")){
-                                
+                                System.out.println("\nYou punch the motionless object..");
+                                found = true;
                             }else if(statueActions[i].equals("kick")){
-                                
+                                System.out.println("\nYou kick the motionless object..");
                             }else if(statueActions[i].equals("imitate")){
-                                
+                                System.out.println("\nYou lay on the ground and play dead imitating what you killed.");
                             }else if(statueActions[i].equals("smell")){
-                                
+                                System.out.println("\nIt really doesn't smell like much.. yet.");
                             }
                         }
                     }
@@ -628,6 +635,9 @@ public class Hallway extends Room implements Serializable {
         }
         if(keyword.startsWith("move")){
             moveRoom(player, keyword);
+        }
+        if(keyword.startsWith("move n") && this.getRoomID() == 10){
+            finalRoomMove(player, keyword);
         }
     }
     
@@ -913,6 +923,33 @@ public class Hallway extends Room implements Serializable {
             System.out.println("\nVery nice job, you have killed the pony.");
             System.out.println("You leave the dead carcass where you killed it, you better get out of this place before worse things happen!");
             player.addToPoints(25);
+        }
+    }
+
+    public void finalRoomMove(Player player, String keyword){
+        if(keyword.startsWith("move n") && this.getNorthDoor() != 0){
+            if(player.getKey() == 1 && getFinalFight()){
+                Menus.displayGameWon(player);
+            }else if(player.getKey() == 0){
+                System.err.println("\nSorry this door is locked, you need to find the key.");  
+            }else if(!getFinalFight()){
+                System.err.println("\nMaybe you should check out the statue in this room!");
+            }
+        }
+        if(keyword.startsWith("move s") && this.getSouthDoor() != 0){
+            player.setLocation(this.getSouthDoor());
+        }else if(keyword.startsWith("move s") && this.getSouthDoor() == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.startsWith("move e") && this.getEastDoor() != 0){
+            player.setLocation(this.getEastDoor());
+        }else if(keyword.startsWith("move e") && this.getEastDoor() == 0){
+            System.err.println("\nYou cannot go this direction.");
+        }
+        if(keyword.startsWith("move w") && this.getWestDoor() != 0){
+            player.setLocation(this.getWestDoor());
+        }else if(keyword.startsWith("move w") && this.getWestDoor() == 0){
+            System.err.println("\nYou cannot go this direction.");
         }
     }
 }
