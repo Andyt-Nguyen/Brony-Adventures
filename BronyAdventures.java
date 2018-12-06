@@ -6,7 +6,7 @@ class BronyAdventures {
     public final static Scanner scanner = new Scanner(System.in);
     public static PlayBronyGame game;
 
-    public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
 
         readyPlayer();
         game.playGame();
@@ -29,7 +29,7 @@ class BronyAdventures {
 
     
     
-    public static void readyPlayer() throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static void readyPlayer() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
         FileIo.readFile();
         boolean flag = false;
         while(!flag) {
@@ -64,7 +64,7 @@ class BronyAdventures {
 
 
 
-    public static boolean createUser() throws FileNotFoundException, IOException, ClassNotFoundException  {
+    public static boolean createUser() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException  {
         /**
          * Initial setup game
          */
@@ -177,6 +177,7 @@ class BronyAdventures {
 
         boolean isNewPlayer = FileIo.addNewPlayer(newGame);
         if (isNewPlayer) {
+            System.out.println("Saving new user...");
             game = newGame;
             FileIo.writeFile();
             // System.out.println("Welcome " + username + " to Brony Adventures!");
@@ -187,7 +188,7 @@ class BronyAdventures {
         }
     }
 
-    public static boolean signinUser() throws IOException {
+    public static boolean signinUser() throws IOException, InterruptedException {
         String username = getString("Enter username");
         String password = getString("Enter password");
         PlayBronyGame isPlayerExist = FileIo.getGame(username, password);

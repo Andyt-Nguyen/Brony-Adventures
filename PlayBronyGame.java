@@ -1,5 +1,5 @@
 
-import java.io.Serializable;
+import java.io.*;
 
 public class PlayBronyGame implements Serializable {
     Player player;
@@ -44,7 +44,7 @@ public class PlayBronyGame implements Serializable {
         this.hallway4 = hallway4;
     }
 
-    public void playGame() {
+    public void playGame() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
         String userInput = "";
 
         // Determines amount of times room has been vistied(used to determine message
@@ -110,7 +110,7 @@ public class PlayBronyGame implements Serializable {
             } else if (userInput.startsWith("health")) { // Shows health for user.
                 System.out.println("Hp: " + player.getHp() + "/100");
             } else if (userInput.startsWith("ex")) { // Saves and closes the game.
-                // ProjectFileIO_v2.writeFile();
+                FileIo.writeFile();
                 System.exit(0);
             } else if (userInput.startsWith("walk t") || userInput.startsWith("move ")) { // Based on whichever room the
                                                                                           // user is in, will complete
