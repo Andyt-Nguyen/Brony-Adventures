@@ -1,6 +1,14 @@
 import java.util.*;
 import java.io.*;
 
+/* ********************************
+ * Programmers : Sean and Andrew  *
+ * CIS 131 : Brony Adventures     *
+ * Final Project                  *
+ **********************************/
+
+
+
 class BronyAdventures {
     public static Player player = new Player();
     public final static Scanner scanner = new Scanner(System.in);
