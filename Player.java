@@ -50,7 +50,7 @@ public class Player implements Serializable {
     }
 
     public int getHighScore(){
-        return this.highScore;
+        return highScore;
     }
 
     public int getKey(){

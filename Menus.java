@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.io.*;
+import java.util.*;
 
 public class Menus implements Serializable {
 
@@ -47,5 +49,44 @@ public class Menus implements Serializable {
         System.err.println("You collected a total of " + player.getHighScore() + " points this game.");
         System.err.println("Your stats have been placed on the highscores.");
         System.out.println("----------------------------------------------");
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void sortHighscores(){
+        ArrayList<PlayBronyGame> gameList = FileIo.getGameList();
+        String username[] = new String[gameList.size()];
+        int highscore[] = new int[gameList.size()];
+        
+        for(int i = 0; i < gameList.size();i++){
+            username[i] = gameList.get(i).getPlayerName();
+            highscore[i] = gameList.get(i).getPlayerHighscore();
+        }
+
+        for(int i = 0; i < highscore.length - 1; i++){
+            for(int j = 0; j < highscore.length - i - 1; j++){
+                if(highscore[j] > highscore[j + 1]){
+                    int tempScore = highscore[j];
+                    highscore[j] = highscore[j + 1];
+                    highscore[j + 1] = tempScore;
+                    String tempName = username[j];
+                    username[j] = username[j + 1];
+                    username[j + 1] = tempName;
+                }
+            }
+        }
+
+        displayHighScores(username, highscore);
+    }
+
+
+    public static void displayHighScores(String[] username, int[] highscore){
+        System.out.println("************** Brony Adventures Highscores **************");
+        System.out.println("***** Username *************************** Points *******");
+        for(int i = 0; i < username.length; i++){
+            System.out.printf("     " + (i + 1) + ".%-12s" , username[i]);
+            System.out.print("                          " + highscore[i] + "         *");
+            System.out.println();
+        }
+        System.out.println("*********************************************************");
     }
 }

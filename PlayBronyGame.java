@@ -47,17 +47,6 @@ public class PlayBronyGame implements Serializable {
     public void playGame() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
         String userInput = "";
 
-        // Determines amount of times room has been vistied(used to determine message
-        // sent to user).
-        //int hallway1Visited = 0;
-        //int hallway2Visited = 0;
-        //int hallway3Visited = 0;
-        //int hallway4Visited = 0;
-        //int masterBedroomVisited = 0;
-        //int kitchen1Visited = 0;
-        //int kitchen2Visited = 0;
-        //int masterBathroomVisited = 0;
-        //int bathroomVisited = 0;
 
         // Basic while loop to get input from the user if they are alive.
 
@@ -135,8 +124,10 @@ public class PlayBronyGame implements Serializable {
                 player.eatFood(player);
             }else if(userInput.startsWith("check f")){
                 System.out.println("\nYou have " + player.getFood() + " pieces of food left.");
-            }else if(userInput.startsWith("check p")){
+            }else if(userInput.startsWith("po")){
                 System.out.println("\nYou currently have " + player.getHighScore() + " points..");
+            }else if(userInput.startsWith("high")){
+                Menus.sortHighscores();
             } else {
                 System.out.println("\nSorry the command " + userInput + " is not recognized.");
             }
@@ -244,4 +235,7 @@ public class PlayBronyGame implements Serializable {
         return player.getPassword();
     }
 
+    public int getPlayerHighscore(){
+        return player.getHighScore();
+    }
 }

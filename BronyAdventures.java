@@ -67,8 +67,7 @@ class BronyAdventures {
                     }
                 }
             } else if(userOption == 3){
-
-            
+                Menus.sortHighscores();
             } else if(userOption == 4){
                 System.exit(-1);
             }

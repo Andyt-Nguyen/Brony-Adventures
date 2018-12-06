@@ -64,5 +64,9 @@ public class FileIo {
             }
             return null;
     }
+
+    public static ArrayList getGameList(){
+        return gameList;
+    }
     
 }
