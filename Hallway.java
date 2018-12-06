@@ -724,7 +724,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* -  Stab(knife)                 *");
+                System.out.println("* -  Stab(knife)              *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();
@@ -798,7 +798,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* - Stab(knife)                 *");
+                System.out.println("* - Stab(knife)               *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();
@@ -873,7 +873,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* - Stab(knife)                 *");
+                System.out.println("* - Stab(knife)                *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();

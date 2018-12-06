@@ -206,7 +206,7 @@ public class PlayBronyGame implements Serializable {
             } else if (newLocation == 9 && newLocation != currentRoom) {
                 if (bathroom2.getBathroomVisited()) {
                     System.err.println("\nYou re-entered the bathroom on the north-east side of the building.");
-                } else if (bathroom2.getBathroomVisited()) {
+                } else if (!bathroom2.getBathroomVisited()) {
                     System.err.println("\nYou enter a smaller bathroom on the north-east side of the building..");
                     System.err.println("You see doors to the south and the west, a toilet with a plunger, a sink,");
                     System.err.println("And a mirror above it.");
@@ -216,7 +216,7 @@ public class PlayBronyGame implements Serializable {
             } else if (newLocation == 10 && newLocation != currentRoom) {
                 if (hallway4.getHallwayVisited()) {
                     System.err.println("\nYou re-renter the hallway on the north side of the building.");
-                } else if (hallway4.getHallwayVisited()) {
+                } else if (!hallway4.getHallwayVisited()) {
                     System.err.println("\nYou enter the hallway on the north side of the building..");
                     System.err.println("It has 3 doors, one to the north, one to the east, and one to the west.");
                     System.err.println("Other than that all you see is a statue.");
@@ -225,6 +225,8 @@ public class PlayBronyGame implements Serializable {
                 }
             }
         }
+
+        FileIo.writeFile();
     }
 
     public String getPlayerName() {
