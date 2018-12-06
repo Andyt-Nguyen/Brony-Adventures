@@ -95,7 +95,7 @@ class BronyAdventures {
                 0, 0, 1, 1, 1);
         Bathroom bathroom2 = new Bathroom(9, "Bathroom", "This bathroom is on the north-east side of the house.",
                 "\nYou see doors to the south and to the west, you see a toilet, no shower, a plunger, and some cabinets with a mirror above.",
-                0, 6, 0, 10, 1, 0, 1, 1, 1, 1);
+                0, 6, 0, 10, 1, 0, 1, 0, 1, 1);
         Hallway hallway4 = new Hallway(10, "Northern Hallway", "This hallway is the most northern hallway.",
                 "\nyou see doors to the north, east, and west, and a statue.", 11, 0, 9, 8, 0, 0, 0, 0, 1);
 

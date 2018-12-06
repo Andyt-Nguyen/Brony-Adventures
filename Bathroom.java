@@ -18,7 +18,7 @@ public class Bathroom extends Room implements Serializable {
     private static String[] showerActions = {"examine" , "open curtain", "close curtain", "take shower"};
     private static String[] mirrorActions = {"examine" , "punch", "splash water", "admire self"};
     private static String[] cabinetsActions = {"examine" , "open", "close", "kick"};
-    private static String[] plungerActions = {"examine" , "smell", "plung toilet"};
+    private static String[] plungerActions = {"examine" , "smell", "plunge toilet"};
     private static String[] sinkActions = {"examine", "turn on", "turn off", "wash hands"};
 
 
@@ -166,7 +166,7 @@ public class Bathroom extends Room implements Serializable {
             }
             System.out.println("\nYou return to the center of the room.");
         }
-        if(keyword.startsWith("walk to to") && this.toilet == 1){
+        if(keyword.startsWith("walk to to") && this.toilet == 1 && this.getRoomID() == 3){
             userAction = IR5.getString("\nYou walk up to the toilet. Choose an action.(Help for list of commands)").toLowerCase().trim();
             if(userAction.startsWith("cent")){
                 center = true;
@@ -240,7 +240,7 @@ public class Bathroom extends Room implements Serializable {
             }
             System.out.println("\nYou return to the center of the room.");
         }
-        if(keyword.startsWith("walk to si") && this.sink == 1){
+        if(keyword.startsWith("walk to si") && this.sink == 1 && this.getRoomID() == 3){
             userAction = IR5.getString("\nYou walk up to the sink. Choose an action.(Help for list of commands)").toLowerCase().trim();
             if(userAction.startsWith("cent")){
                 center = true;
@@ -302,6 +302,252 @@ public class Bathroom extends Room implements Serializable {
             }
             System.out.println("\nYou return to the center of the room.");
         }
+        if(keyword.startsWith("walk to to") && this.toilet == 1 && this.getRoomID() == 9){
+            userAction = IR5.getString("\nYou walk up to the toilet. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayToiletActions();
+                    found = true;
+                }
+                for(int i = 0; i < toiletActions.length; i++){
+                    if(userAction.equals(toiletActions[i])){
+                        if(toiletActions[i].equals("examine")){
+                            System.out.println("\nIt's a pretty basic white toilet..");
+                            found = true;
+                        }else if(toiletActions[i].equals("lift seat")){
+                            if(this.seatUp){
+                                System.out.println("\nThe toilet seat is already up.");
+                                found = true;
+                            }else if (!this.seatUp){
+                                System.out.println("\nYou lift the toilet seat up..");
+                                this.seatUp = true;
+                                found = true;
+                            }
+                        }else if(toiletActions[i].equals("close seat")){
+                            if(this.seatUp){
+                                System.out.println("\nYou put the toilet seat down!");
+                                this.seatUp = false;
+                                found = true;
+                            }else if (!this.seatUp){
+                                System.out.println("\nThis toilet seat is already closed.");
+                                found = true;
+                            }
+                        }else if(toiletActions[i].equals("flush")){
+                            System.out.println("\nYou try flushing the toilet but it seems like it's jammed..");
+                            found = true;
+                        }else if(toiletActions[i].equals("take a piss")){
+                            if(this.seatUp){
+                                System.out.println("\nYou somehow make yourself go pee.");
+                                System.out.println("Wow it's like magic..");
+                                found = true;
+                            }else if(!this.seatUp){
+                                System.out.println("\nEven though the toilet seat is down, you decide to go on it.");
+                                System.out.println("I mean this isn't your house.. yolo yaknow!?");
+                                found = true;
+                            }
+                        }else if(toiletActions[i].equals("take a dump")){
+                            if(this.seatUp){
+                                System.out.println("\nYou drop a nuke in the toilet.");
+                                System.out.println("Thanks to you the whole house smells like death.");
+                                System.out.println("Maybe you should go shower and clean yourself.");
+                                found = true;
+                            }else if(!this.seatUp){
+                                System.out.println("\nThe seat is down..");
+                                System.out.println("Doing this wouldn't benefit anybody.");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
+        }
+        if(keyword.startsWith("walk to si") && this.sink == 1 && this.getRoomID() == 9){
+            userAction = IR5.getString("\nYou walk up to the sink. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displaySinkActions();
+                    found = true;
+                }
+                for(int i = 0; i < sinkActions.length; i++){
+                    if(userAction.equals(sinkActions[i])){
+                        if(sinkActions[i].equals("examine")){
+                            System.out.println("\nThis sink has countertop that has a finish of demonic ponies on it.");
+                            found = true;
+                        }else if(sinkActions[i].equals("turn on")){
+                            if(this.isRunning){
+                                System.out.println("\nThe sink is already running!");
+                                System.out.println("Don't worry about turning it off or anything.");
+                                System.out.println("I mean who wants to save water anyways.");
+                                found = true;
+                            }else if(!this.isRunning){
+                                System.out.println("\nYou turn on the sink.");
+                                this.isRunning = true;
+                                found = true;
+                            }
+                        }else if(sinkActions[i].equals("turn off")){
+                            if(isRunning){
+                                System.out.println("\nYou turn off thensink!");
+                                this.isRunning = false;
+                                found = true;
+                            }else if(!this.isRunning){
+                                System.out.println("\nThe sink is already turned off");
+                                found = true;
+                            }
+                        }else if(sinkActions[i].equals("wash hands")){
+                            if(this.isRunning){
+                                System.out.println("\nYou wash your hands in the sink..");
+                                System.out.println("As you're doing this you feel the eyes of the demonic pony countertop glaring at you..");
+                                System.out.println("Don't forget to turn off the sink!");
+                                found = true;
+                            }else if(!this.isRunning){
+                                System.out.println("\nMaybe you should try turning it on before you use it!.");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
+        }
+        if(keyword.startsWith("walk to pl") && this.plunger == 1){
+            userAction = IR5.getString("\nYou walk up to the plunger. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayPlungerActions();
+                    found = true;
+                }
+                for(int i = 0; i < plungerActions.length; i++){
+                    if(userAction.equals(plungerActions[i])){
+                        if(plungerActions[i].equals("examine")){
+                            System.out.println("\nIt's a dirty old plunger that looks like it's been used one to many times..");
+                            found = true;
+                        }else if(plungerActions[i].equals("smell")){
+                            System.out.println("\nWhy in the world would you want to smell the plunger..");
+                            System.out.println("You don't know who or what has even used this thing.");
+                            found = true;
+                        }else if(plungerActions[i].equals("plunge toilet")){
+                            if(this.seatUp){
+                                System.out.println("\nYou pick up the plunger and start plunging away at the toilet for no reason.");
+                                System.out.println("Wasn't that fun?");
+                                found = true;
+                            }else if(!this.seatUp){
+                                System.out.println("\nYou grab the plunger and start plunging the toilet seat because you never lifted it up.");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
+        }
+        if(keyword.startsWith("walk to mi") && this.mirror == 1){
+            userAction = IR5.getString("\nYou walk up to the mirror. Choose an action.(Help for list of commands)").toLowerCase().trim();
+            if(userAction.startsWith("cent")){
+                center = true;
+            }
+            while(!center){
+                boolean found = false;
+                if(userAction.startsWith("hel")){
+                    displayMirrorActions();
+                    found = true;
+                }
+                for(int i = 0; i < mirrorActions.length; i++){
+                    if(userAction.equals(mirrorActions[i])){
+                        if(mirrorActions[i].equals("examine")){
+                            System.out.println("\nIt's a mirror that stands above the sink.");
+                            found = true;
+                        }else if(mirrorActions[i].equals("punch")){
+                            if(this.mirrorBroken){
+                                System.out.println("\nYou already broke this mirror, but here we go..");
+                                System.out.println("You punch it again and more shattered glass gets into your knuckles..");
+                                System.out.println("Feels great, don't it? You take more damage..");
+                                player.decreaseHp(10);
+                                found = true;
+                            }else if(!this.mirrorBroken){
+                                System.out.println("\nYou punch the mirror and in the process break it.");
+                                System.out.println("You see your knuckles begin to bleed..");
+                                System.out.println("You lose some health..");
+                                player.decreaseHp(5);
+                                found = true;
+                            }
+                        }else if(mirrorActions[i].equals("splash water")){
+                            if(this.mirrorBroken && this.isRunning){
+                                System.out.println("\nYou splash water onto the broken mirror.");
+                                found = true;
+                            }else if(!this.mirrorBroken && this.isRunning){
+                                System.out.println("\nYou splash water onto the mirror..");
+                                System.out.println("I guess everyone needs a little bit of excitement in their life.");
+                                found = true;
+                            }else if(this.mirrorBroken && !this.isRunning){
+                                System.out.println("\nYou need to turn on the water to the sink before you can splash it on the broken mirror!");
+                                found = true;
+                            }else if(!this.mirrorBroken && !this.isRunning){
+                                System.out.println("\nYou need to turn on the water to the sink before you can splash it on the mirror!");
+                                found = true;
+                            }
+                        }else if(mirrorActions[i].equals("admire self")){
+                            if(!this.mirrorBroken){
+                                System.out.println("\nYou decide to act really stuck up and admire yourself in the mirror.");
+                                System.out.println("As you are doing so you notice something in the corner of the mirror.");
+                                System.out.println("You see the face of a demonic pony and then feel chills go up and down your body.");
+                                System.out.println("You quickly turn away from the mirror and look back, it's gone..");
+                                found = true;
+                            }else if (this.mirrorBroken){
+                                System.out.println("\nMan it's really hard to see yourself in a broken mirror..");
+                                found = true;
+                            }
+                        }
+                    }
+                }
+                if(!found){
+                    System.err.println("\nSorry this command cannot be used here!");
+                }
+                userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
+                if(userAction.startsWith("cent")){
+                    center = true;
+                }
+                
+            }
+            System.out.println("\nYou return to the center of the room.");
+        }
+        
         if(keyword.startsWith("move ")){
             moveRoom(player, keyword);
         }
