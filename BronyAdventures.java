@@ -177,7 +177,7 @@ class BronyAdventures {
 
         boolean isNewPlayer = FileIo.addNewPlayer(newGame);
         if (isNewPlayer) {
-            System.out.println("Saving new user...");
+            System.out.println("Creating new user");
             game = newGame;
             FileIo.writeFile();
             // System.out.println("Welcome " + username + " to Brony Adventures!");

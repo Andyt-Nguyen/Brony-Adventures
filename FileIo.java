@@ -36,11 +36,12 @@ public class FileIo {
     }
 
     public static void writeFile() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException{
-        System.out.println("Saving game...");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("\nSaving game...");
         TimeUnit.SECONDS.sleep(1);
         System.out.println("Processing...");
         TimeUnit.SECONDS.sleep(1);
-        System.out.println("Processing...");
+        System.out.println("Processing....");
         TimeUnit.SECONDS.sleep(2);
          // write file
          ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
