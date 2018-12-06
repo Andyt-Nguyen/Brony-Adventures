@@ -58,6 +58,11 @@ class BronyAdventures {
                         if(tryAgain.equals("exit")) break;
                     }
                 }
+            } else if(userOption == 3){
+
+            
+            } else if(userOption == 4){
+                System.exit(-1);
             }
         }
     }
@@ -206,6 +211,8 @@ class BronyAdventures {
         System.out.println("*************************");
         System.out.println("* 1. New Game           *");
         System.out.println("* 2. Existing Game      *");
+        System.out.println("* 3. View Highscores    *");
+        System.out.println("* 4. Quit Game          *");
         System.out.println("*************************");
     }
 

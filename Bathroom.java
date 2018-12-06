@@ -8,6 +8,7 @@ public class Bathroom extends Room implements Serializable {
     private int cabinets;
     private int plunger;
     private int sink;
+    private Boolean bathroomVisited;
     private Boolean seatUp;
     private Boolean curtainsClosed;
     private Boolean mirrorBroken;
@@ -45,6 +46,7 @@ public class Bathroom extends Room implements Serializable {
         this.mirrorBroken = false;
         this.cabinetsOpen = false;
         this.isRunning = false;
+        this.bathroomVisited = false;
     }
 
     public void setToilet(int toilet){
@@ -85,6 +87,14 @@ public class Bathroom extends Room implements Serializable {
 
     public int getPlunger(){
         return this.plunger;
+    }
+
+    public void setBathroomVisited(Boolean visited){
+        this.bathroomVisited = visited;
+    }
+
+    public Boolean getBathroomVisited(){
+        return this.bathroomVisited;
     }
 
     public void addKeyword(String keyword){

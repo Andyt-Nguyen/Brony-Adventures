@@ -9,6 +9,7 @@ public class Bedroom extends Room implements Serializable {
     private int gun;
     private int key;
     private int mirror;
+    private boolean bedroomVisited;
     private boolean isOpen;
     private boolean isMade;
     private boolean isBroken;
@@ -34,6 +35,7 @@ public class Bedroom extends Room implements Serializable {
         this.bed = bed;
         this.key = key;
         this.mirror = mirror;
+        this.bedroomVisited = false;
         this.isOpen = false;
         this.isMade = false;
         this.isBroken = false;
@@ -79,6 +81,14 @@ public class Bedroom extends Room implements Serializable {
 
     public int getMirror(){
         return this.mirror;
+    }
+
+    public void setBedroomVisited(Boolean visit){
+        this.bedroomVisited = visit;
+    }
+
+    public Boolean getBedroomVisited(){
+        return this.bedroomVisited;
     }
 
     public void addKeyword(String keyword){

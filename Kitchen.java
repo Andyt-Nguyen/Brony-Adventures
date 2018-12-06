@@ -8,9 +8,11 @@ public class Kitchen extends Room implements Serializable {
     private int food;
     private int sink;
     private int chair;
+    private boolean kitchenVisited;
     private boolean doorOpen;
     private boolean sinkOn;
     private boolean chairFlipped;
+    private boolean foodTaken;
     private ArrayList<String> kitchenKeywords = new ArrayList<String>();
     private static String[] knifeActions = {"examine" , "pick up"};
     private static String[] fridgeActions = {"examine" , "open door", "close door", "take food", "kick"};
@@ -38,7 +40,9 @@ public class Kitchen extends Room implements Serializable {
         this.doorOpen = false;
         this.sinkOn = false;
         this.chairFlipped = false;
-        if(fridge > 0){
+        this.foodTaken = false;
+        this.kitchenVisited = false;
+        if(fridge == 1){
             this.food = 5;
         }else{
             this.food = 0;
@@ -75,6 +79,14 @@ public class Kitchen extends Room implements Serializable {
 
     public int getChair(){
         return this.chair;
+    }
+
+    public void setKitchenVisited(Boolean visit){
+        this.kitchenVisited = visit;
+    }
+
+    public Boolean getKitchenVisited(){
+        return this.kitchenVisited;
     }
 
     public void decreaseFood(int food){
@@ -162,7 +174,9 @@ public class Kitchen extends Room implements Serializable {
                                 found = true;
                             }else if(!this.doorOpen){
                                 System.out.println("\nYou open the fridge door..");
-                                System.out.println("It looks like there is a bit of edible food in here!");
+                                if(!this.foodTaken){
+                                    System.out.println("It looks like there is a bit of edible food in here!");
+                                }
                                 this.doorOpen = true;
                                 found = true;
                             }   
@@ -176,20 +190,21 @@ public class Kitchen extends Room implements Serializable {
                                 found = true;
                             }
                         }else if(fridgeActions[i].equals("take food")){
-                            if(this.doorOpen && this.food > 0){
+                            if(this.doorOpen && !this.foodTaken){
                                 System.out.println("\nYou take the food, which happens to be tater tots..");
-                                System.out.println("And you stash them in your pockets for later");
+                                System.out.println("And you stash them in your pockets for later.");
                                 player.addFood(5);
+                                this.foodTaken = true;
                                 found = true;
                             }else if(!this.doorOpen){
                                 System.out.println("\nThe fridge door has to be open for you to take the food..");
                                 found = true;
-                            }else if(this.doorOpen && this.food == 0){
+                            }else if(this.doorOpen && this.foodTaken){
                                 System.out.println("\nYou already took the food that was in here!");
                                 found = true;
                             }
                         }else if(fridgeActions[i].equals("kick")){
-                            if(this.food == 0){
+                            if(this.foodTaken){
                                 System.out.println("\nYou violently kick the fridge wishing there was more food to take..");
                                 System.out.println("You hurt your foot and lost some health in the process..");
                                 player.decreaseHp(10);
@@ -213,7 +228,7 @@ public class Kitchen extends Room implements Serializable {
 
             System.out.println("\nYou return to the center of the room.");
         } 
-        if(keyword.startsWith("walk to fr") && this.fridge == 1 && this.getRoomID() == 8){
+        if(keyword.startsWith("walk to f") && this.fridge == 1 && this.getRoomID() == 8){
             userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
             if(userAction.startsWith("cent")){
                 center = true;
@@ -236,7 +251,9 @@ public class Kitchen extends Room implements Serializable {
                                 found = true;
                             }else if(!this.doorOpen){
                                 System.out.println("\nYou open the fridge door..");
-                                System.out.println("It looks like there is a bit of edible food in here!");
+                                if(!this.foodTaken){
+                                    System.out.println("It looks like there is a bit of edible food in here!");
+                                }
                                 this.doorOpen = true;
                                 found = true;
                             }   
@@ -250,20 +267,21 @@ public class Kitchen extends Room implements Serializable {
                                 found = true;
                             }
                         }else if(fridgeActions[i].equals("take food")){
-                            if(this.doorOpen && this.food > 0){
+                            if(this.doorOpen && !this.foodTaken){
                                 System.out.println("\nYou take the food, which happens to be tater tots..");
-                                System.out.println("And you stash them in your pockets for later");
+                                System.out.println("And you stash them in your pockets for later.");
                                 player.addFood(5);
+                                this.foodTaken = true;
                                 found = true;
                             }else if(!this.doorOpen){
                                 System.out.println("\nThe fridge door has to be open for you to take the food..");
                                 found = true;
-                            }else if(this.doorOpen && this.food == 0){
+                            }else if(this.doorOpen && this.foodTaken){
                                 System.out.println("\nYou already took the food that was in here!");
                                 found = true;
                             }
                         }else if(fridgeActions[i].equals("kick")){
-                            if(this.food == 0){
+                            if(this.foodTaken){
                                 System.out.println("\nYou violently kick the fridge wishing there was more food to take..");
                                 System.out.println("You hurt your foot and lost some health in the process..");
                                 player.decreaseHp(10);

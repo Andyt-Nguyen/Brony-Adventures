@@ -4,7 +4,7 @@ public class Menus implements Serializable {
 
     public static void displayStartGame(Player player){
         System.out.println("************************************************************");
-        System.out.println("* Welcome " + player.getUsername() + " to Brony Adventures.                         *");
+        System.out.println("* Welcome " + player.getUsername() + " to Brony Adventures.                            *");
         System.out.println("* You wake up from a deep sleep in an abandoned house.     *");
         System.out.println("* The goal is to find the key...                           *");
         System.out.println("* Get to the hallway on the north side of the building..   *");
@@ -17,8 +17,8 @@ public class Menus implements Serializable {
 
     public static void displayGameWon(Player player){
         System.out.println("****************************************************************");
-        System.out.println("*  Congratulations, " + player.getUsername() + ". You have escaped!                   *" );
-        System.out.println("*  Your score of " + player.getHighScore() + " points will be recorded to the highscores. *");
+        System.out.println("*  Congratulations, " + player.getUsername() + ". You have escaped!                    *" );
+        System.out.println("*  Your score of " + player.getHighScore() + " points will be recorded to the highscores.*");
         System.out.println("*  I hope you enjoyed playing our game!                        *");
         System.out.println("****************************************************************");
     }
@@ -33,7 +33,10 @@ public class Menus implements Serializable {
         System.out.println("* Search              |    Examines Room               *");
         System.out.println("* Scream              |    Player Screams              *");
         System.out.println("* Eat Food            |    Eats food if available.     *");
+        System.out.println("* Check Food          |    Checks amt of food          *");
         System.out.println("* Health              |    Displays HP                 *");
+        System.out.println("* Points              |    Displays points             *");
+        System.out.println("* Highscores          |    Displays highscores         *");
         System.out.println("* Exit                |    Saves and Quits Game        *");
         System.out.println("********************************************************");
     }

@@ -8,6 +8,7 @@ public class Hallway extends Room implements Serializable {
     private int closet;
     private int atticPanel;
     private int statue;
+    private boolean hallwayVisited;
     private boolean lampOn;
     private boolean windowOpen;
     private boolean isScouted;
@@ -48,6 +49,7 @@ public class Hallway extends Room implements Serializable {
         this.closetFightComplete = false;
         this.panelFightComplete = false;
         this.finalFightComplete = false;
+        this.hallwayVisited = false;
     }
 
     public void setLamp(int lamp){
@@ -88,6 +90,14 @@ public class Hallway extends Room implements Serializable {
     
     public int getWindow(){
         return this.window;
+    }
+
+    public void setHallwayVisited(Boolean visit){
+        this.hallwayVisited = visit;
+    }
+
+    public Boolean getHallwayVisited(){
+        return this.hallwayVisited;
     }
 
     public Boolean getFinalFight(){
@@ -788,7 +798,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* -  Stab(knife)                 *");
+                System.out.println("* - Stab(knife)                 *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();
@@ -863,7 +873,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* -  Stab(knife)                 *");
+                System.out.println("* - Stab(knife)                 *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();
@@ -929,7 +939,10 @@ public class Hallway extends Room implements Serializable {
     public void finalRoomMove(Player player, String keyword){
         if(keyword.startsWith("move n") && this.getNorthDoor() != 0){
             if(player.getKey() == 1 && getFinalFight()){
+                player.addToPoints(player.getHp());
+                player.addToPoints(100);
                 Menus.displayGameWon(player);
+                player.setHp(0);
             }else if(player.getKey() == 0){
                 System.err.println("\nSorry this door is locked, you need to find the key.");  
             }else if(!getFinalFight()){
