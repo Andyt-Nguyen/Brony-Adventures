@@ -54,39 +54,31 @@ public class Menus implements Serializable {
     @SuppressWarnings("unchecked")
     public static void sortHighscores(){
         ArrayList<PlayBronyGame> gameList = FileIo.getGameList();
-        String username[] = new String[gameList.size()];
-        int highscore[] = new int[gameList.size()];
-        
-        for(int i = 0; i < gameList.size();i++){
-            username[i] = gameList.get(i).getPlayerName();
-            highscore[i] = gameList.get(i).getPlayerHighscore();
-        }
-
-        for(int i = 0; i < highscore.length - 1; i++){
-            for(int j = 0; j < highscore.length - i - 1; j++){
-                if(highscore[j] > highscore[j + 1]){
-                    int tempScore = highscore[j];
-                    highscore[j] = highscore[j + 1];
-                    highscore[j + 1] = tempScore;
-                    String tempName = username[j];
-                    username[j] = username[j + 1];
-                    username[j + 1] = tempName;
-                }
+        Collections.sort(gameList, new Comparator<PlayBronyGame>() {
+            public int compare(PlayBronyGame p1, PlayBronyGame p2) {
+                return Integer.valueOf(p2.getPlayerHighscore())
+                              .compareTo(p1.getPlayerHighscore());
             }
-        }
+        });
 
-        displayHighScores(username, highscore);
+        System.out.println("-------------* Brony Adventures Highscores *-------------");
+        System.out.println("      Username             |               Points");
+        System.out.println("---------------------------------------------------------");
+        for(int i = 0 ; i < gameList.size(); i++) {
+
+            displayNameAndScore((i + 1)
+                                ,gameList.get(i).getPlayerName(),
+                                gameList.get(i).getPlayerHighscore());
+        }
+        System.out.println("---------------------------------------------------------");
+        
+
     }
 
-
-    public static void displayHighScores(String[] username, int[] highscore){
-        System.out.println("************** Brony Adventures Highscores **************");
-        System.out.println("***** Username *************************** Points *******");
-        for(int i = 0; i < username.length; i++){
-            System.out.printf("     " + (i + 1) + ".%-12s" , username[i]);
-            System.out.print("                          " + highscore[i] + "         *");
+    public static void displayNameAndScore(int inc, String username, int highscore){
+        
+            System.out.printf("     " + inc + ". %-12s" , username);
+            System.out.print("                         " + highscore);
             System.out.println();
-        }
-        System.out.println("*********************************************************");
     }
 }
