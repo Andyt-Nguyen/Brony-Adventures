@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.io.*;
 
@@ -16,10 +15,9 @@ class BronyAdventures {
     public static PlayBronyGame game;
 
     public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
-        while(true){
-            readyPlayer();
-            game.playGame();
-        }
+
+        readyPlayer();
+        game.playGame();
         /**
          * To access the player object just use variable "player" player.getHighScore();
          * player.getFood(); etc...
@@ -116,69 +114,69 @@ class BronyAdventures {
         // Adds keywords to intialize an action in guestBedroom.
         guestBedroom.addKeyword("Walk to Dresser");
         guestBedroom.addKeyword("Walk to Bed");
-        guestBedroom.addKeyword("North");
+        guestBedroom.addKeyword("Move North");
 
         // Adds keywords to intialize an action in hallway1.
         hallway1.addKeyword("Walk to Lamp");
         hallway1.addKeyword("Walk to Window");
-        hallway1.addKeyword("West");
-        hallway1.addKeyword("East");
+        hallway1.addKeyword("Move West");
+        hallway1.addKeyword("Move East");
 
         // Adds keywords to intialize an action in masterBathroom.
         masterBathroom.addKeyword("Walk to Toilet");
         masterBathroom.addKeyword("Walk to Shower");
         masterBathroom.addKeyword("Walk to Sink");
-        masterBathroom.addKeyword("East");
-        masterBathroom.addKeyword("North");
+        masterBathroom.addKeyword("Move East");
+        masterBathroom.addKeyword("Move North");
 
         // Adds keywords to intialize an action in kitchen1.
         kitchen1.addKeyword("Walk to Fridge");
         kitchen1.addKeyword("Walk to Knife");
-        kitchen1.addKeyword("West");
-        kitchen1.addKeyword("North");
+        kitchen1.addKeyword("Move West");
+        kitchen1.addKeyword("Move North");
 
         // Adds keywords to intialize an action in hallway2.
         hallway2.addKeyword("Walk to Window");
         hallway2.addKeyword("Walk to Statue");
         hallway2.addKeyword("Walk to Closet");
-        hallway2.addKeyword("North");
-        hallway2.addKeyword("East");
-        hallway2.addKeyword("South");
+        hallway2.addKeyword("Move North");
+        hallway2.addKeyword("Move East");
+        hallway2.addKeyword("Move South");
 
         // Adds keywords to intialize an action in hallway3.
         hallway3.addKeyword("Walk to Window");
         hallway3.addKeyword("Walk to Attic Panel");
-        hallway3.addKeyword("North");
-        hallway3.addKeyword("West");
-        hallway3.addKeyword("South");
+        hallway3.addKeyword("Move North");
+        hallway3.addKeyword("Move West");
+        hallway3.addKeyword("Move South");
 
         // Adds keywords to initialize list of actions for the master bedroom.
         masterBedroom.addKeyword("Walk to Dresser");
         masterBedroom.addKeyword("Walk to Bed");
         masterBedroom.addKeyword("Walk to Mirror");
-        masterBedroom.addKeyword("East");
-        masterBedroom.addKeyword("West");
+        masterBedroom.addKeyword("Move East");
+        masterBedroom.addKeyword("Move West");
 
         // Adds keywords to initialize list of actions for the north-west kitchen.
         kitchen2.addKeyword("Walk to Fridge");
         kitchen2.addKeyword("Walk to Sink");
         kitchen2.addKeyword("Walk to Chair");
-        kitchen2.addKeyword("East");
-        kitchen2.addKeyword("South");
+        kitchen2.addKeyword("Move East");
+        kitchen2.addKeyword("Move South");
 
         // Adds keywords to initialize list of actions for the 2nd bathroom.
         bathroom2.addKeyword("Walk to Toilet");
         bathroom2.addKeyword("Walk to Plunger");
         bathroom2.addKeyword("Walk to Sink");
         bathroom2.addKeyword("Walk to Mirror");
-        bathroom2.addKeyword("South");
-        bathroom2.addKeyword("West");
+        bathroom2.addKeyword("Move South");
+        bathroom2.addKeyword("Move West");
 
         // Adds keywords to initialize list of actions for northern hallway.
         hallway4.addKeyword("Walk to Statue");
-        hallway4.addKeyword("North");
-        hallway4.addKeyword("East");
-        hallway4.addKeyword("West");
+        hallway4.addKeyword("Move North");
+        hallway4.addKeyword("Move East");
+        hallway4.addKeyword("Move West");
 
         /**
          * Creating user

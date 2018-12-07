@@ -1,4 +1,4 @@
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 public class Hallway extends Room implements Serializable {
@@ -108,7 +108,7 @@ public class Hallway extends Room implements Serializable {
         this.hallwayKeywords.add(keyword);
     }
 
-    public void findKeyword(Player player, String keyword){
+    public void findKeyword(Player player, String keyword) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException{
         boolean isFound = false;
         for(int i = 0; i < this.hallwayKeywords.size();i++){
             if(this.hallwayKeywords.get(i).toLowerCase().startsWith(keyword)){
@@ -121,7 +121,7 @@ public class Hallway extends Room implements Serializable {
         }
     }
 
-    public void performAction(Player player, String keyword){
+    public void performAction(Player player, String keyword) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException{
         boolean userChoice;
         boolean center = false;
         String userAction;
@@ -643,10 +643,10 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou return to the center of the room.");
             } 
         }
-        if(keyword.startsWith("move")){
+        if(keyword.startsWith("n") || keyword.startsWith("s") || keyword.startsWith("e") || keyword.startsWith("w")){
             moveRoom(player, keyword);
         }
-        if(keyword.startsWith("move n") && this.getRoomID() == 10){
+        if((keyword.startsWith("n") || keyword.startsWith("s") || keyword.startsWith("e") || keyword.startsWith("w")) && this.getRoomID() == 10){
             finalRoomMove(player, keyword);
         }
     }
@@ -724,7 +724,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* -  Stab(knife)              *");
+                System.out.println("* - Stab(knife)                *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();
@@ -798,7 +798,7 @@ public class Hallway extends Room implements Serializable {
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
-                System.out.println("* - Stab(knife)               *");
+                System.out.println("* - Stab(knife)                *");
             }
             System.out.println("********************************");
             userChoice = IR5.getString("\n").toLowerCase().trim();
@@ -936,30 +936,32 @@ public class Hallway extends Room implements Serializable {
         }
     }
 
-    public void finalRoomMove(Player player, String keyword){
-        if(keyword.startsWith("move n") && this.getNorthDoor() != 0){
+    public void finalRoomMove(Player player, String keyword) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
+        if(keyword.startsWith("n") && this.getNorthDoor() != 0){
             if(player.getKey() == 1 && getFinalFight()){
                 player.addToPoints(player.getHp());
                 player.addToPoints(100);
                 Menus.displayGameWon(player);
+                player.setWinGame(true);
                 player.setHp(0);
+                FileIo.writeFile();
             }else if(player.getKey() == 0){
                 System.err.println("\nSorry this door is locked, you need to find the key.");  
             }else if(!getFinalFight()){
                 System.err.println("\nMaybe you should check out the statue in this room!");
             }
         }
-        if(keyword.startsWith("move s") && this.getSouthDoor() != 0){
+        if(keyword.startsWith("s") && this.getSouthDoor() != 0){
             player.setLocation(this.getSouthDoor());
         }else if(keyword.startsWith("move s") && this.getSouthDoor() == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.startsWith("move e") && this.getEastDoor() != 0){
+        if(keyword.startsWith("e") && this.getEastDoor() != 0){
             player.setLocation(this.getEastDoor());
         }else if(keyword.startsWith("move e") && this.getEastDoor() == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.startsWith("move w") && this.getWestDoor() != 0){
+        if(keyword.startsWith("w") && this.getWestDoor() != 0){
             player.setLocation(this.getWestDoor());
         }else if(keyword.startsWith("move w") && this.getWestDoor() == 0){
             System.err.println("\nYou cannot go this direction.");

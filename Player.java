@@ -9,6 +9,7 @@ public class Player implements Serializable {
     private int knife;
     private int highScore;
     private int key;
+    private boolean winGame;
     
     public Player() {
         this.username = "";
@@ -24,6 +25,7 @@ public class Player implements Serializable {
         this.hp = hp;
         this.food = food;
         this.location = location;
+        this.winGame = false;
     }
 
     public String getUsername() {
@@ -67,6 +69,14 @@ public class Player implements Serializable {
 
     public void setFood(int food) {
         this.food = food;
+    }
+
+    public void setWinGame(Boolean isTrue){
+        this.winGame = isTrue;
+    }
+
+    public Boolean getWinGame(){
+        return this.winGame;
     }
 
     public void setUsername(String username) {

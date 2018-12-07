@@ -19,7 +19,8 @@ public class Menus implements Serializable {
 
     public static void displayGameWon(Player player){
         System.out.println("****************************************************************");
-        System.out.println("*  Congratulations, " + player.getUsername() + ". You have escaped!                    *" );
+        System.out.printf("*  Congratulations, %8s" , player.getUsername() + ". You have escaped!                     *" );
+        System.out.println();
         System.out.println("*  Your score of " + player.getHighScore() + " points will be recorded to the highscores.*");
         System.out.println("*  I hope you enjoyed playing our game!                        *");
         System.out.println("****************************************************************");
@@ -30,7 +31,7 @@ public class Menus implements Serializable {
         System.out.println("* Command             |    Action                      *");
         System.out.println("********************************************************");
         System.out.println("* Walk to -object-    |    Moves to object             *");
-        System.out.println("* Move -direction-    |    Changes rooms in direction. *");
+        System.out.println("* type a direction    |    Changes rooms in direction. *");
         System.out.println("* Center              |    Return to center of room.   *");
         System.out.println("* Search              |    Examines Room               *");
         System.out.println("* Scream              |    Player Screams              *");
@@ -60,18 +61,20 @@ public class Menus implements Serializable {
                               .compareTo(p1.getPlayerHighscore());
             }
         });
+        if(gameList.size() <= 1){
+            System.out.println("\nThere are no highscores to display!");
+        }else{
+            System.out.println("-------------* Brony Adventures Highscores *-------------");
+            System.out.println("      Username             |               Points");
+            System.out.println("---------------------------------------------------------");
+            for(int i = 0 ; i < gameList.size(); i++) {
 
-        System.out.println("-------------* Brony Adventures Highscores *-------------");
-        System.out.println("      Username             |               Points");
-        System.out.println("---------------------------------------------------------");
-        for(int i = 0 ; i < gameList.size(); i++) {
-
-            displayNameAndScore((i + 1)
-                                ,gameList.get(i).getPlayerName(),
-                                gameList.get(i).getPlayerHighscore());
+                displayNameAndScore((i + 1)
+                                    ,gameList.get(i).getPlayerName(),
+                                    gameList.get(i).getPlayerHighscore());
+            }
+            System.out.println("---------------------------------------------------------");
         }
-        System.out.println("---------------------------------------------------------");
-        
 
     }
 

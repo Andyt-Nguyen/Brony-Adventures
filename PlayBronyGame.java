@@ -46,13 +46,14 @@ public class PlayBronyGame implements Serializable {
 
     public void playGame() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
         String userInput = "";
-
+        int counter = 0;
 
         // Basic while loop to get input from the user if they are alive.
 
         while (player.getHp() > 0) {
+            counter++;
             int currentRoom = player.getLocation();
-            userInput = IR5.getString("\nEnter a single word associated with what you would like to do (ex to exit).")
+            userInput = IR5.getString("\nEnter a single word associated with what you would like to do (exit to quit).")
                     .trim().toLowerCase();
             if (userInput.startsWith("hel")) {
                 Menus.displayHelp();// Displays the help menu.
@@ -93,10 +94,11 @@ public class PlayBronyGame implements Serializable {
 
             } else if (userInput.startsWith("health")) { // Shows health for user.
                 System.out.println("Hp: " + player.getHp() + "/100");
-            } else if (userInput.startsWith("ex")) { // Saves and closes the game.
+            } else if (userInput.equals("exit")) { // Saves and closes the game.
                 FileIo.writeFile();
-                System.exit(0);
-            } else if (userInput.startsWith("walk t") || userInput.startsWith("move ")) { // Based on whichever room the
+                break;
+            } else if (userInput.startsWith("walk t") || userInput.startsWith("n") || userInput.startsWith("e") || 
+            userInput.startsWith("s") || userInput.startsWith("w")) { // Based on whichever room the
                                                                                           // user is in, will complete
                                                                                           // an action.
                 if (currentRoom == 1) {
@@ -226,7 +228,12 @@ public class PlayBronyGame implements Serializable {
             }
         }
 
-        FileIo.writeFile();
+        if(player.getWinGame() && counter == 0){
+            System.out.println("\nThis player has already beaten the game..");
+            System.out.println("Please start a new game or choose another player.");
+        }
+        //FileIo.writeFile();
+        // BronyAdventures.readyPlayer();
     }
 
     public String getPlayerName() {

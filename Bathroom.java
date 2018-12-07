@@ -558,7 +558,7 @@ public class Bathroom extends Room implements Serializable {
             System.out.println("\nYou return to the center of the room.");
         }
         
-        if(keyword.startsWith("move ")){
+        if(keyword.startsWith("n") || keyword.startsWith("s") || keyword.startsWith("e") || keyword.startsWith("w")){
             moveRoom(player, keyword);
         }
     }
