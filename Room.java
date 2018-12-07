@@ -101,24 +101,24 @@ public class Room implements Serializable {
 
     public void moveRoom(Player player, String keyword){
 
-        if(keyword.startsWith("n") && this.northDoor != 0 && this.roomID != 10){
+        if(keyword.startsWith("no") && this.northDoor != 0 && this.roomID != 10){
                 player.setLocation(this.northDoor);
-        }else if(keyword.startsWith("n") && this.northDoor == 0){
+        }else if(keyword.startsWith("no") && this.northDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.startsWith("s") && this.southDoor != 0){
+        if(keyword.startsWith("so") && this.southDoor != 0){
             player.setLocation(this.southDoor);
-        }else if(keyword.startsWith("s") && this.southDoor == 0){
+        }else if(keyword.startsWith("so") && this.southDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.startsWith("e") && this.eastDoor != 0){
+        if(keyword.startsWith("ea") && this.eastDoor != 0){
             player.setLocation(this.eastDoor);
-        }else if(keyword.startsWith("e") && this.eastDoor == 0){
+        }else if(keyword.startsWith("ea") && this.eastDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
-        if(keyword.startsWith("w") && this.westDoor != 0){
+        if(keyword.startsWith("we") && this.westDoor != 0){
             player.setLocation(this.westDoor);
-        }else if(keyword.startsWith("w") && this.westDoor == 0){
+        }else if(keyword.startsWith("we") && this.westDoor == 0){
             System.err.println("\nYou cannot go this direction.");
         }
         

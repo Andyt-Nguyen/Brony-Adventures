@@ -8,9 +8,10 @@ public class Menus implements Serializable {
         System.out.println("************************************************************");
         System.out.println("* Welcome " + player.getUsername() + " to Brony Adventures.                            *");
         System.out.println("* You wake up from a deep sleep in an abandoned house.     *");
+        System.out.println("* This house is home to 3 dangerous demonic ponies.        *");
         System.out.println("* The goal is to find the key...                           *");
         System.out.println("* Get to the hallway on the north side of the building..   *");
-        System.out.println("* And escape through the front door.                       *");
+        System.out.println("* And escape through the front door safely.                *");
         System.out.println("* It seems like you are in a room with a bed, a dresser,   *");
         System.out.println("* And a door to the north..                                *");
         System.out.println("* You can use the command \"help\" to get started..          *");

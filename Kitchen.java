@@ -116,7 +116,7 @@ public class Kitchen extends Room implements Serializable {
         String userAction;
         if(keyword.startsWith("walk to k") && this.knife == 1){
             userAction = IR5.getString("\nYou walk up to the knife. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("cent")){
+            if(userAction.startsWith("c")){
                 center = true;
             }
             while(!center){
@@ -145,16 +145,16 @@ public class Kitchen extends Room implements Serializable {
                 if(this.knife == 1){
                     userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
                 }
-                if(userAction.startsWith("cent")){
+                if(userAction.startsWith("c")){
                     center = true;
                 }
             }
 
             System.out.println("\nYou return to the center of the room.");
         } 
-        if(keyword.startsWith("walk to fr") && this.fridge == 1 && this.getRoomID() == 4){
+        if(keyword.startsWith("walk to f") && this.fridge == 1 && this.getRoomID() == 4){
             userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("cent")){
+            if(userAction.startsWith("c")){
                 center = true;
             }
             while(!center){
@@ -221,7 +221,7 @@ public class Kitchen extends Room implements Serializable {
                 }
 
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("cent")){
+                if(userAction.startsWith("c")){
                     center = true;
                 }
             }
@@ -230,7 +230,7 @@ public class Kitchen extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to f") && this.fridge == 1 && this.getRoomID() == 8){
             userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("cent")){
+            if(userAction.startsWith("c")){
                 center = true;
             }
             while(!center){
@@ -298,16 +298,16 @@ public class Kitchen extends Room implements Serializable {
                 }
 
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("cent")){
+                if(userAction.startsWith("c")){
                     center = true;
                 }
             }
 
             System.out.println("\nYou return to the center of the room.");
         } 
-        if(keyword.startsWith("walk to si") && this.sink == 1){
+        if(keyword.startsWith("walk to s") && this.sink == 1){
             userAction = IR5.getString("\nYou walk up to the sink. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("cent")){
+            if(userAction.startsWith("c")){
                 center = true;
             }
             while(!center){
@@ -361,15 +361,15 @@ public class Kitchen extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("cent")){
+                if(userAction.startsWith("c")){
                     center = true;
                 }
             }
             System.out.println("\nYou return to the center of the room.");
         } 
-        if(keyword.startsWith("walk to ch") && this.chair == 1){
+        if(keyword.startsWith("walk to c") && this.chair == 1){
             userAction = IR5.getString("\nYou walk up to the chair. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("cent")){
+            if(userAction.startsWith("c")){
                 center = true;
             }
             while(!center){
@@ -429,13 +429,13 @@ public class Kitchen extends Room implements Serializable {
                 }
 
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("cent")){
+                if(userAction.startsWith("c")){
                     center = true;
                 }
             }
             System.out.println("\nYou return to the center of the room.");
         } 
-        if(keyword.startsWith("n") || keyword.startsWith("s") || keyword.startsWith("e") || keyword.startsWith("w")){
+        if(keyword.startsWith("no") || keyword.startsWith("so") || keyword.startsWith("ea") || keyword.startsWith("we")){
             moveRoom(player, keyword);
         }
     }

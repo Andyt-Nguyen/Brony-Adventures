@@ -45,19 +45,20 @@ public class PlayBronyGame implements Serializable {
     }
 
     public void playGame() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
-        String userInput = "";
+        //String userInput = "";
         int counter = 0;
 
         // Basic while loop to get input from the user if they are alive.
 
         while (player.getHp() > 0) {
             counter++;
+            String userInput = "";
             int currentRoom = player.getLocation();
             userInput = IR5.getString("\nEnter a single word associated with what you would like to do (exit to quit).")
                     .trim().toLowerCase();
             if (userInput.startsWith("hel")) {
                 Menus.displayHelp();// Displays the help menu.
-            } else if (userInput.startsWith("sea")) { // Displays the room help window.
+            } else if (userInput.startsWith("se")) { // Displays the room help window.
                 if (currentRoom == 1) {
                     System.out.println(guestBedroom.getRoomUniques());
                     guestBedroom.displayRoomHelp();
@@ -92,13 +93,13 @@ public class PlayBronyGame implements Serializable {
             } else if (userInput.startsWith("scr")) { // Random command to scream.
                 System.out.println("You scream in fear!");
 
-            } else if (userInput.startsWith("health")) { // Shows health for user.
+            } else if (userInput.startsWith("hea")) { // Shows health for user.
                 System.out.println("Hp: " + player.getHp() + "/100");
             } else if (userInput.equals("exit")) { // Saves and closes the game.
                 FileIo.writeFile();
                 break;
-            } else if (userInput.startsWith("walk t") || userInput.startsWith("n") || userInput.startsWith("e") || 
-            userInput.startsWith("s") || userInput.startsWith("w")) { // Based on whichever room the
+            } else if (userInput.startsWith("walk t") || userInput.startsWith("no") || userInput.startsWith("ea") || 
+            userInput.startsWith("so") || userInput.startsWith("we")) { // Based on whichever room the
                                                                                           // user is in, will complete
                                                                                           // an action.
                 if (currentRoom == 1) {
@@ -122,7 +123,7 @@ public class PlayBronyGame implements Serializable {
                 } else if (currentRoom == 10) {
                     hallway4.findKeyword(player, userInput);
                 }
-            } else if (userInput.startsWith("eat fo")) {
+            } else if (userInput.startsWith("eat")) {
                 player.eatFood(player);
             }else if(userInput.startsWith("check f")){
                 System.out.println("\nYou have " + player.getFood() + " pieces of food left.");
