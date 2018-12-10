@@ -139,18 +139,18 @@ public class PlayBronyGame implements Serializable {
             int newLocation = player.getLocation();
             if (newLocation == 2 && newLocation != currentRoom) {
                 if (hallway1.getHallwayVisited()) {
-                    System.err.println("\nYou entered the hallway on the south side of the building.");
+                    System.err.println("\nYou re-enter the hallway on the south side of the building.");
                 } else if (!hallway1.getHallwayVisited()) {
                     System.err.println("\nYou enter a hallway on the south side of the building, you see a window leading");
                     System.err.println("to the center courtyard, a lamp in the corner of the room, and doors to the east,");
                     System.err.println("and the west.");
-                    System.err.println("\nYou here the door behind you lock..");
+                    System.err.println("\nYou hear the door behind you lock..");
                     hallway1.setHallwayVisited(true);
                     player.addToPoints(5);
                 }
             } else if (newLocation == 3 && newLocation != currentRoom) {
                 if (masterBathroom.getBathroomVisited()) {
-                    System.err.println("\nYou entered the master bathroom.");
+                    System.err.println("\nYou re-enter the master bathroom.");
                 } else if (!masterBathroom.getBathroomVisited()) {
                     System.err.println("\nYou enter the master bathroom, you see luxurious shower, toilet,");
                     System.err.println("and sink. That's about it in here..");
@@ -159,7 +159,7 @@ public class PlayBronyGame implements Serializable {
                 }
             } else if (newLocation == 4 && newLocation != currentRoom) {
                 if (kitchen1.getKitchenVisited()) {
-                    System.err.println("\nYou entered the kitchen on the south-east side of the building.");
+                    System.err.println("\nYou re-enter the kitchen on the south-east side of the building.");
                 } else if (!kitchen1.getKitchenVisited()) {
                     System.err.println("\nYou enter the kitchen on the south-east side of the building.");
                     System.err.println("You see a working fridge and a knife on the counter..");
@@ -169,7 +169,7 @@ public class PlayBronyGame implements Serializable {
                 }
             } else if (newLocation == 5 && newLocation != currentRoom) {
                 if (hallway2.getHallwayVisited()) {
-                    System.err.println("\nYou entered the hallway on the west side of the building.");
+                    System.err.println("\nYou re-enter the hallway on the west side of the building.");
                 } else if (!hallway2.getHallwayVisited()) {
                     System.err.println("\nYou entered the hallway on the west side of the building..");
                     System.err.println("You see another window, an unidentifiable statue in the corner of the room,");
@@ -179,7 +179,7 @@ public class PlayBronyGame implements Serializable {
                 }
             } else if (newLocation == 6 && newLocation != currentRoom) {
                 if (hallway3.getHallwayVisited()) {
-                    System.err.println("\nYou entered the hallway on the east side of the building.");
+                    System.err.println("\nYou re-enter the hallway on the east side of the building.");
                 } else if (!hallway3.getHallwayVisited()) {
                     System.err.println("\nYou entered the hallway on the west side of the building.");
                     System.err.println("There is another window, a statue in the corner of the room,");
@@ -189,7 +189,7 @@ public class PlayBronyGame implements Serializable {
                 }
             } else if (newLocation == 7 && newLocation != currentRoom) {
                 if (masterBedroom.getBedroomVisited()) {
-                    System.err.println("\nYou re-entered the master bedroom.");
+                    System.err.println("\nYou re-enter the master bedroom.");
                 } else if (!masterBedroom.getBedroomVisited()) {
                     System.err.println("\nYou enter the master bedroom, which seems to be in the center of the building.");
                     System.err.println("You see doors to the east and west, a mirror, a bed, and a dresser.");
@@ -198,7 +198,7 @@ public class PlayBronyGame implements Serializable {
                 }
             } else if (newLocation == 8 && newLocation != currentRoom) {
                 if (kitchen2.getKitchenVisited()) {
-                    System.err.println("\nYou re-entered the kitchen on the north-west side of the building.");
+                    System.err.println("\nYou re-enter the kitchen on the north-west side of the building.");
                 } else if (!kitchen2.getKitchenVisited()) {
                     System.err.println("\nYou enter a second kitchen on the north west side of the building..");
                     System.err.println("You see doors to the east and the south, a fridge, a sink that might work,");
