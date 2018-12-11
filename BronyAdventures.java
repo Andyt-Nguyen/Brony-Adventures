@@ -16,29 +16,16 @@ class BronyAdventures {
     public static PlayBronyGame game;
 
     public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
+        introMsg();
         while(true){
             readyPlayer();
             game.playGame();
         }
-        /**
-         * To access the player object just use variable "player" player.getHighScore();
-         * player.getFood(); etc...
-         */
-
-        // Creation of Rooms.. Format goes RoomID, Room Name, Room Description, A help
-        // message for the "Search" command,
-        // the north door value, the south door value, the east door value, the west
-        // door value, then a 0 or a 1,
-        // based on those classes fields and whether that object is in the room or not.
-
     }
 
     /*******************
      * Start: Create or get user information
      *********************/
-
-    
-    
     public static void readyPlayer() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
         FileIo.readFile();
         boolean flag = false;
@@ -248,6 +235,29 @@ class BronyAdventures {
             }
         }
         return answer;
+    }
+
+    public static void introMsg() {
+        System.out.println("");
+        System.out.println("88888888ba");
+        System.out.println("88      \"8b");
+        System.out.println("88      ,8P");
+        System.out.println("88aaaaaa8P'  8b,dPPYba,   ,adPPYba,   8b,dPPYba,   8b       d8");
+        System.out.println("88\"\"\"\"\"\"8b,  88P'   \"Y8  a8\"     \"8a  88P'   `\"8a  `8b     d8'");
+        System.out.println("88      `8b  88          8b       d8  88       88   `8b   d8'");
+        System.out.println("88      a8P  88          \"8a,   ,a8\"  88       88    `8b,d8'");
+        System.out.println("8888888db\"   88           88YbbdP\"'   88       88      Y88'");
+        System.out.println("      d88b                88                           d8'           ,d");
+        System.out.println("     d8'`8b               88                          d8'            88");
+        System.out.println("    d8'  `8b      ,adPPYb,88  8b       d8   ,adPPYba,  8b,dPPYba,  MM88MMM  88       88  8b,dPPYba,   ,adPPYba,  ,adPPYba,");
+        System.out.println("   d8YaaaaY8b    a8\"    `Y88  `8b     d8'  a8P_____88  88P'   `\"8a   88     88       88  88P'   \"Y8  a8P_____88  I8[    \"\"");
+        System.out.println("  d8\"\"\"\"\"\"\"\"8b   8b       88   `8b   d8'   8PP\"\"\"\"\"\"\"  88       88   88     88       88  88          8PP\"\"\"\"\"\"\"   `\"Y8ba,");
+        System.out.println(" d8'        `8b  \"8a,   ,d88    `8b,d8'    \"8b,   ,aa  88       88   88,    \"8a,   ,a88  88          \"8b,   ,aa  aa    ]8I");
+        System.out.println("d8'          `8b  `\"8bbdP\"Y8      \"8\"       `\"Ybbd8\"'  88       88   \"Y888   `\"YbbdP'Y8  88           `\"Ybbd8\"'  `\"YbbdP\"'");
+        System.out.println("");
+        
+                                                                                                            
+
     }
 
 }

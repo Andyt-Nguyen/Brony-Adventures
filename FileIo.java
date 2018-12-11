@@ -19,9 +19,9 @@ public class FileIo {
             addNewPlayer(new PlayBronyGame());
             writeFile();
         } catch(IOException e) {
-            System.out.println("Error " + e);
+            System.out.println("Io Error");
         } catch(ClassNotFoundException e) {
-            System.out.println("Error " + e);
+            System.out.println("Class not found");
         }
     }
 
