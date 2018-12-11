@@ -16,7 +16,6 @@ class BronyAdventures {
     public static PlayBronyGame game;
 
     public static void main(String args[]) throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
-        introMsg();
         while(true){
             readyPlayer();
             game.playGame();
@@ -29,30 +28,36 @@ class BronyAdventures {
     public static void readyPlayer() throws FileNotFoundException, IOException, ClassNotFoundException, InterruptedException {
         FileIo.readFile();
         boolean flag = false;
+        
+        introMsg();        
         while(!flag) {
             loggingUserMsg();
             int userOption = IR5.getInteger("Select option");
 
             if(userOption == 1) {
+                boolean isExit = false;
                 boolean isNewUser = false;
-                while(!isNewUser) {
+                while(!isNewUser && !isExit) {
                     isNewUser = createUser();
-                    if(isNewUser) flag = true;
+                    if(isNewUser) {
+                        flag = true;
+                        Menus.displayStartGame(player);   
+                    }
                     else {
                         String tryAgain = getString("Press any key to try again (type exit to go back)");
-                        if(tryAgain.equals("exit")) break;
+                        if(tryAgain.equals("exit")) { isExit = true; };
                     }
                     
                 }
-                Menus.displayStartGame(player);
             } else if(userOption == 2) {
+                boolean isExit = false;
                 boolean doesUserExist = false;
-                while(!doesUserExist) {
+                while(!doesUserExist && !isExit) {
                     doesUserExist = signinUser();
                     if(doesUserExist) flag = true;
                     else {
                         String tryAgain = getString("Press any key to try again (type exit to go back)");
-                        if(tryAgain.equals("exit")) break;
+                        if(tryAgain.equals("exit")) { isExit = true;};
                     }
                 }
             } else if(userOption == 3){
