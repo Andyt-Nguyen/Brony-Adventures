@@ -127,7 +127,7 @@ public class Hallway extends Room implements Serializable {
         String userAction;
         if(keyword.startsWith("walk to l") && this.lamp == 1){
             userAction = IR5.getString("\nYou walk up to the lamp. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -239,7 +239,7 @@ public class Hallway extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }  
@@ -248,7 +248,7 @@ public class Hallway extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to w") && this.window == 1 && this.getRoomID() == 5){
             userAction = IR5.getString("\nYou walk up to the window. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -312,7 +312,7 @@ public class Hallway extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }  
@@ -321,7 +321,7 @@ public class Hallway extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to s") && this.statue == 1 && this.getRoomID() == 5){
             userAction = IR5.getString("\nYou walk up to the statue. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -363,7 +363,7 @@ public class Hallway extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }  
@@ -372,7 +372,7 @@ public class Hallway extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to c") && this.closet == 1){
             userAction = IR5.getString("\nYou walk up to the closet. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -455,7 +455,7 @@ public class Hallway extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }  
@@ -464,7 +464,7 @@ public class Hallway extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to w") && this.window == 1 && this.getRoomID() == 6){
             userAction = IR5.getString("\nYou walk up to the window. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -521,7 +521,7 @@ public class Hallway extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }  
@@ -530,7 +530,7 @@ public class Hallway extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to a") && this.atticPanel == 1){
             userAction = IR5.getString("\nYou walk under the attic panel. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -587,7 +587,7 @@ public class Hallway extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }  
@@ -604,7 +604,7 @@ public class Hallway extends Room implements Serializable {
                 }
             }else if(this.finalFightComplete){
                 userAction = IR5.getString("\nYou walk up to the statue. Choose an action.(Help for list of commands)").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
                 while(!center){
@@ -635,7 +635,7 @@ public class Hallway extends Room implements Serializable {
                         System.err.println("\nSorry this command cannot be used here!");
                     }
                     userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                    if(userAction.startsWith("c")){
+                    if(userAction.startsWith("cen")){
                         center = true;
                     }
                 }  
@@ -714,13 +714,13 @@ public class Hallway extends Room implements Serializable {
     }
 
     public void closetFight(Player player){
-        int ponyHealth = 20;
+        int ponyHealth = 25;
         String userChoice;
         int ponyDamage;
         int userDamage;
-        System.out.println("As you open up the door you're attacked by a demonic pony..");
+        System.out.println("\nAs you open up the door you're attacked by a demonic pony..");
         while(ponyHealth > 0 && player.getHp() > 0){
-            System.out.println("**********Choose Attack*********");
+            System.out.println("\n**********Choose Attack*********");
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
@@ -737,7 +737,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to use your hands to punch it, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(5, 10);
+                    ponyDamage = IR5.getRandomNumber(10, 15);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");
@@ -788,13 +788,13 @@ public class Hallway extends Room implements Serializable {
     }
 
     public void panelFight(Player player){
-        int ponyHealth = 20;
+        int ponyHealth = 25;
         String userChoice;
         int ponyDamage;
         int userDamage;
-        System.out.println("As you open up the attic panel a demonic pony jumps out and attacks you!");
+        System.out.println("\nAs you open up the attic panel a demonic pony jumps out and attacks you!");
         while(ponyHealth > 0 && player.getHp() > 0){
-            System.out.println("**********Choose Attack*********");
+            System.out.println("\n**********Choose Attack*********");
             System.out.println("* - Punch                      *");
             System.out.println("* - Kick                       *");
             if(player.getKnife() == 1){
@@ -811,7 +811,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to use your hands to punch it, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(5, 10);
+                    ponyDamage = IR5.getRandomNumber(10, 15);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");
@@ -826,7 +826,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to use your feet to kick it, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(5, 10);
+                    ponyDamage = IR5.getRandomNumber(10, 15);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");
@@ -841,7 +841,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to stab it with the knife you picked up!, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(5, 10);
+                    ponyDamage = IR5.getRandomNumber(10, 15);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");
@@ -866,7 +866,7 @@ public class Hallway extends Room implements Serializable {
         String userChoice;
         int ponyDamage;
         int userDamage;
-        System.out.println("You approach the statue.. All of the sudden it comes to life and and attacks!");
+        System.out.println("\nYou approach the statue.. All of the sudden it comes to life and and attacks!");
         System.out.println("It's a demonic pony but this one has 3 horns and is slightly bigger!");
         while(ponyHealth > 0 && player.getHp() > 0){
             System.out.println("\n**********Choose Attack*********");
@@ -886,7 +886,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to use your hands to punch it, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(10, 12);
+                    ponyDamage = IR5.getRandomNumber(15, 20);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");
@@ -901,7 +901,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to use your feet to kick it, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(10, 12);
+                    ponyDamage = IR5.getRandomNumber(15, 20);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");
@@ -916,7 +916,7 @@ public class Hallway extends Room implements Serializable {
                 System.out.println("\nYou decide to stab it with the knife you picked up!, you deal " + userDamage + " damage to the pony.");
                 System.out.println("The pony has " + ponyHealth + " hp remaining.");
                 if(ponyHealth > 0){
-                    ponyDamage = IR5.getRandomNumber(10, 12);
+                    ponyDamage = IR5.getRandomNumber(15, 20);
                     player.decreaseHp(ponyDamage);
                     System.out.println("\nThe pony attacks back buckshotting you with it's hind legs!");
                     System.out.println("You take " + ponyDamage + " damage.");

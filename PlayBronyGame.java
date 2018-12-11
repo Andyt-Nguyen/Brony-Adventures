@@ -92,7 +92,8 @@ public class PlayBronyGame implements Serializable {
                 }
             } else if (userInput.startsWith("scr")) { // Random command to scream.
                 System.out.println("You scream in fear!");
-
+            }else if (userInput.startsWith("eat")) {
+                    player.eatFood(player);
             } else if (userInput.startsWith("hea")) { // Shows health for user.
                 System.out.println("Hp: " + player.getHp() + "/100");
             } else if (userInput.equals("exit")) { // Saves and closes the game.
@@ -123,8 +124,6 @@ public class PlayBronyGame implements Serializable {
                 } else if (currentRoom == 10) {
                     hallway4.findKeyword(player, userInput);
                 }
-            } else if (userInput.startsWith("eat")) {
-                player.eatFood(player);
             }else if(userInput.startsWith("check f")){
                 System.out.println("\nYou have " + player.getFood() + " pieces of food left.");
             }else if(userInput.startsWith("po")){

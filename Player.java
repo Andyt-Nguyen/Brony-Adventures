@@ -131,7 +131,7 @@ public class Player implements Serializable {
         }else if (this.food >= 1){
             System.out.println("\nYou eat a piece of food.");
             System.out.println("You slightly recovered some health");
-            player.increaseHp(20);
+            player.increaseHp(5);
             player.decreaseFood(1);
         }
     }

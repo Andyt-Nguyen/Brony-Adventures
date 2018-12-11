@@ -116,7 +116,7 @@ public class Kitchen extends Room implements Serializable {
         String userAction;
         if(keyword.startsWith("walk to k") && this.knife == 1){
             userAction = IR5.getString("\nYou walk up to the knife. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -135,6 +135,7 @@ public class Kitchen extends Room implements Serializable {
                             this.knife = 0;
                             center = true;
                             player.setKnife(1);
+                            this.kitchenKeywords.remove("Walk to Knife");
                             found = true;
                         }
                     }
@@ -145,7 +146,7 @@ public class Kitchen extends Room implements Serializable {
                 if(this.knife == 1){
                     userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
                 }
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }
@@ -154,7 +155,7 @@ public class Kitchen extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to f") && this.fridge == 1 && this.getRoomID() == 4){
             userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -221,7 +222,7 @@ public class Kitchen extends Room implements Serializable {
                 }
 
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }
@@ -230,7 +231,7 @@ public class Kitchen extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to f") && this.fridge == 1 && this.getRoomID() == 8){
             userAction = IR5.getString("\nYou walk up to the fridge. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -298,7 +299,7 @@ public class Kitchen extends Room implements Serializable {
                 }
 
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }
@@ -307,7 +308,7 @@ public class Kitchen extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to s") && this.sink == 1){
             userAction = IR5.getString("\nYou walk up to the sink. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -327,11 +328,13 @@ public class Kitchen extends Room implements Serializable {
                                 found = true;
                             }else if(!this.sinkOn){
                                 System.out.println("\nYou turn the sink on!");
+                                this.sinkOn = true;
                                 found = true;
                             }
                         }else if(sinkActions[i].equals("turn off")){
                             if(this.sinkOn){
                                 System.out.println("\nYou turn the sink off!");
+                                this.sinkOn = false;
                                 found = true;
                             }else if(!this.sinkOn){
                                 System.out.println("\nThis sink is already off.");
@@ -361,7 +364,7 @@ public class Kitchen extends Room implements Serializable {
                     System.err.println("\nSorry this command cannot be used here!");
                 }
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }
@@ -369,7 +372,7 @@ public class Kitchen extends Room implements Serializable {
         } 
         if(keyword.startsWith("walk to c") && this.chair == 1){
             userAction = IR5.getString("\nYou walk up to the chair. Choose an action.(Help for list of commands)").toLowerCase().trim();
-            if(userAction.startsWith("c")){
+            if(userAction.startsWith("cen")){
                 center = true;
             }
             while(!center){
@@ -429,7 +432,7 @@ public class Kitchen extends Room implements Serializable {
                 }
 
                 userAction = IR5.getString("\nChoose next action.").toLowerCase().trim();
-                if(userAction.startsWith("c")){
+                if(userAction.startsWith("cen")){
                     center = true;
                 }
             }
